@@ -32,14 +32,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        this.isDarkTheme = savedTheme === 'dark';
-        this.applyTheme();
-      } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        this.isDarkTheme = prefersDark;
-        this.applyTheme();
-      }
+      this.isDarkTheme = savedTheme === 'dark';
+      this.applyTheme();
     }
   }
 
@@ -49,16 +43,19 @@ export class AppComponent implements OnInit {
 
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
-    this.applyTheme();
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
+      this.applyTheme();
     }
   }
 
   private applyTheme() {
     if (isPlatformBrowser(this.platformId)) {
-      document.body.classList.remove('light-theme', 'dark-theme');
-      document.body.classList.add(this.isDarkTheme ? 'dark-theme' : 'light-theme');
+      const body = document.querySelector('body');
+      if (body) {
+        body.classList.remove('light-theme', 'dark-theme');
+        body.classList.add(this.isDarkTheme ? 'dark-theme' : 'light-theme');
+      }
     }
   }
 }
