@@ -7,9 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { isPlatformBrowser } from '@angular/common';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-
 
 @Component({
   selector: 'app-root',
@@ -29,13 +26,8 @@ export class AppComponent implements OnInit {
   isExpanded = true;
   isDarkTheme = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, 
-  private iconRegistry: MatIconRegistry, 
-  private sanitizer: DomSanitizer) { 
-    this.iconRegistry.addSvgIcon(
-      'logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/logo.svg')
-    );
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { 
+
   }
 
   ngOnInit() {
