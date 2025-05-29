@@ -7,7 +7,7 @@ mat-sidenav {
   display: flex;
   flex-direction: column;
   width: 250px;
-  min-width: 60px;
+  min-width: 70px;
   height: 100vh;
   transition: width 0.3s ease;
   background-color: var(--mat-sys-surface-container);
@@ -19,12 +19,15 @@ mat-sidenav {
       display: none;
     }
   }
-
-  .user-section {
-    margin-top: auto;
-    width: 100%;
-  }
 }
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 64px);
+}
+
 
 mat-sidenav-content {
   flex: 1;
@@ -62,10 +65,12 @@ mat-nav-list {
   a {
     display: flex;
     align-items: center;
+    align-self: center;
     padding: 8px 16px;
     transition: all 0.2s ease;
 
     mat-icon {
+      margin-left: 8px;
       margin-right: 16px;
       color: var(--mat-sys-on-surface-variant);
       transition: all 0.2s ease;
