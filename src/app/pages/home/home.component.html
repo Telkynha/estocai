@@ -17,4 +17,99 @@
       </mat-card>
     }
   </div>
+  
+  <div class="large-cards-grid">
+    @for (card of largeCards; track card.title) {
+      <mat-card class="large-card">
+        <mat-card-header>
+          <mat-icon>{{card.icon}}</mat-icon>
+          <mat-card-title>{{card.title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          @for (item of card.items; track item.name) {
+            <div class="item-row">
+              <div class="item-info">
+                <div class="item-name">{{item.name}}</div>
+                <div class="item-value">{{item.value}}</div>
+              </div>
+              <div class="progress-bar">
+                <div class="progress" [style.width.%]="item.percentage"></div>
+              </div>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  <div class="new-cards-grid">
+    @for (card of newCards; track card.title) {
+      @switch (card.type) {
+        @case ('comparison') {
+          <mat-card class="comparison-card">
+            <mat-card-header>
+              <mat-icon>{{card.icon}}</mat-icon>
+              <mat-card-title>{{card.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="comparison-item">
+                <div class="label">{{card.current?.label}}</div>
+                <div class="value">{{card.current?.value}}</div>
+                <mat-progress-bar mode="determinate" 
+                                 [value]="card.current?.percentage"
+                                 color="primary">
+                </mat-progress-bar>
+              </div>
+              <div class="comparison-item">
+                <div class="label">{{card.previous?.label}}</div>
+                <div class="value">{{card.previous?.value}}</div>
+                <mat-progress-bar mode="determinate" 
+                                 [value]="card.previous?.percentage"
+                                 color="accent">
+                </mat-progress-bar>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+        @case ('timeline') {
+          <mat-card class="timeline-card">
+            <mat-card-header>
+              <mat-icon>{{card.icon}}</mat-icon>
+              <mat-card-title>{{card.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              @for (activity of card.activities; track activity.time) {
+                <div class="activity" [class]="activity.status">
+                  <div class="time">{{activity.time}}</div>
+                  <div class="description">{{activity.description}}</div>
+                </div>
+              }
+            </mat-card-content>
+          </mat-card>
+        }
+        @case ('distribution') {
+          <mat-card class="distribution-card">
+            <mat-card-header>
+              <mat-icon>{{card.icon}}</mat-icon>
+              <mat-card-title>{{card.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="total">
+                <div class="label">Total</div>
+                <div class="value">{{card.total}}</div>
+              </div>
+              <mat-divider></mat-divider>
+              @for (category of card.categories; track category.name) {
+                <div class="category">
+                  <div class="color-indicator" [style.background-color]="category.color"></div>
+                  <div class="name">{{category.name}}</div>
+                  <div class="percentage">{{category.percentage}}%</div>
+                </div>
+              }
+            </mat-card-content>
+          </mat-card>
+        }
+      }
+    }
+  </div>
 </div>

@@ -35,14 +35,14 @@ html {
   --mat-sys-on-tertiary-fixed-variant: light-dark(#4a435c, #4a435c);
 
   /* Neutral palette variables */
-  --mat-sys-background: light-dark(#faf9f8, #121413);
+  --mat-sys-background: light-dark(#fffdfb, #121413);
   --mat-sys-on-background: light-dark(#1a1c1c, #e3e2e1);
   --mat-sys-surface: light-dark(#faf9f8, #121413);
   --mat-sys-surface-dim: light-dark(#dadad9, #121413);
   --mat-sys-surface-bright: light-dark(#faf9f8, #383939);
-  --mat-sys-surface-container-low: light-dark(#f4f3f2, #1a1c1c);
+  --mat-sys-surface-container-low: light-dark(#f5f4f3, #1a1c1c);
   --mat-sys-surface-container-lowest: light-dark(#ffffff, #0d0f0e);
-  --mat-sys-surface-container: light-dark(#eeeeed, #1e2020);
+  --mat-sys-surface-container: light-dark(rgb(245, 245, 243), #1e2020);
   --mat-sys-surface-container-high: light-dark(#e8e8e7, #292a2a);
   --mat-sys-surface-container-highest: light-dark(#e3e2e1, #333535);
   --mat-sys-on-surface: light-dark(#1a1c1c, #e3e2e1);
