@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { isPlatformBrowser } from '@angular/common';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,8 @@ import { isPlatformBrowser } from '@angular/common';
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDividerModule
 ]
 })
 export class AppComponent implements OnInit {
