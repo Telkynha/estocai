@@ -2,10 +2,10 @@
   <mat-sidenav #sidenav mode="side" [class.expanded]="isExpanded" opened>
     <mat-toolbar>
       <button mat-icon-button (click)="toggleSidebar()">
-        <mat-icon>menu</mat-icon>
+        <mat-icon class="custom-icon"></mat-icon>
       </button>
       @if (isExpanded) {
-        <span>Estocai</span>
+      <span>Estocai</span>
       }
     </mat-toolbar>
 

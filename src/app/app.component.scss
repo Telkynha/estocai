@@ -3,6 +3,15 @@
   display: flex;
 }
 
+.custom-icon {
+  background-image: url('../assets/icons/logo.ico');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+}
+
 mat-sidenav {
   display: flex;
   flex-direction: column;
