@@ -32,11 +32,11 @@
       <div class="user-section">
         <mat-divider></mat-divider>
         <mat-nav-list class="bottom-nav-list">
-          <a mat-list-item routerLink="/configuracoes" routerLinkActive="active">
+          <a mat-list-item (click)="openConfig()">
             <mat-icon>settings</mat-icon>
             @if (isExpanded) { <span>Configurações</span> }
           </a>
-          <a mat-list-item routerLink="/login" routerLinkActive="active">
+          <a mat-list-item (click)="openAcesso()">
             <mat-icon>login</mat-icon>
             @if (isExpanded) { <span>Login</span> }
           </a>

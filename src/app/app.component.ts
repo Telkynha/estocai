@@ -8,7 +8,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { isPlatformBrowser } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ConfigComponent } from './components/forms/config/config.component';
+import { AcessoComponent } from './components/forms/acesso/acesso.component';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
   isExpanded = true;
   isDarkTheme = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private dialog: MatDialog) { 
 
   }
 
@@ -61,5 +63,19 @@ export class AppComponent implements OnInit {
         body.classList.add(this.isDarkTheme ? 'dark-theme' : 'light-theme');
       }
     }
+  }
+
+  openConfig() {
+    this.dialog.open(ConfigComponent, {
+      minWidth: '60vw',
+      height: '50vh'
+    });
+  }
+
+  openAcesso() {
+    this.dialog.open(AcessoComponent, {
+      minWidth: '60vw',
+      height: '50vh'
+    });
   }
 }
