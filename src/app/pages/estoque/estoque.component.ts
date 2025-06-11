@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
 
 interface EstoqueItem {
   codigo: string;
@@ -16,7 +18,7 @@ interface EstoqueItem {
 @Component({
   selector: 'app-estoque',
   standalone: true,
-  imports: [MatTableModule, MatCardModule, CommonModule],
+  imports: [MatTableModule, MatCardModule, CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './estoque.component.html',
   styleUrls: ['./estoque.component.scss']
 })

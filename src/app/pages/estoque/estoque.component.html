@@ -1,8 +1,19 @@
 <mat-card class="estoque-card">
   <mat-card-title>Estoque de Produtos</mat-card-title>
+
+  <div class="estoque-actions">
+    <button mat-raised-button color="primary" aria-label="Adicionar item">
+      <mat-icon>add</mat-icon>
+      <span>Adicionar Item</span>
+    </button>
+    <button mat-raised-button color="accent" aria-label="Importar dados">
+      <mat-icon>upload</mat-icon>
+      <span>Importar Dados</span>
+    </button>
+  </div>
+
   <div class="estoque-table-container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
-
       <!-- Código -->
       <ng-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef class="primary-header">Código</th>
