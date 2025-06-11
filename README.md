@@ -1,59 +1,92 @@
-# Frontend
+# Estocai 📦
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+Uma solução inteligente de gestão de estoque para pequenos negócios que ajuda a controlar níveis de estoque e sugere o melhor momento para reposição.
 
-## Development server
+## 🚀 Funcionalidades
 
-To start a local development server, run:
+- **Cadastro Fácil de Produtos**
+  - Entrada rápida com detalhes essenciais
+  - Importação em massa via CSV
+  - Organização por tags
 
-```bash
-ng serve
-```
+- **Monitoramento Inteligente de Estoque**
+  - Atualizações automáticas
+  - Alertas de estoque baixo
+  - Acompanhamento em tempo real
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Análise de Vendas**
+  - Dashboard visual
+  - Acompanhamento de desempenho
+  - Análise de tendências e previsões
 
-## Code scaffolding
+- **Gestão Financeira**
+  - Controle de despesas e receitas
+  - Cálculos de lucro
+  - Comparativos mensais/anuais
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 💻 Tecnologias
 
-```bash
-ng generate component component-name
-```
+- **Frontend:** Angular, Material Design
+- **Backend:** Firebase
+  - Firestore
+  - Authentication
+  - Cloud Functions
+  - Cloud Messaging
+  - Hosting
+- **Integração:** AngularFire
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📱 Módulos Principais
 
-```bash
-ng generate --help
-```
+### 📊 Dashboard
+- Visão geral das métricas
+- Alertas de estoque baixo
+- Transações recentes
+- Botões de ação rápida
 
-## Building
+### 📦 Estoque
+- Gestão de produtos
+- Níveis de estoque
+- Acompanhamento de preços
+- Informações de fornecedores
 
-To build the project run:
+### 💰 Movimentações
+- Registro de vendas
+- Reposição de estoque
+- Controle de despesas
+- Integração com envios
 
-```bash
-ng build
-```
+### 📈 Estatísticas
+- Análise de vendas
+- Acompanhamento de despesas
+- Cálculos de lucro
+- Desempenho dos produtos
+- Tendências de crescimento
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### ⚙️ Configurações
+- Gestão de conta
+- Preferências de notificação
+- Personalização de tema
+- Configurações do sistema
 
-## Running unit tests
+## 🔜 Roadmap
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- [ ] MVP com funcionalidades básicas
+- [ ] Estruturação completa do layout
+- [ ] Integração com o backend
+- [ ] Integração com os marketplaces
+- [ ] Recursos Premiums
 
-```bash
-ng test
-```
+## 🌟 Recursos Premium (Em Breve)
 
-## Running end-to-end tests
+- Análises avançadas
+- Integração com marketplaces
+- Portal do fornecedor
+- Integração com WhatsApp
+- Limites estendidos de produtos
 
-For end-to-end (e2e) testing, run:
+## 📄 Licença
 
-```bash
-ng e2e
-```
+- Reservado aos autores do projeto
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+Feito com ❤️ para pequenos empresários
