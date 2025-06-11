@@ -27,9 +27,14 @@ Uma solução inteligente de gestão de estoque para pequenos negócios que ajud
 ## 💻 Tecnologias
 
 - **Frontend:** Angular 20, Material Design
-- **Gráficos:** Chart.js, ng2-charts
-- **Server:** Node.js, Express
-- **Deploy:** SSR (Server Side Rendering)
+  - **Gráficos:** Chart.js, ng2-charts
+- **Backend:** Firebase
+  - Firestore
+  - Authentication
+  - Cloud Functions
+  - Cloud Messaging
+  - Hosting
+- **Integração:** AngularFire
 
 ## 🚀 Como Executar o Projeto
 
