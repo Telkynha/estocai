@@ -70,7 +70,7 @@ Uma solução inteligente de gestão de estoque para pequenos negócios que ajud
 
 ## 🔜 Roadmap
 
-- [ ] MVP com funcionalidades básicas
+- [x] MVP com funcionalidades básicas
 - [ ] Estruturação completa do layout
 - [ ] Integração com o backend
 - [ ] Integração com os marketplaces
