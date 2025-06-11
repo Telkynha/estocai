@@ -1,0 +1,77 @@
+.movimentacoes-card {
+  margin: 32px;
+  background: var(--mat-sys-surface-container-low);
+  border-radius: 16px;
+  padding: 32px;
+
+  mat-card-title {
+    color: var(--mat-sys-primary);
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+}
+
+.table-container {
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  background: var(--mat-sys-surface-container);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th.mat-header-cell {
+  background: var(--mat-sys-surface-container-highest);
+  color: var(--mat-sys-on-surface-variant);
+  font-weight: 600;
+  padding: 16px;
+}
+
+td.mat-cell {
+  padding: 16px;
+  color: var(--mat-sys-on-surface);
+}
+
+// Status para Vendas
+.status-em-processamento {
+  color: var(--mat-sys-secondary);
+  font-weight: 500;
+}
+
+.status-enviado {
+  color: var(--mat-sys-primary);
+  font-weight: 500;
+}
+
+.status-entregue {
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.status-cancelado {
+  color: #ba1a1a;
+  font-weight: 700;
+}
+
+// Status para Gastos
+.status-pago {
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.status-pendente {
+  color: var(--mat-sys-secondary);
+  font-weight: 500;
+}
+
+.status-atrasado {
+  color: #ba1a1a;
+  font-weight: 700;
+}
+
+mat-tab-group {
+  margin-top: 16px;
+}
