@@ -26,14 +26,33 @@ Uma solução inteligente de gestão de estoque para pequenos negócios que ajud
 
 ## 💻 Tecnologias
 
-- **Frontend:** Angular, Material Design
-- **Backend:** Firebase
-  - Firestore
-  - Authentication
-  - Cloud Functions
-  - Cloud Messaging
-  - Hosting
-- **Integração:** AngularFire
+- **Frontend:** Angular 20, Material Design
+- **Gráficos:** Chart.js, ng2-charts
+- **Server:** Node.js, Express
+- **Deploy:** SSR (Server Side Rendering)
+
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+
+- Node.js (versão 18+)
+- Angular CLI (`npm install -g @angular/cli`)
+
+### Instalação
+
+```bash
+# Clone este repositório
+git clone <url-do-repositorio>
+
+# Entre na pasta do projeto
+cd estocai
+
+# Instale as dependências
+npm install
+
+# Execute a aplicação
+npm start
+```
 
 ## 📱 Módulos Principais
 
@@ -60,13 +79,6 @@ Uma solução inteligente de gestão de estoque para pequenos negócios que ajud
 - Acompanhamento de despesas
 - Cálculos de lucro
 - Desempenho dos produtos
-- Tendências de crescimento
-
-### ⚙️ Configurações
-- Gestão de conta
-- Preferências de notificação
-- Personalização de tema
-- Configurações do sistema
 
 ## 🔜 Roadmap
 
@@ -74,7 +86,7 @@ Uma solução inteligente de gestão de estoque para pequenos negócios que ajud
 - [ ] Estruturação completa do layout
 - [ ] Integração com o backend
 - [ ] Integração com os marketplaces
-- [ ] Recursos Premiums
+- [ ] Recursos Premium
 
 ## 🌟 Recursos Premium (Em Breve)
 
@@ -86,7 +98,7 @@ Uma solução inteligente de gestão de estoque para pequenos negócios que ajud
 
 ## 📄 Licença
 
-- Reservado aos autores do projeto
+Reservado aos autores do projeto
 
 ---
 Feito com ❤️ para pequenos empresários
