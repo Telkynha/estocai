@@ -1,1 +1,75 @@
-<p>movimentacoes works!</p>
+<mat-card class="movimentacoes-card">
+  <mat-card-title>Movimentações</mat-card-title>
+  
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Vendas">
+      <div class="table-container">
+        <table mat-table [dataSource]="vendasData" class="mat-elevation-z2">
+          @for (column of vendasColumns; track column) {
+            <ng-container [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef>{{column | titlecase}}</th>
+              <td mat-cell *matCellDef="let item">
+                @switch (column) {
+                  @case ('valor') {
+                    R$ {{item[column] | number:'1.2-2'}}
+                  }
+                  @case ('frete') {
+                    R$ {{item[column] | number:'1.2-2'}}
+                  }
+                  @case ('dataVenda') {
+                    {{item[column] | date:'dd/MM/yyyy'}}
+                  }
+                  @case ('dataEntrega') {
+                    {{item[column] | date:'dd/MM/yyyy'}}
+                  }
+                  @case ('status') {
+                    <span [class]="'status-' + item[column].toLowerCase().replace(' ', '-')">
+                      {{item[column]}}
+                    </span>
+                  }
+                  @default {
+                    {{item[column]}}
+                  }
+                }
+              </td>
+            </ng-container>
+          }
+          <tr mat-header-row *matHeaderRowDef="vendasColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: vendasColumns;"></tr>
+        </table>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Gastos">
+      <div class="table-container">
+        <table mat-table [dataSource]="gastosData" class="mat-elevation-z2">
+          @for (column of gastosColumns; track column) {
+            <ng-container [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef>{{column | titlecase}}</th>
+              <td mat-cell *matCellDef="let item">
+                @switch (column) {
+                  @case ('valor') {
+                    R$ {{item[column] | number:'1.2-2'}}
+                  }
+                  @case ('data') {
+                    {{item[column] | date:'dd/MM/yyyy'}}
+                  }
+                  @case ('status') {
+                    <span [class]="'status-' + item[column].toLowerCase().replace(' ', '-')">
+                      {{item[column]}}
+                    </span>
+                  }
+                  @default {
+                    {{item[column]}}
+                  }
+                }
+              </td>
+            </ng-container>
+          }
+          <tr mat-header-row *matHeaderRowDef="gastosColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: gastosColumns;"></tr>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
