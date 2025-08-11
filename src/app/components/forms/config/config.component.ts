@@ -4,6 +4,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatNavList } from '@angular/material/list';
 
 @Component({
   selector: 'app-config',
@@ -19,5 +20,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent {
-
+  // You can add methods to handle click events for each menu item here
 }
