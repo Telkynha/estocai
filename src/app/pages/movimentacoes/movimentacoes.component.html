@@ -1,42 +1,111 @@
-<mat-card class="movimentacoes-card">
-  <mat-card-title>Movimentações</mat-card-title>
+<div class="movimentacoes-container">
+  <h1>Movimentações</h1>
 
-  <mat-tab label="Vendas">
-    <div class="table-container">
-      <table mat-table [dataSource]="vendasData" class="mat-elevation-z2">
-        @for (column of vendasColumns; track column) {
-        <ng-container [matColumnDef]="column">
-          <th mat-header-cell *matHeaderCellDef>{{column | titlecase}}</th>
-          <td mat-cell *matCellDef="let item">
-            @switch (column) {
-            @case ('valor') {
-            R$ {{item[column] | number:'1.2-2'}}
-            }
-            @case ('frete') {
-            R$ {{item[column] | number:'1.2-2'}}
-            }
-            @case ('dataVenda') {
-            {{item[column] | date:'dd/MM/yyyy'}}
-            }
-            @case ('dataEntrega') {
-            {{item[column] | date:'dd/MM/yyyy'}}
-            }
-            @case ('status') {
-            <span [class]="'status-' + item[column].toLowerCase().replace(' ', '-')">
+  <div class="header-container">
+    <div class="filtros-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="aplicarFiltro($event)" placeholder="Digite para buscar...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select (selectionChange)="filtrarPorStatus($event.value)">
+          <mat-option *ngFor="let status of statusList" [value]="status">
+            {{status}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Categoria</mat-label>
+        <mat-select (selectionChange)="filtrarPorCategoria($event.value)">
+          <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+            {{categoria}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="acoes-container">
+      <button mat-raised-button color="primary" (click)="novaMovimentacao()">
+        <mat-icon>add</mat-icon>
+        <span>Nova Movimentação</span>
+      </button>
+
+      <button mat-raised-button [matMenuTriggerFor]="menu" color="accent">
+        <mat-icon>more_vert</mat-icon>
+        <span>Mais ações</span>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="exportarSelecionados()">
+          <mat-icon>file_download</mat-icon>
+          <span>Exportar selecionados</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>upload</mat-icon>
+          <span>Importar dados</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+      <!-- Seleção -->
+      <ng-container matColumnDef="selecao">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(row) : null"
+                       [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Colunas da tabela -->
+      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column | titlecase}}</th>
+        <td mat-cell *matCellDef="let item">
+          <ng-container [ngSwitch]="column">
+            <span *ngSwitchCase="'valor'" class="valor">R$ {{item[column] | number:'1.2-2'}}</span>
+            <span *ngSwitchCase="'status'" [class]="'status-chip ' + item[column].toLowerCase().replace(' ', '-')">
               {{item[column]}}
             </span>
-            }
-            @default {
-            {{item[column]}}
-            }
-            }
-          </td>
-        </ng-container>
-        }
-        <tr mat-header-row *matHeaderRowDef="vendasColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: vendasColumns;"></tr>
-      </table>
-    </div>
-  </mat-tab>
+            <span *ngSwitchCase="'acoes'">
+              <button mat-icon-button [matMenuTriggerFor]="itemMenu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #itemMenu="matMenu">
+                <button mat-menu-item (click)="editarItem(item)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Editar</span>
+                </button>
+                <button mat-menu-item (click)="excluirItem(item)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Excluir</span>
+                </button>
+              </mat-menu>
+            </span>
+            <span *ngSwitchDefault>{{item[column]}}</span>
+          </ng-container>
+        </td>
+      </ng-container>
 
-</mat-card>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                   aria-label="Selecione a página"
+                   showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
