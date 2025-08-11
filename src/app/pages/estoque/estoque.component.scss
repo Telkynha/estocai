@@ -5,67 +5,91 @@
   padding: 32px;
 }
 
-mat-card-title {
-  color: var(--mat-sys-primary);
-  font-size: 1.5rem;
+.estoque-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-bottom: 24px;
+}
+
+.filtros-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  
+  mat-form-field {
+    min-width: 200px;
+  }
+}
+
+.acoes-container {
+  display: flex;
+  gap: 8px;
 }
 
 .estoque-table-container {
   overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--mat-sys-surface-container);
-}
-
-th.mat-header-cell {
-  font-weight: 600;
-  background: var(--mat-sys-surface-container-highest);
-  color: var(--mat-sys-on-surface-variant);
-}
-
-.primary-header {
-  color: var(--mat-sys-primary);
-}
-
-.secondary-header {
-  color: var(--mat-sys-secondary);
-}
-
-td.mat-cell {
-  color: var(--mat-sys-on-surface);
-}
-
-.status-disponivel {
-  color: var(--mat-sys-primary);
-  font-weight: 500;
-}
-.status-baixo {
-  color: var(--mat-sys-secondary);
-  font-weight: 500;
-}
-.status-critico {
-  color: #ba1a1a;
-  font-weight: 700;
-}
-
-.estoque-actions {
-  display: flex;
-  gap: 16px;
-  margin: 16px 0;
-  justify-content: flex-end;
+  margin-top: 16px;
   
-  button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+.mat-mdc-row {
+  &:hover {
+    background-color: var(--mat-sys-surface-container-highest);
+  }
+}
+
+.status-chip {
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  
+  &.disponivel {
+    background-color: var(--mat-sys-success-container);
+    color: var(--mat-sys-on-success-container);
+  }
+  
+  &.baixo {
+    background-color: var(--mat-sys-warning-container);
+    color: var(--mat-sys-on-warning-container);
+  }
+  
+  &.critico {
+    background-color: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-error-container);
+  }
+}
+
+.mat-column-selecao {
+  width: 48px;
+  padding: 0 8px;
+}
+
+.mat-column-acoes {
+  width: 48px;
+  text-align: center;
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .estoque-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filtros-container {
+    flex-direction: column;
     
-    mat-icon {
-      margin-right: 4px;
+    mat-form-field {
+      width: 100%;
     }
   }
 }
