@@ -1,0 +1,16 @@
+I0811 18:22:25.455739   22500 load.go:37] Reloading schema and connectors...
+I0811 18:22:25.479764   22500 control.go:84] [/emulator/estocai f32e] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\mutations.gql [1301B] connector\queries.gql [1947B] 
+I0811 18:22:25.491880   22500 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect-generated\\js\\default-connector"
+I0811 18:22:25.498607   22500 collector.go:107] schema extensions wrote into "C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+I0811 18:22:25.502214   22500 collector.go:107] connector "default" javascriptSdk wrote into "C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect-generated\\js\\default-connector"
+Generated sources: angular\index.d.ts [0B] angular\package.json [661B] angular\esm\index.esm.js [0B] index.d.ts [248B] index.cjs.js [145B] README.md [2902B] angular\esm\package.json [17B] angular\index.cjs.js [1B] angular\README.md [5186B] esm\index.esm.js [110B] esm\package.json [17B] package.json [872B] 
+I0811 18:22:25.504341   22500 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0811 18:22:25.504341   22500 load.go:115] Finished reloading
+I0811 18:22:25.504854   22500 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I0811 18:22:25.505371   22500 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399
+I0811 18:22:30.521255   22500 control.go:84] [/emulator/estocai e2e9] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\mutations.gql [1301B] connector\queries.gql [1947B] 
