@@ -1,7 +1,6 @@
 connectorId: default
 generate:
   javascriptSdk:
-    outputDir: ..\..\dataconnect-generated\js\default-connector
+    outputDir: dataconnect-generated\js\default-connector
     package: "@firebasegen/default-connector"
-    packageJsonDir: ..\..
-    angular: true
+    packageJsonDir: ""

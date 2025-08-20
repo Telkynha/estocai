@@ -17,6 +17,5 @@ export interface Venda {
     nomeCliente?: string;
     contatoCliente?: string;
     observacoes?: string;
-    criadoPor: string;
     status: 'pendente' | 'concluido' | 'cancelado';
 }

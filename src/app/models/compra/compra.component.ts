@@ -14,9 +14,6 @@ export interface Compra {
     fornecedor: string;
     numeroNota?: string;
     data: Date;
-    dataPrevisaoEntrega?: Date;
-    dataEntrega?: Date;
     observacoes?: string;
-    criadoPor: string;
     status: 'pendente' | 'recebido' | 'cancelado';
 }

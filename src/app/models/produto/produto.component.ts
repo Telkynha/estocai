@@ -4,7 +4,6 @@ export interface Produto {
     nome: string;
     descricao: string;
     categoria: string;
-    etiquetas: string[];
     precoVenda: number;
     precoCusto: number;
     estoqueAtual: number;
