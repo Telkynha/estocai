@@ -13,5 +13,18 @@ export interface Produto {
     dataCriacao: Date;
     dataAtualizacao: Date;
     ativo: boolean;
-    usuario: string;
+    usuarioId: string;
+}
+
+export interface Item {
+    produtoId: string;
+    quantidade: number;
+    custoNoMomento: number;
+    subtotal: number;
+}
+
+export enum status {
+    PENDENTE = 0,
+    CONCLUIDA = 1,
+    CANCELADA = 2  
 }

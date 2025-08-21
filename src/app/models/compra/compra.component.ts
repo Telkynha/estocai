@@ -1,20 +1,14 @@
-import { Produto } from "../produto/produto.component";
-
-export interface ItemCompra {
-    produto: Produto;
-    quantidade: number;
-    custoNoMomento: number;
-    subtotal: number;
-}
+import { Item } from "../produto/produto.component";
+import { status } from "../produto/produto.component";
 
 export interface Compra {
     id?: string;
-    itens: ItemCompra[];
+    itens: Item[];
     valorTotal: number;
     fornecedor: string;
     numeroNota?: string;
     data: Date;
     observacoes?: string;
-    status: 'pendente' | 'recebido' | 'cancelado';
-    usuario: string;
+    status: status; // 0: Pendente, 1: Concluída, 2: Cancelada
+    usuarioId: string;
 }
