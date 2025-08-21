@@ -23,6 +23,11 @@ export class AuthStateService {
       next: (user) => {
         this._user.set(user);
         this._loading.set(false);
+        if (user) {
+          console.log('Usuário autenticado:', { id: user.id, nome: user.nome, email: user.email });
+        } else {
+          console.log('Usuário desconectado');
+        }
       },
       error: (error) => {
         console.error('Erro ao carregar usuário:', error);

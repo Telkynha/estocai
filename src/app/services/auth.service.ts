@@ -30,17 +30,21 @@ export class AuthService {
 
     async login(email: string, senha: string): Promise<void> {
         try {
-            await this.auth.signInWithEmailAndPassword(email, senha);
+            const result = await this.auth.signInWithEmailAndPassword(email, senha);
+            console.log('Login bem sucedido:', result.user?.email);
         } catch (error: any) {
+            console.error('Erro no login:', error.message);
             throw this.handleAuthError(error);
         }
     }
 
     async register(usuario: { nome: string; email: string; senha: string }): Promise<void> {
         try {
+            console.log('Iniciando registro de usuário:', usuario.email);
             const credential = await this.auth.createUserWithEmailAndPassword(usuario.email, usuario.senha);
 
             if (credential.user) {
+                console.log('Usuário criado com sucesso:', credential.user.uid);
                 // Criar documento do usuário no Firestore
                 await this.firestore.doc(`usuarios/${credential.user.uid}`).set({
                     id: credential.user.uid,
