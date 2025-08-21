@@ -6,19 +6,26 @@
                 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName="email">
+                    <input matInput type="email" formControlName="email" [readonly]="loading">
                     <mat-icon matSuffix>email</mat-icon>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email é obrigatório</mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Senha</mat-label>
-                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" [readonly]="loading">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
                         <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">Senha é obrigatória</mat-error>
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres</mat-error>
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" type="submit">Entrar</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || loading">
+                    <mat-spinner diameter="20" *ngIf="loading" class="spinner"></mat-spinner>
+                    <span *ngIf="!loading">Entrar</span>
+                </button>
             </form>
         </mat-tab>
 
@@ -28,25 +35,33 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Nome</mat-label>
-                    <input matInput formControlName="name">
+                    <input matInput formControlName="name" [readonly]="loading">
                     <mat-icon matSuffix>person</mat-icon>
+                    <mat-error *ngIf="registerForm.get('name')?.errors?.['required']">Nome é obrigatório</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName="email">
+                    <input matInput type="email" formControlName="email" [readonly]="loading">
                     <mat-icon matSuffix>email</mat-icon>
+                    <mat-error *ngIf="registerForm.get('email')?.errors?.['required']">Email é obrigatório</mat-error>
+                    <mat-error *ngIf="registerForm.get('email')?.errors?.['email']">Email inválido</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Senha</mat-label>
-                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" [readonly]="loading">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
                         <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
+                    <mat-error *ngIf="registerForm.get('password')?.errors?.['required']">Senha é obrigatória</mat-error>
+                    <mat-error *ngIf="registerForm.get('password')?.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres</mat-error>
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid || loading">
+                    <mat-spinner diameter="20" *ngIf="loading" class="spinner"></mat-spinner>
+                    <span *ngIf="!loading">Cadastrar</span>
+                </button>
             </form>
         </mat-tab>
     </mat-tab-group>

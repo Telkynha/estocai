@@ -24,6 +24,15 @@
     margin-top: 16px;
     padding: 8px;
     font-size: 16px;
+    min-height: 36px;
+    position: relative;
+
+    .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 
@@ -34,5 +43,23 @@
 
   .mat-mdc-tab-body-content {
     overflow: hidden !important;
+  }
+
+  .mat-mdc-form-field-error {
+    font-size: 12px;
+  }
+
+  .mat-mdc-snack-bar-container {
+    &.error {
+      --mdc-snackbar-container-color: #f44336;
+      --mat-mdc-snack-bar-button-color: #fff;
+      --mdc-snackbar-supporting-text-color: #fff;
+    }
+
+    &.success {
+      --mdc-snackbar-container-color: #4caf50;
+      --mat-mdc-snack-bar-button-color: #fff;
+      --mdc-snackbar-supporting-text-color: #fff;
+    }
   }
 }

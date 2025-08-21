@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-acesso',
@@ -19,7 +23,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './acesso.component.html',
   styleUrl: './acesso.component.scss'
@@ -28,8 +35,15 @@ export class AcessoComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
   hidePassword = true;
+  loading = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private dialogRef: MatDialogRef<AcessoComponent>
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -42,17 +56,49 @@ export class AcessoComponent {
     });
   }
 
-  onLogin() {
+  async onLogin() {
     if (this.loginForm.valid) {
-      console.log('Login:', this.loginForm.value);
-      // Implement your login logic here
+      this.loading = true;
+      try {
+        const { email, password } = this.loginForm.value;
+        await this.authService.login(email, password);
+        this.dialogRef.close(true);
+        this.router.navigate(['/']);
+        this.showMessage('Login realizado com sucesso!');
+      } catch (error: any) {
+        this.showMessage(error.message);
+      } finally {
+        this.loading = false;
+      }
     }
   }
 
-  onRegister() {
+  async onRegister() {
     if (this.registerForm.valid) {
-      console.log('Register:', this.registerForm.value);
-      // Implement your registration logic here
+      this.loading = true;
+      try {
+        const { name, email, password } = this.registerForm.value;
+        await this.authService.register({
+          nome: name,
+          email: email,
+          senha: password
+        });
+        this.dialogRef.close(true);
+        this.router.navigate(['/']);
+        this.showMessage('Cadastro realizado com sucesso!');
+      } catch (error: any) {
+        this.showMessage(error.message);
+      } finally {
+        this.loading = false;
+      }
     }
+  }
+
+  private showMessage(message: string): void {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 }
