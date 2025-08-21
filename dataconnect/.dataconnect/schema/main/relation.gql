@@ -1,0 +1,845 @@
+extend type Compra {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "Compra", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `Compra` table.
+  """
+  _count: Int! @fdc_generated(from: "Compra", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `data` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  data_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.data", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `fornecedor` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  fornecedor_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.fornecedor", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `numeroNota` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  numeroNota_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.numeroNota", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `observacoes` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  observacoes_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.observacoes", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `status` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  status_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.status", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `usuarioId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  usuarioId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.usuarioId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Compra` table where the `valorTotal` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  valorTotal_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Compra.valorTotal", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `valorTotal` field in the `Compra` table.
+  """
+  valorTotal_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Compra.valorTotal", purpose: QUERY_SUM)
+  """
+  ✨ Average the `valorTotal` field in the `Compra` table.
+  """
+  valorTotal_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Compra.valorTotal", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `data` field in the `Compra` table.
+  """
+  data_min: Timestamp @fdc_generated(from: "Compra.data", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `valorTotal` field in the `Compra` table.
+  """
+  valorTotal_min: Float @fdc_generated(from: "Compra.valorTotal", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `data` field in the `Compra` table.
+  """
+  data_max: Timestamp @fdc_generated(from: "Compra.data", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `valorTotal` field in the `Compra` table.
+  """
+  valorTotal_max: Float @fdc_generated(from: "Compra.valorTotal", purpose: QUERY_MAX)
+}
+extend type ItemCompra {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "ItemCompra", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `ItemCompra` table.
+  """
+  _count: Int! @fdc_generated(from: "ItemCompra", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemCompra` table where the `compraId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  compraId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemCompra.compraId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemCompra` table where the `custoNoMomento` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  custoNoMomento_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemCompra.custoNoMomento", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemCompra` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemCompra.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemCompra` table where the `produtoId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  produtoId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemCompra.produtoId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemCompra` table where the `quantidade` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  quantidade_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemCompra.quantidade", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemCompra` table where the `subtotal` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  subtotal_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemCompra.subtotal", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `custoNoMomento` field in the `ItemCompra` table.
+  """
+  custoNoMomento_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemCompra.custoNoMomento", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `quantidade` field in the `ItemCompra` table.
+  """
+  quantidade_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "ItemCompra.quantidade", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `subtotal` field in the `ItemCompra` table.
+  """
+  subtotal_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemCompra.subtotal", purpose: QUERY_SUM)
+  """
+  ✨ Average the `custoNoMomento` field in the `ItemCompra` table.
+  """
+  custoNoMomento_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemCompra.custoNoMomento", purpose: QUERY_AVG)
+  """
+  ✨ Average the `quantidade` field in the `ItemCompra` table.
+  """
+  quantidade_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemCompra.quantidade", purpose: QUERY_AVG)
+  """
+  ✨ Average the `subtotal` field in the `ItemCompra` table.
+  """
+  subtotal_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemCompra.subtotal", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `custoNoMomento` field in the `ItemCompra` table.
+  """
+  custoNoMomento_min: Float @fdc_generated(from: "ItemCompra.custoNoMomento", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `quantidade` field in the `ItemCompra` table.
+  """
+  quantidade_min: Int @fdc_generated(from: "ItemCompra.quantidade", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `subtotal` field in the `ItemCompra` table.
+  """
+  subtotal_min: Float @fdc_generated(from: "ItemCompra.subtotal", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `custoNoMomento` field in the `ItemCompra` table.
+  """
+  custoNoMomento_max: Float @fdc_generated(from: "ItemCompra.custoNoMomento", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `quantidade` field in the `ItemCompra` table.
+  """
+  quantidade_max: Int @fdc_generated(from: "ItemCompra.quantidade", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `subtotal` field in the `ItemCompra` table.
+  """
+  subtotal_max: Float @fdc_generated(from: "ItemCompra.subtotal", purpose: QUERY_MAX)
+}
+extend type ItemVenda {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "ItemVenda", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `ItemVenda` table.
+  """
+  _count: Int! @fdc_generated(from: "ItemVenda", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemVenda` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemVenda.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemVenda` table where the `precoNoMomento` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  precoNoMomento_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemVenda.precoNoMomento", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemVenda` table where the `produtoId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  produtoId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemVenda.produtoId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemVenda` table where the `quantidade` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  quantidade_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemVenda.quantidade", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemVenda` table where the `subtotal` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  subtotal_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemVenda.subtotal", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `ItemVenda` table where the `vendaId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  vendaId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "ItemVenda.vendaId", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `precoNoMomento` field in the `ItemVenda` table.
+  """
+  precoNoMomento_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemVenda.precoNoMomento", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `quantidade` field in the `ItemVenda` table.
+  """
+  quantidade_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "ItemVenda.quantidade", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `subtotal` field in the `ItemVenda` table.
+  """
+  subtotal_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemVenda.subtotal", purpose: QUERY_SUM)
+  """
+  ✨ Average the `precoNoMomento` field in the `ItemVenda` table.
+  """
+  precoNoMomento_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemVenda.precoNoMomento", purpose: QUERY_AVG)
+  """
+  ✨ Average the `quantidade` field in the `ItemVenda` table.
+  """
+  quantidade_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemVenda.quantidade", purpose: QUERY_AVG)
+  """
+  ✨ Average the `subtotal` field in the `ItemVenda` table.
+  """
+  subtotal_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "ItemVenda.subtotal", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `precoNoMomento` field in the `ItemVenda` table.
+  """
+  precoNoMomento_min: Float @fdc_generated(from: "ItemVenda.precoNoMomento", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `quantidade` field in the `ItemVenda` table.
+  """
+  quantidade_min: Int @fdc_generated(from: "ItemVenda.quantidade", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `subtotal` field in the `ItemVenda` table.
+  """
+  subtotal_min: Float @fdc_generated(from: "ItemVenda.subtotal", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `precoNoMomento` field in the `ItemVenda` table.
+  """
+  precoNoMomento_max: Float @fdc_generated(from: "ItemVenda.precoNoMomento", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `quantidade` field in the `ItemVenda` table.
+  """
+  quantidade_max: Int @fdc_generated(from: "ItemVenda.quantidade", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `subtotal` field in the `ItemVenda` table.
+  """
+  subtotal_max: Float @fdc_generated(from: "ItemVenda.subtotal", purpose: QUERY_MAX)
+}
+extend type Produto {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "Produto", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `Produto` table.
+  """
+  _count: Int! @fdc_generated(from: "Produto", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `ativo` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  ativo_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.ativo", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `categoria` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  categoria_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.categoria", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `codigo` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  codigo_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.codigo", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `dataAtualizacao` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  dataAtualizacao_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.dataAtualizacao", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `dataCriacao` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  dataCriacao_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.dataCriacao", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `descricao` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  descricao_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.descricao", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `estoqueAtual` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  estoqueAtual_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.estoqueAtual", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `estoqueMinimo` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  estoqueMinimo_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.estoqueMinimo", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `fornecedor` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  fornecedor_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.fornecedor", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `nome` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  nome_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.nome", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `observacoes` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  observacoes_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.observacoes", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `precoCusto` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  precoCusto_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.precoCusto", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `precoVenda` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  precoVenda_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.precoVenda", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Produto` table where the `usuarioId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  usuarioId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Produto.usuarioId", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `estoqueAtual` field in the `Produto` table.
+  """
+  estoqueAtual_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "Produto.estoqueAtual", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `estoqueMinimo` field in the `Produto` table.
+  """
+  estoqueMinimo_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "Produto.estoqueMinimo", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `precoCusto` field in the `Produto` table.
+  """
+  precoCusto_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Produto.precoCusto", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `precoVenda` field in the `Produto` table.
+  """
+  precoVenda_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Produto.precoVenda", purpose: QUERY_SUM)
+  """
+  ✨ Average the `estoqueAtual` field in the `Produto` table.
+  """
+  estoqueAtual_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Produto.estoqueAtual", purpose: QUERY_AVG)
+  """
+  ✨ Average the `estoqueMinimo` field in the `Produto` table.
+  """
+  estoqueMinimo_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Produto.estoqueMinimo", purpose: QUERY_AVG)
+  """
+  ✨ Average the `precoCusto` field in the `Produto` table.
+  """
+  precoCusto_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Produto.precoCusto", purpose: QUERY_AVG)
+  """
+  ✨ Average the `precoVenda` field in the `Produto` table.
+  """
+  precoVenda_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Produto.precoVenda", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `dataAtualizacao` field in the `Produto` table.
+  """
+  dataAtualizacao_min: Timestamp @fdc_generated(from: "Produto.dataAtualizacao", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `dataCriacao` field in the `Produto` table.
+  """
+  dataCriacao_min: Timestamp @fdc_generated(from: "Produto.dataCriacao", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `estoqueAtual` field in the `Produto` table.
+  """
+  estoqueAtual_min: Int @fdc_generated(from: "Produto.estoqueAtual", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `estoqueMinimo` field in the `Produto` table.
+  """
+  estoqueMinimo_min: Int @fdc_generated(from: "Produto.estoqueMinimo", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `precoCusto` field in the `Produto` table.
+  """
+  precoCusto_min: Float @fdc_generated(from: "Produto.precoCusto", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `precoVenda` field in the `Produto` table.
+  """
+  precoVenda_min: Float @fdc_generated(from: "Produto.precoVenda", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `dataAtualizacao` field in the `Produto` table.
+  """
+  dataAtualizacao_max: Timestamp @fdc_generated(from: "Produto.dataAtualizacao", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `dataCriacao` field in the `Produto` table.
+  """
+  dataCriacao_max: Timestamp @fdc_generated(from: "Produto.dataCriacao", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `estoqueAtual` field in the `Produto` table.
+  """
+  estoqueAtual_max: Int @fdc_generated(from: "Produto.estoqueAtual", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `estoqueMinimo` field in the `Produto` table.
+  """
+  estoqueMinimo_max: Int @fdc_generated(from: "Produto.estoqueMinimo", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `precoCusto` field in the `Produto` table.
+  """
+  precoCusto_max: Float @fdc_generated(from: "Produto.precoCusto", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `precoVenda` field in the `Produto` table.
+  """
+  precoVenda_max: Float @fdc_generated(from: "Produto.precoVenda", purpose: QUERY_MAX)
+}
+extend type Usuario {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "Usuario", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `Usuario` table.
+  """
+  _count: Int! @fdc_generated(from: "Usuario", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Usuario` table where the `email` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  email_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Usuario.email", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Usuario` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Usuario.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Usuario` table where the `nome` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  nome_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Usuario.nome", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Usuario` table where the `senha` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  senha_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Usuario.senha", purpose: QUERY_COUNT)
+}
+extend type Venda {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "Venda", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `Venda` table.
+  """
+  _count: Int! @fdc_generated(from: "Venda", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `contatoCliente` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  contatoCliente_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.contatoCliente", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `data` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  data_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.data", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `formaPagamento` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  formaPagamento_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.formaPagamento", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `nomeCliente` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  nomeCliente_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.nomeCliente", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `observacoes` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  observacoes_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.observacoes", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `plataforma` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  plataforma_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.plataforma", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `status` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  status_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.status", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `usuarioId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  usuarioId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.usuarioId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Venda` table where the `valorTotal` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  valorTotal_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Venda.valorTotal", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `valorTotal` field in the `Venda` table.
+  """
+  valorTotal_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Venda.valorTotal", purpose: QUERY_SUM)
+  """
+  ✨ Average the `valorTotal` field in the `Venda` table.
+  """
+  valorTotal_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Venda.valorTotal", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `data` field in the `Venda` table.
+  """
+  data_min: Timestamp @fdc_generated(from: "Venda.data", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `valorTotal` field in the `Venda` table.
+  """
+  valorTotal_min: Float @fdc_generated(from: "Venda.valorTotal", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `data` field in the `Venda` table.
+  """
+  data_max: Timestamp @fdc_generated(from: "Venda.data", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `valorTotal` field in the `Venda` table.
+  """
+  valorTotal_max: Float @fdc_generated(from: "Venda.valorTotal", purpose: QUERY_MAX)
+}

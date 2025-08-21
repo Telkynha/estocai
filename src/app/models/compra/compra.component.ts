@@ -16,4 +16,5 @@ export interface Compra {
     data: Date;
     observacoes?: string;
     status: 'pendente' | 'recebido' | 'cancelado';
+    usuario: string;
 }

@@ -13,4 +13,5 @@ export interface Produto {
     dataCriacao: Date;
     dataAtualizacao: Date;
     ativo: boolean;
+    usuario: string;
 }

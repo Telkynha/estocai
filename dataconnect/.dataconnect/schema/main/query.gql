@@ -1,0 +1,350 @@
+extend type Query {
+  """
+  ✨ Look up a single `Compra` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  compra(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Compra_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Compra_FirstRow
+  ): Compra @fdc_generated(from: "Compra", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `ItemCompra` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  itemCompra(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: ItemCompra_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: ItemCompra_FirstRow
+  ): ItemCompra @fdc_generated(from: "ItemCompra", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `ItemVenda` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  itemVenda(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: ItemVenda_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: ItemVenda_FirstRow
+  ): ItemVenda @fdc_generated(from: "ItemVenda", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Produto` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  produto(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Produto_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Produto_FirstRow
+  ): Produto @fdc_generated(from: "Produto", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Usuario` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  usuario(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Usuario_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Usuario_FirstRow
+  ): Usuario @fdc_generated(from: "Usuario", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Venda` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  venda(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Venda_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Venda_FirstRow
+  ): Venda @fdc_generated(from: "Venda", purpose: QUERY_SINGLE)
+  """
+  ✨ List `Compra` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  compras(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Compra_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Compra_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Compra_Having
+  ): [Compra!]! @fdc_generated(from: "Compra", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `ItemCompra` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  itemCompras(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: ItemCompra_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [ItemCompra_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: ItemCompra_Having
+  ): [ItemCompra!]! @fdc_generated(from: "ItemCompra", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `ItemVenda` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  itemVendas(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: ItemVenda_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [ItemVenda_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: ItemVenda_Having
+  ): [ItemVenda!]! @fdc_generated(from: "ItemVenda", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Produto` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  produtos(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Produto_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Produto_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Produto_Having
+  ): [Produto!]! @fdc_generated(from: "Produto", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Usuario` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  usuarios(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Usuario_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Usuario_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Usuario_Having
+  ): [Usuario!]! @fdc_generated(from: "Usuario", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Venda` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  vendas(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Venda_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Venda_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Venda_Having
+  ): [Venda!]! @fdc_generated(from: "Venda", purpose: QUERY_MULTIPLE)
+}

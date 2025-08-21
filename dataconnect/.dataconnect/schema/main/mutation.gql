@@ -1,0 +1,734 @@
+extend type Mutation {
+  """
+  ✨ Insert a single `Compra` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  compra_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Compra_Data!
+  ): Compra_KeyOutput! @fdc_generated(from: "Compra", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `ItemCompra` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  itemCompra_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: ItemCompra_Data!
+  ): ItemCompra_KeyOutput! @fdc_generated(from: "ItemCompra", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `ItemVenda` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  itemVenda_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: ItemVenda_Data!
+  ): ItemVenda_KeyOutput! @fdc_generated(from: "ItemVenda", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Produto` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  produto_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Produto_Data!
+  ): Produto_KeyOutput! @fdc_generated(from: "Produto", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Usuario` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  usuario_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Usuario_Data!
+  ): Usuario_KeyOutput! @fdc_generated(from: "Usuario", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Venda` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  venda_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Venda_Data!
+  ): Venda_KeyOutput! @fdc_generated(from: "Venda", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert `Compra` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  compra_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Compra_Data!]!
+  ): [Compra_KeyOutput!]! @fdc_generated(from: "Compra", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `ItemCompra` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  itemCompra_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [ItemCompra_Data!]!
+  ): [ItemCompra_KeyOutput!]! @fdc_generated(from: "ItemCompra", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `ItemVenda` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  itemVenda_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [ItemVenda_Data!]!
+  ): [ItemVenda_KeyOutput!]! @fdc_generated(from: "ItemVenda", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Produto` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  produto_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Produto_Data!]!
+  ): [Produto_KeyOutput!]! @fdc_generated(from: "Produto", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Usuario` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  usuario_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Usuario_Data!]!
+  ): [Usuario_KeyOutput!]! @fdc_generated(from: "Usuario", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Venda` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  venda_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Venda_Data!]!
+  ): [Venda_KeyOutput!]! @fdc_generated(from: "Venda", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert or update a single `Compra` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Compra`.
+  """
+  compra_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Compra_Data!
+  ): Compra_KeyOutput! @fdc_generated(from: "Compra", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `ItemCompra` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `ItemCompra`.
+  """
+  itemCompra_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: ItemCompra_Data!
+  ): ItemCompra_KeyOutput! @fdc_generated(from: "ItemCompra", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `ItemVenda` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `ItemVenda`.
+  """
+  itemVenda_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: ItemVenda_Data!
+  ): ItemVenda_KeyOutput! @fdc_generated(from: "ItemVenda", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Produto` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Produto`.
+  """
+  produto_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Produto_Data!
+  ): Produto_KeyOutput! @fdc_generated(from: "Produto", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Usuario` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Usuario`.
+  """
+  usuario_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Usuario_Data!
+  ): Usuario_KeyOutput! @fdc_generated(from: "Usuario", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Venda` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Venda`.
+  """
+  venda_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Venda_Data!
+  ): Venda_KeyOutput! @fdc_generated(from: "Venda", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update `Compra` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Compra`.
+  """
+  compra_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Compra_Data!]!
+  ): [Compra_KeyOutput!]! @fdc_generated(from: "Compra", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `ItemCompra` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `ItemCompra`.
+  """
+  itemCompra_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [ItemCompra_Data!]!
+  ): [ItemCompra_KeyOutput!]! @fdc_generated(from: "ItemCompra", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `ItemVenda` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `ItemVenda`.
+  """
+  itemVenda_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [ItemVenda_Data!]!
+  ): [ItemVenda_KeyOutput!]! @fdc_generated(from: "ItemVenda", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Produto` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Produto`.
+  """
+  produto_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Produto_Data!]!
+  ): [Produto_KeyOutput!]! @fdc_generated(from: "Produto", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Usuario` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Usuario`.
+  """
+  usuario_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Usuario_Data!]!
+  ): [Usuario_KeyOutput!]! @fdc_generated(from: "Usuario", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Venda` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Venda`.
+  """
+  venda_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Venda_Data!]!
+  ): [Venda_KeyOutput!]! @fdc_generated(from: "Venda", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Update a single `Compra` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Compra` or `null` if not found.
+  """
+  compra_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Compra_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Compra_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Compra_Data!
+  ): Compra_KeyOutput @fdc_generated(from: "Compra", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `ItemCompra` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `ItemCompra` or `null` if not found.
+  """
+  itemCompra_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: ItemCompra_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: ItemCompra_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: ItemCompra_Data!
+  ): ItemCompra_KeyOutput @fdc_generated(from: "ItemCompra", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `ItemVenda` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `ItemVenda` or `null` if not found.
+  """
+  itemVenda_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: ItemVenda_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: ItemVenda_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: ItemVenda_Data!
+  ): ItemVenda_KeyOutput @fdc_generated(from: "ItemVenda", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Produto` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Produto` or `null` if not found.
+  """
+  produto_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Produto_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Produto_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Produto_Data!
+  ): Produto_KeyOutput @fdc_generated(from: "Produto", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Usuario` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Usuario` or `null` if not found.
+  """
+  usuario_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Usuario_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Usuario_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Usuario_Data!
+  ): Usuario_KeyOutput @fdc_generated(from: "Usuario", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Venda` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Venda` or `null` if not found.
+  """
+  venda_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Venda_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Venda_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Venda_Data!
+  ): Venda_KeyOutput @fdc_generated(from: "Venda", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update `Compra` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  compra_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Compra_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Compra_Data!
+  ): Int! @fdc_generated(from: "Compra", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `ItemCompra` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  itemCompra_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: ItemCompra_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: ItemCompra_Data!
+  ): Int! @fdc_generated(from: "ItemCompra", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `ItemVenda` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  itemVenda_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: ItemVenda_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: ItemVenda_Data!
+  ): Int! @fdc_generated(from: "ItemVenda", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Produto` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  produto_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Produto_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Produto_Data!
+  ): Int! @fdc_generated(from: "Produto", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Usuario` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  usuario_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Usuario_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Usuario_Data!
+  ): Int! @fdc_generated(from: "Usuario", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Venda` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  venda_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Venda_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Venda_Data!
+  ): Int! @fdc_generated(from: "Venda", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Delete a single `Compra` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  compra_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Compra_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Compra_FirstRow
+  ): Compra_KeyOutput @fdc_generated(from: "Compra", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `ItemCompra` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  itemCompra_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: ItemCompra_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: ItemCompra_FirstRow
+  ): ItemCompra_KeyOutput @fdc_generated(from: "ItemCompra", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `ItemVenda` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  itemVenda_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: ItemVenda_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: ItemVenda_FirstRow
+  ): ItemVenda_KeyOutput @fdc_generated(from: "ItemVenda", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Produto` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  produto_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Produto_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Produto_FirstRow
+  ): Produto_KeyOutput @fdc_generated(from: "Produto", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Usuario` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  usuario_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Usuario_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Usuario_FirstRow
+  ): Usuario_KeyOutput @fdc_generated(from: "Usuario", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Venda` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  venda_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Venda_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Venda_FirstRow
+  ): Venda_KeyOutput @fdc_generated(from: "Venda", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete `Compra` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  compra_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Compra_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Compra", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `ItemCompra` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  itemCompra_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: ItemCompra_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "ItemCompra", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `ItemVenda` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  itemVenda_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: ItemVenda_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "ItemVenda", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Produto` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  produto_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Produto_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Produto", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Usuario` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  usuario_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Usuario_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Usuario", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Venda` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  venda_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Venda_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Venda", purpose: DELETE_MULTIPLE)
+}

@@ -77,3 +77,151 @@ Generated sources: index.cjs.js [145B] package.json [634B] README.md [2773B] ind
 I0820 10:28:12.215304    9180 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package
 I0820 10:28:12.215304    9180 load.go:115] Finished reloading
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0820 10:28:12.215304    9180 collector.go:107] connector \"default\" javascriptSdk wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\nGenerated sources: index.cjs.js [145B] package.json [634B] README.md [2773B] index.d.ts [248B] esm\\index.esm.js [110B] esm\\package.json [17B] \nI0820 10:28:12.215304    9180 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package\nI0820 10:28:12.215304    9180 load.go:115] Finished reloading\n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] !  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2025-08-21T16:53:31.353Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-08-21T16:53:35.669Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-08-21T16:53:35.670Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-21T16:53:35.670Z] > authorizing via signed-in user (emilyhiha12@gmail.com)
+[debug] [2025-08-21T16:53:35.673Z] Checked if tokens are valid: false, expires at: 1755698071026
+[debug] [2025-08-21T16:53:35.673Z] Checked if tokens are valid: false, expires at: 1755698071026
+[debug] [2025-08-21T16:53:35.674Z] > refreshing access token with scopes: []
+[debug] [2025-08-21T16:53:35.675Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-08-21T16:53:35.675Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T16:53:35.685Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.10.1) on port 50001
+[debug] [2025-08-21T16:53:36.630Z] I0821 13:53:36.608368    7628 control.go:84] [/emulator/estocai 2464] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\mutations.gql [1301B] connector\queries.gql [1947B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.608368    7628 control.go:84] [/emulator/estocai 2464] UpdateResources(): done\nSchema: sources: schema\\schema.gql [2088B] \nConnector \"default\": sources: connector\\mutations.gql [1301B] connector\\queries.gql [1947B] \n"}}
+[debug] [2025-08-21T16:53:36.631Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-08-21T16:53:36.631Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-08-21T16:53:36.632Z] Starting Data Connect Emulator with command {"binary":"C:\\Users\\emily\\.cache\\firebase\\emulators\\dataconnect-emulator-2.10.1.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\emily\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-2.10.1.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2025-08-21T16:53:36.706Z] I0821 13:53:36.673025    6276 load.go:37] Reloading schema and connectors...
+I0821 13:53:36.699994    6276 control.go:84] [/emulator/estocai b0bf] UpdateResources(): done
+Schema: sources: schema\schema.gql [2088B] 
+Connector "default": sources: connector\queries.gql [1947B] connector\mutations.gql [1301B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.673025    6276 load.go:37] Reloading schema and connectors...\nI0821 13:53:36.699994    6276 control.go:84] [/emulator/estocai b0bf] UpdateResources(): done\nSchema: sources: schema\\schema.gql [2088B] \nConnector \"default\": sources: connector\\queries.gql [1947B] connector\\mutations.gql [1301B] \n"}}
+[debug] [2025-08-21T16:53:36.717Z] I0821 13:53:36.718142    6276 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\connector\\dataconnect-generated\\js\\default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.718142    6276 codegen.go:82] [connector \"default\" javascriptSdk] Generating sources into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\n"}}
+[debug] [2025-08-21T16:53:36.722Z] I0821 13:53:36.722909    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.722909    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \n"}}
+[debug] [2025-08-21T16:53:36.728Z] I0821 13:53:36.728179    6276 collector.go:107] connector "default" javascriptSdk wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\connector\\dataconnect-generated\\js\\default-connector"
+Generated sources: esm\package.json [17B] index.cjs.js [145B] package.json [634B] README.md [2773B] index.d.ts [248B] esm\index.esm.js [110B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.728179    6276 collector.go:107] connector \"default\" javascriptSdk wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\nGenerated sources: esm\\package.json [17B] index.cjs.js [145B] package.json [634B] README.md [2773B] index.d.ts [248B] esm\\index.esm.js [110B] \n"}}
+[debug] [2025-08-21T16:53:36.728Z] I0821 13:53:36.728179    6276 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package
+I0821 13:53:36.728179    6276 load.go:115] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.728179    6276 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package\nI0821 13:53:36.728179    6276 load.go:115] Finished reloading\n"}}
+[debug] [2025-08-21T16:53:36.738Z] I0821 13:53:36.738977    6276 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.738977    6276 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-08-21T16:53:36.805Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-08-21T16:53:36.806Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T16:53:36.816Z] [Firebase Plugin] User found:  emilyhiha12@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-08-21T16:53:36.818Z] Checked if tokens are valid: true, expires at: 1755798815806
+[debug] [2025-08-21T16:53:36.818Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-08-21T16:53:36.882Z] I0821 13:53:36.882849    6276 engine.go:174] [/emulator/estocai b0bf] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 13:53:36.882849    6276 engine.go:174] [/emulator/estocai b0bf] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2025-08-21T16:53:37.557Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-08-21T16:53:37.558Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-08-21T18:06:13.123Z] I0821 15:06:13.123528    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:06:13.123528    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:06:13.124Z] E0821 15:06:13.125072    6276 load.go:79] Could not load sources: 
+Errors: schema\schema.gql:46: Undefined directive relation.
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0821 15:06:13.125072    6276 load.go:79] Could not load sources: \nErrors: schema\\schema.gql:46: Undefined directive relation.\n"}}
+[debug] [2025-08-21T18:06:13.126Z] I0821 15:06:13.126097    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+I0821 15:06:13.126097    6276 load.go:80] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:06:13.126097    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \nI0821 15:06:13.126097    6276 load.go:80] Finished reloading\n"}}
+[debug] [2025-08-21T18:06:36.604Z] I0821 15:06:36.604413    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:06:36.604413    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:06:36.605Z] E0821 15:06:36.605954    6276 load.go:79] Could not load sources: 
+Errors: schema\schema.gql:45: Undefined directive foreign.
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0821 15:06:36.605954    6276 load.go:79] Could not load sources: \nErrors: schema\\schema.gql:45: Undefined directive foreign.\n"}}
+[debug] [2025-08-21T18:06:36.606Z] I0821 15:06:36.606467    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+I0821 15:06:36.606467    6276 load.go:80] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:06:36.606467    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \nI0821 15:06:36.606467    6276 load.go:80] Finished reloading\n"}}
+[debug] [2025-08-21T18:06:58.285Z] I0821 15:06:58.285475    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:06:58.285475    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:06:58.286Z] E0821 15:06:58.286558    6276 load.go:79] Could not load sources: 
+Errors: schema\schema.gql:42: Undefined type DateTime.
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0821 15:06:58.286558    6276 load.go:79] Could not load sources: \nErrors: schema\\schema.gql:42: Undefined type DateTime.\n"}}
+[debug] [2025-08-21T18:06:58.287Z] I0821 15:06:58.287070    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+I0821 15:06:58.287070    6276 load.go:80] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:06:58.287070    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \nI0821 15:06:58.287070    6276 load.go:80] Finished reloading\n"}}
+[debug] [2025-08-21T18:07:14.649Z] I0821 15:07:14.649145    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:07:14.649145    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:07:14.652Z] E0821 15:07:14.652094    6276 load.go:79] Could not load sources: 
+Errors: schema\schema.gql:45: Undefined directive references.
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0821 15:07:14.652094    6276 load.go:79] Could not load sources: \nErrors: schema\\schema.gql:45: Undefined directive references.\n"}}
+[debug] [2025-08-21T18:07:14.653Z] I0821 15:07:14.653707    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+I0821 15:07:14.653707    6276 load.go:80] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:07:14.653707    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \nI0821 15:07:14.653707    6276 load.go:80] Finished reloading\n"}}
+[debug] [2025-08-21T18:07:36.259Z] I0821 15:07:36.259742    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:07:36.259742    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:07:36.261Z] E0821 15:07:36.262348    6276 load.go:79] Could not load sources: 
+Errors: schema\schema.gql:37: On Compra: Should be annotated with @table or @view
+schema\schema.gql:28: On ItemCompra: Should be annotated with @table or @view
+schema\schema.gql:48: On ItemVenda: Should be annotated with @table or @view
+schema\schema.gql:10: On Produto: Should be annotated with @table or @view
+schema\schema.gql:3: On Usuario: Should be annotated with @table or @view
+schema\schema.gql:57: On Venda: Should be annotated with @table or @view
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0821 15:07:36.262348    6276 load.go:79] Could not load sources: \nErrors: schema\\schema.gql:37: On Compra: Should be annotated with @table or @view\nschema\\schema.gql:28: On ItemCompra: Should be annotated with @table or @view\nschema\\schema.gql:48: On ItemVenda: Should be annotated with @table or @view\nschema\\schema.gql:10: On Produto: Should be annotated with @table or @view\nschema\\schema.gql:3: On Usuario: Should be annotated with @table or @view\nschema\\schema.gql:57: On Venda: Should be annotated with @table or @view\n"}}
+[debug] [2025-08-21T18:07:36.262Z] I0821 15:07:36.263376    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+I0821 15:07:36.263376    6276 load.go:80] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:07:36.263376    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \nI0821 15:07:36.263376    6276 load.go:80] Finished reloading\n"}}
+[debug] [2025-08-21T18:08:00.898Z] I0821 15:08:00.898774    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:00.898774    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:08:00.903Z] E0821 15:08:00.904057    6276 load.go:79] Could not load sources: 
+Errors: schema\schema.gql:42: On Compra.data @default(expr): Failed to compile string expression "formatISO(request.time)": invalid expression ("formatISO(request.time)"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')
+ | formatISO(request.time)
+ | .........^
+schema\schema.gql:23: On Produto.dataAtualizacao @default(expr): Failed to compile string expression "formatISO(request.time)": invalid expression ("formatISO(request.time)"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')
+ | formatISO(request.time)
+ | .........^
+schema\schema.gql:22: On Produto.dataCriacao @default(expr): Failed to compile string expression "formatISO(request.time)": invalid expression ("formatISO(request.time)"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')
+ | formatISO(request.time)
+ | .........^
+schema\schema.gql:62: On Venda.data @default(expr): Failed to compile string expression "formatISO(request.time)": invalid expression ("formatISO(request.time)"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')
+ | formatISO(request.time)
+ | .........^
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0821 15:08:00.904057    6276 load.go:79] Could not load sources: \nErrors: schema\\schema.gql:42: On Compra.data @default(expr): Failed to compile string expression \"formatISO(request.time)\": invalid expression (\"formatISO(request.time)\"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')\n | formatISO(request.time)\n | .........^\nschema\\schema.gql:23: On Produto.dataAtualizacao @default(expr): Failed to compile string expression \"formatISO(request.time)\": invalid expression (\"formatISO(request.time)\"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')\n | formatISO(request.time)\n | .........^\nschema\\schema.gql:22: On Produto.dataCriacao @default(expr): Failed to compile string expression \"formatISO(request.time)\": invalid expression (\"formatISO(request.time)\"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')\n | formatISO(request.time)\n | .........^\nschema\\schema.gql:62: On Venda.data @default(expr): Failed to compile string expression \"formatISO(request.time)\": invalid expression (\"formatISO(request.time)\"): ERROR: <input>:1:10: undeclared reference to 'formatISO' (in container '')\n | formatISO(request.time)\n | .........^\n"}}
+[debug] [2025-08-21T18:08:00.904Z] I0821 15:08:00.905076    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+I0821 15:08:00.905076    6276 load.go:80] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:00.905076    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \nI0821 15:08:00.905076    6276 load.go:80] Finished reloading\n"}}
+[debug] [2025-08-21T18:08:26.298Z] I0821 15:08:26.298851    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:26.298851    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:08:26.302Z] E0821 15:08:26.303261    6276 load.go:79] Could not load sources: 
+Errors: schema\schema.gql:42: On Compra.data @default(expr): Failed to compile string expression "request.time": invalid expression ("request.time"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)
+schema\schema.gql:23: On Produto.dataAtualizacao @default(expr): Failed to compile string expression "request.time": invalid expression ("request.time"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)
+schema\schema.gql:22: On Produto.dataCriacao @default(expr): Failed to compile string expression "request.time": invalid expression ("request.time"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)
+schema\schema.gql:62: On Venda.data @default(expr): Failed to compile string expression "request.time": invalid expression ("request.time"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0821 15:08:26.303261    6276 load.go:79] Could not load sources: \nErrors: schema\\schema.gql:42: On Compra.data @default(expr): Failed to compile string expression \"request.time\": invalid expression (\"request.time\"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)\nschema\\schema.gql:23: On Produto.dataAtualizacao @default(expr): Failed to compile string expression \"request.time\": invalid expression (\"request.time\"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)\nschema\\schema.gql:22: On Produto.dataCriacao @default(expr): Failed to compile string expression \"request.time\": invalid expression (\"request.time\"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)\nschema\\schema.gql:62: On Venda.data @default(expr): Failed to compile string expression \"request.time\": invalid expression (\"request.time\"): result is unexpected type (got google.protobuf.Timestamp; want a type compatible with string)\n"}}
+[debug] [2025-08-21T18:08:26.303Z] I0821 15:08:26.303774    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:26.303774    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] \n"}}
+[debug] [2025-08-21T18:08:26.304Z] I0821 15:08:26.303774    6276 load.go:80] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:26.303774    6276 load.go:80] Finished reloading\n"}}
+[debug] [2025-08-21T18:08:50.609Z] I0821 15:08:50.609388    6276 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:50.609388    6276 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T18:08:50.643Z] I0821 15:08:50.643226    6276 control.go:84] [/emulator/estocai b0bf] UpdateResources(): done
+Schema: sources: schema\schema.gql [1485B] 
+Connector "default": sources: connector\mutations.gql [1301B] connector\queries.gql [1947B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:50.643226    6276 control.go:84] [/emulator/estocai b0bf] UpdateResources(): done\nSchema: sources: schema\\schema.gql [1485B] \nConnector \"default\": sources: connector\\mutations.gql [1301B] connector\\queries.gql [1947B] \n"}}
+[debug] [2025-08-21T18:08:50.676Z] I0821 15:08:50.675898    6276 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\connector\\dataconnect-generated\\js\\default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:50.675898    6276 codegen.go:82] [connector \"default\" javascriptSdk] Generating sources into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\n"}}
+[debug] [2025-08-21T18:08:50.680Z] I0821 15:08:50.679886    6276 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: main\mutation.gql [21865B] prelude.gql [73172B] main\input.gql [55270B] main\relation.gql [32096B] main\query.gql [8298B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:50.679886    6276 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: main\\mutation.gql [21865B] prelude.gql [73172B] main\\input.gql [55270B] main\\relation.gql [32096B] main\\query.gql [8298B] \n"}}
+[debug] [2025-08-21T18:08:50.686Z] I0821 15:08:50.685477    6276 collector.go:107] connector "default" javascriptSdk wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\connector\\dataconnect-generated\\js\\default-connector"
+Generated sources: esm\package.json [17B] index.cjs.js [145B] package.json [634B] README.md [2773B] index.d.ts [720B] esm\index.esm.js [110B] 
+I0821 15:08:50.685477    6276 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package
+I0821 15:08:50.685477    6276 load.go:115] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:50.685477    6276 collector.go:107] connector \"default\" javascriptSdk wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\nGenerated sources: esm\\package.json [17B] index.cjs.js [145B] package.json [634B] README.md [2773B] index.d.ts [720B] esm\\index.esm.js [110B] \nI0821 15:08:50.685477    6276 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package\nI0821 15:08:50.685477    6276 load.go:115] Finished reloading\n"}}
