@@ -225,3 +225,37 @@ Generated sources: esm\package.json [17B] index.cjs.js [145B] package.json [634B
 I0821 15:08:50.685477    6276 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package
 I0821 15:08:50.685477    6276 load.go:115] Finished reloading
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:08:50.685477    6276 collector.go:107] connector \"default\" javascriptSdk wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\nGenerated sources: esm\\package.json [17B] index.cjs.js [145B] package.json [634B] README.md [2773B] index.d.ts [720B] esm\\index.esm.js [110B] \nI0821 15:08:50.685477    6276 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package\nI0821 15:08:50.685477    6276 load.go:115] Finished reloading\n"}}
+[debug] [2025-08-21T18:31:58.927Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2025-08-21T18:31:58.927Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-08-21T18:31:58.929Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-21T18:31:58.929Z] > authorizing via signed-in user (emilyhiha12@gmail.com)
+[debug] [2025-08-21T18:31:58.930Z] Checked if tokens are valid: false, expires at: 1755798815806
+[debug] [2025-08-21T18:31:58.930Z] Checked if tokens are valid: false, expires at: 1755798815806
+[debug] [2025-08-21T18:31:58.930Z] > refreshing access token with scopes: []
+[debug] [2025-08-21T18:31:58.931Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-08-21T18:31:58.931Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T18:31:58.936Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2025-08-21T18:31:58.937Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-08-21T18:31:58.939Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-21T18:31:58.939Z] > authorizing via signed-in user (emilyhiha12@gmail.com)
+[debug] [2025-08-21T18:31:58.939Z] Checked if tokens are valid: false, expires at: 1755798815806
+[debug] [2025-08-21T18:31:58.940Z] Checked if tokens are valid: false, expires at: 1755798815806
+[debug] [2025-08-21T18:31:58.940Z] > refreshing access token with scopes: []
+[debug] [2025-08-21T18:31:58.940Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-08-21T18:31:58.940Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T18:31:59.126Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-08-21T18:31:59.126Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T18:31:59.136Z] [Firebase Plugin] User found:  emilyhiha12@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-08-21T18:31:59.137Z] Checked if tokens are valid: true, expires at: 1755804718127
+[debug] [2025-08-21T18:31:59.138Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-08-21T18:31:59.144Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-08-21T18:31:59.145Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T18:31:59.154Z] [Firebase Plugin] User found:  emilyhiha12@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-08-21T18:31:59.155Z] Checked if tokens are valid: true, expires at: 1755804718145
+[debug] [2025-08-21T18:31:59.155Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-08-21T18:31:59.956Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-08-21T18:31:59.956Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-08-21T18:31:59.973Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-08-21T18:31:59.973Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
