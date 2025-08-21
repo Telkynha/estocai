@@ -5,11 +5,11 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
-import { initializeApp } from 'firebase/app';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,21 +18,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideAnimations(),
     importProvidersFrom([
-      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireModule,
       AngularFireAuthModule,
       AngularFirestoreModule
-    ])
-  ]
-};
-      provideFirebaseApp(() => initializeApp(environment.firebase)),
-      provideAuth(() => getAuth()),
-      provideFirestore(() => getFirestore())
-    ),
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
-      provideFirebaseApp(() => initializeApp(environment.firebase)),
-      provideAuth(() => getAuth()),
-      provideFirestore(() => getFirestore())
-    ),
+    ]),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ]
 };

@@ -25,8 +25,7 @@ import { AuthService } from '../../../services/auth.service';
     MatButtonModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule,
-    NgIf
+    ReactiveFormsModule
   ],
   templateUrl: './acesso.component.html',
   styleUrl: './acesso.component.scss'

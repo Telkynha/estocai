@@ -2,10 +2,10 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: "AIzaSyAkp8hh04IrrXX9FWNaAnZrbzyEJXFOfQ8",
-    authDomain: "YOUR_AUTH_DOMAIN",
+    authDomain: "estocaibase.firebaseapp.com",
     projectId: "estocaibase",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    storageBucket: "estocaibase.appspot.com",
+    messagingSenderId: "467828264754",
+    appId: "1:467828264754:web:AfZaSyAkp8hh04IrrXX9FWNaAnZrbzyEJXFOfQ8"
   }
 };
