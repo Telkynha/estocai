@@ -10,6 +10,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       AngularFireModule,
       AngularFireAuthModule,
-      AngularFirestoreModule
+      AngularFirestoreModule,
+      MatDialogModule
     ]),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ]

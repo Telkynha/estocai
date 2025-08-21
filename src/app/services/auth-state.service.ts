@@ -19,9 +19,15 @@ export class AuthStateService {
     private router: Router
   ) {
     // Inicializa o estado de autenticação
-    this.authService.user$.subscribe(user => {
-      this._user.set(user);
-      this._loading.set(false);
+    this.authService.user$.subscribe({
+      next: (user) => {
+        this._user.set(user);
+        this._loading.set(false);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar usuário:', error);
+        this._loading.set(false);
+      }
     });
   }
 

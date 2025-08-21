@@ -36,6 +36,51 @@
   }
 }
 
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px;
+  margin-top: 16px;
+  gap: 8px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  color: #3c4043;
+  background-color: white;
+  transition: background-color 0.3s ease;
+
+  &:hover:not([disabled]) {
+    background-color: #f8f9fa;
+  }
+
+  &:active:not([disabled]) {
+    background-color: #f1f3f4;
+  }
+
+  .google-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+mat-divider {
+  margin: 24px 0;
+  position: relative;
+  text-align: center;
+
+  &::after {
+    content: attr(ng-reflect-text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 0 16px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
 ::ng-deep {
   .mat-mdc-tab-group {
     margin-top: -24px;

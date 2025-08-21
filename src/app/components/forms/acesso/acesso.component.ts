@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDivider } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-acesso',
@@ -25,7 +27,9 @@ import { AuthService } from '../../../services/auth.service';
     MatButtonModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDividerModule,
+    MatDivider
   ],
   templateUrl: './acesso.component.html',
   styleUrl: './acesso.component.scss'
@@ -41,7 +45,7 @@ export class AcessoComponent {
     private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<AcessoComponent>
+    @Optional() private dialogRef: MatDialogRef<AcessoComponent>
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -61,7 +65,9 @@ export class AcessoComponent {
       try {
         const { email, password } = this.loginForm.value;
         await this.authService.login(email, password);
-        this.dialogRef.close(true);
+        if (this.dialogRef) {
+          this.dialogRef.close(true);
+        }
         this.router.navigate(['/']);
         this.showMessage('Login realizado com sucesso!');
       } catch (error: any) {
@@ -92,6 +98,20 @@ export class AcessoComponent {
       }
     }
   }
+
+  async loginWithGoogle() {
+  try {
+    this.loading = true;
+    await this.authService.loginWithGoogle();
+    this.showMessage('Login realizado com sucesso!');
+    this.dialogRef?.close(true);
+    this.router.navigate(['/']);
+  } catch (error: any) {
+    this.showMessage(error.message);
+  } finally {
+    this.loading = false;
+  }
+}
 
   private showMessage(message: string): void {
     this.snackBar.open(message, 'Fechar', {
