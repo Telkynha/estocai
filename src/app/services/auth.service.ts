@@ -1,25 +1,25 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Injectable, inject } from '@angular/core';
+import { Auth, authState, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, UserCredential } from '@angular/fire/auth';
+import { Firestore, doc, docData, getDoc, setDoc, DocumentReference } from '@angular/fire/firestore';
 import { Observable, from, switchMap, of, map } from 'rxjs';
 import { Usuario } from '../models/usuario/usuario.component';
-import { GoogleAuthProvider } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    private auth: Auth = inject(Auth);
+    private firestore: Firestore = inject(Firestore);
+
     user$: Observable<Usuario | null>;
 
-    constructor(
-        private auth: AngularFireAuth,
-        private firestore: AngularFirestore
-    ) {
-        this.user$ = this.auth.authState.pipe(
+    constructor() {
+        this.user$ = authState(this.auth).pipe(
             switchMap(user => {
                 if (user) {
-                    return this.firestore.doc<Usuario>(`usuarios/${user.uid}`).valueChanges().pipe(
-                        map(dbUser => dbUser || null) // Converte undefined para null
+                    const userDocRef = doc(this.firestore, `usuarios/${user.uid}`) as DocumentReference<Usuario>;
+                    return docData<Usuario>(userDocRef, { idField: 'id' }).pipe(
+                        map(dbUser => dbUser || null)
                     );
                 } else {
                     return of(null);
@@ -28,31 +28,32 @@ export class AuthService {
         );
     }
 
-    async login(email: string, senha: string): Promise<void> {
+    async login(email: string, senha: string): Promise<UserCredential> {
         try {
-            const result = await this.auth.signInWithEmailAndPassword(email, senha);
+            const result = await signInWithEmailAndPassword(this.auth, email, senha);
             console.log('Login bem sucedido:', result.user?.email);
+            return result;
         } catch (error: any) {
             console.error('Erro no login:', error.message);
             throw this.handleAuthError(error);
         }
     }
 
-    async register(usuario: { nome: string; email: string; senha: string }): Promise<void> {
+    async register(usuario: { nome: string; email: string; senha: string }): Promise<UserCredential> {
         try {
             console.log('Iniciando registro de usuário:', usuario.email);
-            const credential = await this.auth.createUserWithEmailAndPassword(usuario.email, usuario.senha);
+            const credential = await createUserWithEmailAndPassword(this.auth, usuario.email, usuario.senha);
 
             if (credential.user) {
                 console.log('Usuário criado com sucesso:', credential.user.uid);
-                // Criar documento do usuário no Firestore
-                await this.firestore.doc(`usuarios/${credential.user.uid}`).set({
+                await setDoc(doc(this.firestore, `usuarios/${credential.user.uid}`), {
                     id: credential.user.uid,
                     nome: usuario.nome,
                     email: usuario.email,
                     senha: '' // Não armazenamos a senha no Firestore por segurança
                 });
             }
+            return credential;
         } catch (error: any) {
             throw this.handleAuthError(error);
         }
@@ -60,25 +61,25 @@ export class AuthService {
 
     async logout(): Promise<void> {
         try {
-            await this.auth.signOut();
+            await signOut(this.auth);
         } catch (error: any) {
             throw this.handleAuthError(error);
         }
     }
 
-    async loginWithGoogle(): Promise<void> {
+    async loginWithGoogle(): Promise<UserCredential> {
         try {
             const provider = new GoogleAuthProvider();
-            const credential = await this.auth.signInWithPopup(provider);
+            const credential = await signInWithPopup(this.auth, provider);
 
             if (credential.user) {
                 const { uid, displayName, email } = credential.user;
-                const userDoc = this.firestore.doc<Usuario>(`usuarios/${uid}`);
+                const userDocRef = doc(this.firestore, `usuarios/${uid}`);
 
-                const userSnapshot = await userDoc.get().toPromise();
+                const userSnapshot = await getDoc(userDocRef);
 
-                if (!userSnapshot?.exists && displayName && email) {
-                    await userDoc.set({
+                if (!userSnapshot.exists() && displayName && email) {
+                    await setDoc(userDocRef, {
                         id: uid,
                         nome: displayName,
                         email: email,
@@ -86,19 +87,20 @@ export class AuthService {
                     });
                 }
             }
+            return credential;
         } catch (error: any) {
             throw this.handleAuthError(error);
         }
     }
 
     isAuthenticated(): Observable<boolean> {
-        return this.auth.authState.pipe(
+        return authState(this.auth).pipe(
             map(user => !!user)
         );
     }
 
     getCurrentUserId(): Observable<string | null> {
-        return this.auth.authState.pipe(
+        return authState(this.auth).pipe(
             map(user => user ? user.uid : null)
         );
     }

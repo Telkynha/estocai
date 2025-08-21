@@ -64,12 +64,14 @@ export class AcessoComponent {
       this.loading = true;
       try {
         const { email, password } = this.loginForm.value;
-        await this.authService.login(email, password);
-        if (this.dialogRef) {
-          this.dialogRef.close(true);
+        const credential = await this.authService.login(email, password);
+        if (credential.user) {
+          if (this.dialogRef) {
+            this.dialogRef.close(true);
+          }
+          this.router.navigate(['/']);
+          this.showMessage('Login realizado com sucesso!');
         }
-        this.router.navigate(['/']);
-        this.showMessage('Login realizado com sucesso!');
       } catch (error: any) {
         this.showMessage(error.message);
       } finally {
@@ -83,14 +85,18 @@ export class AcessoComponent {
       this.loading = true;
       try {
         const { name, email, password } = this.registerForm.value;
-        await this.authService.register({
+        const credential = await this.authService.register({
           nome: name,
           email: email,
           senha: password
         });
-        this.dialogRef.close(true);
-        this.router.navigate(['/']);
-        this.showMessage('Cadastro realizado com sucesso!');
+        if (credential.user) {
+          if (this.dialogRef) {
+            this.dialogRef.close(true);
+          }
+          this.router.navigate(['/']);
+          this.showMessage('Cadastro realizado com sucesso!');
+        }
       } catch (error: any) {
         this.showMessage(error.message);
       } finally {
@@ -100,18 +106,20 @@ export class AcessoComponent {
   }
 
   async loginWithGoogle() {
-  try {
-    this.loading = true;
-    await this.authService.loginWithGoogle();
-    this.showMessage('Login realizado com sucesso!');
-    this.dialogRef?.close(true);
-    this.router.navigate(['/']);
-  } catch (error: any) {
-    this.showMessage(error.message);
-  } finally {
-    this.loading = false;
+    try {
+      this.loading = true;
+      const credential = await this.authService.loginWithGoogle();
+      if (credential.user) {
+        this.showMessage('Login realizado com sucesso!');
+        this.dialogRef?.close(true);
+        this.router.navigate(['/']);
+      }
+    } catch (error: any) {
+      this.showMessage(error.message);
+    } finally {
+      this.loading = false;
+    }
   }
-}
 
   private showMessage(message: string): void {
     this.snackBar.open(message, 'Fechar', {

@@ -6,11 +6,12 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { MatDialogModule } from '@angular/material/dialog';
+
+// Import modular Firebase providers
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,12 +19,10 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withFetch()),
     provideAnimations(),
-    importProvidersFrom([
-      AngularFireModule,
-      AngularFireAuthModule,
-      AngularFirestoreModule,
-      MatDialogModule
-    ]),
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+    importProvidersFrom(MatDialogModule), // Keep this for MatDialog
+    // Initialize Firebase using the modular providers
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ]
 };

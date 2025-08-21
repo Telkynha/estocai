@@ -330,3 +330,52 @@ I0821 15:45:05.490731   22604 load.go:115] Finished reloading
 [info] +  Wrote .gemini/extensions/firebase/FIREBASE.md 
 [debug] [2025-08-21T18:47:38.510Z] I0821 15:47:38.510133   22604 engine.go:174] [/emulator/estocai 17eb] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 15:47:38.510133   22604 engine.go:174] [/emulator/estocai 17eb] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2025-08-21T20:40:38.352Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-08-21T20:44:14.833Z] [Firebase Plugin] Activating Firebase extension.
+[info] [Firebase Plugin] Checked firebase-tools, is up to date!
+[debug] [2025-08-21T20:44:18.760Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-08-21T20:44:18.761Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-21T20:44:18.761Z] > authorizing via signed-in user (emilyhiha12@gmail.com)
+[debug] [2025-08-21T20:44:18.765Z] Checked if tokens are valid: false, expires at: 1755808293886
+[debug] [2025-08-21T20:44:18.765Z] Checked if tokens are valid: false, expires at: 1755808293886
+[debug] [2025-08-21T20:44:18.765Z] > refreshing access token with scopes: []
+[debug] [2025-08-21T20:44:18.767Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-08-21T20:44:18.767Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T20:44:18.778Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.10.1) on port 50001
+[debug] [2025-08-21T20:44:19.093Z] I0821 17:44:19.056679    5580 control.go:84] [/emulator/estocai 98ab] UpdateResources(): done
+Schema: sources: schema\schema.gql [1485B] 
+Connector "default": sources: connector\mutations.gql [1301B] connector\queries.gql [1947B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.056679    5580 control.go:84] [/emulator/estocai 98ab] UpdateResources(): done\nSchema: sources: schema\\schema.gql [1485B] \nConnector \"default\": sources: connector\\mutations.gql [1301B] connector\\queries.gql [1947B] \n"}}
+[debug] [2025-08-21T20:44:19.094Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-08-21T20:44:19.094Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-08-21T20:44:19.095Z] Starting Data Connect Emulator with command {"binary":"C:\\Users\\emily\\.cache\\firebase\\emulators\\dataconnect-emulator-2.10.1.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\emily\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-2.10.1.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2025-08-21T20:44:19.205Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-08-21T20:44:19.205Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-08-21T20:44:19.217Z] [Firebase Plugin] User found:  emilyhiha12@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-08-21T20:44:19.219Z] Checked if tokens are valid: true, expires at: 1755812658205
+[debug] [2025-08-21T20:44:19.220Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-08-21T20:44:19.222Z] I0821 17:44:19.185708   29752 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.185708   29752 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2025-08-21T20:44:19.250Z] I0821 17:44:19.250826   29752 control.go:84] [/emulator/estocai 1759] UpdateResources(): done
+Schema: sources: schema\schema.gql [1485B] 
+Connector "default": sources: connector\queries.gql [1947B] connector\mutations.gql [1301B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.250826   29752 control.go:84] [/emulator/estocai 1759] UpdateResources(): done\nSchema: sources: schema\\schema.gql [1485B] \nConnector \"default\": sources: connector\\queries.gql [1947B] connector\\mutations.gql [1301B] \n"}}
+[debug] [2025-08-21T20:44:19.288Z] I0821 17:44:19.288576   29752 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\connector\\dataconnect-generated\\js\\default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.288576   29752 codegen.go:82] [connector \"default\" javascriptSdk] Generating sources into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\n"}}
+[debug] [2025-08-21T20:44:19.292Z] I0821 17:44:19.293107   29752 collector.go:107] schema extensions wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [73172B] main\input.gql [55270B] main\relation.gql [32096B] main\query.gql [8298B] main\mutation.gql [21865B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.293107   29752 collector.go:107] schema extensions wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [73172B] main\\input.gql [55270B] main\\relation.gql [32096B] main\\query.gql [8298B] main\\mutation.gql [21865B] \n"}}
+[debug] [2025-08-21T20:44:19.298Z] I0821 17:44:19.299341   29752 collector.go:107] connector "default" javascriptSdk wrote into "c:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\dataconnect\\connector\\dataconnect-generated\\js\\default-connector"
+Generated sources: README.md [2773B] index.d.ts [720B] esm\index.esm.js [110B] esm\package.json [17B] index.cjs.js [145B] package.json [634B] 
+I0821 17:44:19.299341   29752 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package
+I0821 17:44:19.299341   29752 load.go:115] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.299341   29752 collector.go:107] connector \"default\" javascriptSdk wrote into \"c:\\\\Users\\\\emily\\\\Documents\\\\! PROGRAMAÇÃO\\\\estocai\\\\dataconnect\\\\connector\\\\dataconnect-generated\\\\js\\\\default-connector\"\nGenerated sources: README.md [2773B] index.d.ts [720B] esm\\index.esm.js [110B] esm\\package.json [17B] index.cjs.js [145B] package.json [634B] \nI0821 17:44:19.299341   29752 installsdk.go:138] generate.javascriptSdk.packageJsonDir is not specified, skipping automatic installation of JS package\nI0821 17:44:19.299341   29752 load.go:115] Finished reloading\n"}}
+[debug] [2025-08-21T20:44:19.306Z] I0821 17:44:19.307568   29752 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.307568   29752 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-08-21T20:44:19.358Z] I0821 17:44:19.359030   29752 engine.go:174] [/emulator/estocai 1759] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0821 17:44:19.359030   29752 engine.go:174] [/emulator/estocai 1759] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2025-08-21T20:44:19.978Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-08-21T20:44:19.978Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
