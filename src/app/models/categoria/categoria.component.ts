@@ -1,5 +1,26 @@
-export interface Categoria {
-    id?: string;
-    nome: string;
-    codigo: number;
+export enum Categoria {
+    OUTROS = 0,
+    ELETRONICOS = 1,
+    ROUPAS = 2,
+    ALIMENTOS = 3,
+    MOVEIS = 4,
+    LIVROS = 5,
+    BELEZA = 6,
+    ESPORTES = 7,
+    FERRAMENTAS = 8,
+    BRINQUEDOS = 9,
+    SAUDE = 10,
+    AUTOMOTIVO = 11,
+    PET_SHOP = 12,
+    INFORMATICA = 13,
+    CASA_JARDIM = 14,
+    PAPELERIA = 15,
+    MUSICA = 16,
+    VIAGENS = 17,
+    ARTES = 18,
+    ACESSORIOS = 19,
+    FESTAS = 20,
+    ARTESANATO = 21,
+    COLECIONAVEIS = 22,
+    JOGOS = 23
 }

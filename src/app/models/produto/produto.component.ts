@@ -1,9 +1,11 @@
+import { Categoria } from "../categoria/categoria.component";
+
 export interface Produto {
     id?: string;
     codigo: string;
     nome: string;
     descricao: string;
-    categoria: string;
+    categoria: Array<Categoria>;
     precoVenda: number;
     precoCusto: number;
     estoqueAtual: number;
