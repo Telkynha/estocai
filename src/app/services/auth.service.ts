@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, authState, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, UserCredential } from '@angular/fire/auth';
+import { Auth, authState, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, UserCredential, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
 import { Firestore, doc, docData, getDoc, setDoc, DocumentReference } from '@angular/fire/firestore';
 import { Observable, from, switchMap, of, map } from 'rxjs';
 import { Usuario } from '../models/usuario/usuario.component';
@@ -133,5 +133,26 @@ export class AuthService {
         }
 
         return new Error(message);
+    }
+
+    /**
+     * Exclui a conta do usuário atual no Firebase Authentication
+     * Nota: O usuário deve ter feito login recentemente. 
+     * Em caso de sessão expirada, será necessário reautenticar.
+     */
+    async deleteAccount(): Promise<void> {
+        try {
+            const user = this.auth.currentUser;
+            if (user) {
+                await deleteUser(user);
+            } else {
+                throw new Error('Nenhum usuário autenticado para exclusão');
+            }
+        } catch (error: any) {
+            if (error.code === 'auth/requires-recent-login') {
+                throw new Error('Por motivos de segurança, faça login novamente antes de excluir sua conta.');
+            }
+            throw this.handleAuthError(error);
+        }
     }
 }

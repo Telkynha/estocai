@@ -71,8 +71,22 @@
     margin: 0 0 16px 0;
   }
   
-  .logout-btn {
+  .account-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     margin-top: 16px;
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .delete-btn {
+    border: 1px solid #f44336;
+    color: #f44336;
+    
+    &:hover {
+      background-color: rgba(244, 67, 54, 0.1);
+    }
   }
 }
 

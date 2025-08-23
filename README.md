@@ -82,8 +82,8 @@ npm start
 ## 🔜 Roadmap
 
 - [x] MVP com funcionalidades básicas
-- [ ] Estruturação completa do layout
-- [ ] Integração com o backend
+- [x] Estruturação completa do layout
+- [x] Integração com o backend
 - [ ] Integração com os marketplaces
 - [ ] Recursos Premium
 
