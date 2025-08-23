@@ -87,7 +87,7 @@
         <ng-container matColumnDef="qtdItens">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Itens </th>
           <td mat-cell *matCellDef="let row" class="qtd-itens-cell"> 
-            <span class="qtd-itens-badge">{{row.itens?.length || 0}}</span>
+            <span class="qtd-itens-badge">{{calcularTotalItens(row)}}</span>
           </td>
         </ng-container>
 

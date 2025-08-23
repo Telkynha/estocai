@@ -262,6 +262,15 @@ export class MovimentacoesComponent implements OnInit {
       currency: 'BRL'
     });
   }
+  
+  calcularTotalItens(movimentacao: Venda | Compra): number {
+    if (!movimentacao.itens || movimentacao.itens.length === 0) {
+      return 0;
+    }
+    
+    // Soma a quantidade de cada item
+    return movimentacao.itens.reduce((total, item) => total + item.quantidade, 0);
+  }
 
   exportarSelecionados() {
     if (this.selection.selected.length === 0) {
