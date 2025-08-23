@@ -1,0 +1,181 @@
+<h2 mat-dialog-title>{{ isEdicao ? 'Editar' : 'Nova' }} {{ tipoMovimentacao === 'venda' ? 'Venda' : 'Compra' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <!-- Informações Gerais -->
+    <div class="form-section">
+      <h3>Informações Gerais</h3>
+      
+      <!-- Campos específicos de venda -->
+      <div *ngIf="tipoMovimentacao === 'venda'" class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Plataforma</mat-label>
+          <mat-select formControlName="plataforma">
+            <mat-option *ngFor="let opt of plataformaOptions" [value]="opt.valor">
+              {{ opt.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Forma de Pagamento</mat-label>
+          <mat-select formControlName="formaPagamento">
+            <mat-option *ngFor="let opt of formaPagamentoOptions" [value]="opt.valor">
+              {{ opt.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <!-- Campos específicos de compra -->
+      <div *ngIf="tipoMovimentacao === 'compra'" class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Fornecedor</mat-label>
+          <input matInput formControlName="fornecedor">
+          <mat-error *ngIf="form.get('fornecedor')?.hasError('required')">
+            Fornecedor é obrigatório
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Número da Nota</mat-label>
+          <input matInput formControlName="numeroNota">
+        </mat-form-field>
+      </div>
+      
+      <!-- Campos comuns -->
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="data">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option *ngFor="let opt of statusOptions" [value]="opt.valor">
+              {{ opt.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <!-- Campos adicionais para venda -->
+      <div *ngIf="tipoMovimentacao === 'venda'" class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome do Cliente</mat-label>
+          <input matInput formControlName="nomeCliente">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Contato</mat-label>
+          <input matInput formControlName="contatoCliente">
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <mat-divider></mat-divider>
+    
+    <!-- Itens -->
+    <div class="form-section">
+      <h3>Itens</h3>
+      
+      <div class="item-input-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Produto</mat-label>
+          <input matInput 
+                 placeholder="Busque um produto"
+                 (input)="filtrarProdutos($event)"
+                 [matAutocomplete]="auto">
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let produto of filteredProdutos" 
+                      [value]="produto.nome"
+                      (click)="selecionarProduto(produto)">
+              {{ produto.nome }} ({{ produto.codigo }}) - 
+              {{ tipoMovimentacao === 'venda' ? 
+                  (produto.precoVenda | currency:'BRL') : 
+                  (produto.precoCusto | currency:'BRL') }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-hint *ngIf="produtoSelecionado">Produto selecionado: {{ produtoSelecionado.nome }}</mat-hint>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="quantidade-field">
+          <mat-label>Qtd</mat-label>
+          <input matInput type="number" min="1" [(ngModel)]="quantidadeTemp" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        
+        <button mat-flat-button color="primary" (click)="adicionarItem()" [disabled]="!produtoSelecionado">
+          <mat-icon>add</mat-icon> Adicionar
+        </button>
+      </div>
+      
+      <div *ngIf="itensArray.length === 0" class="empty-items">
+        Nenhum item adicionado
+      </div>
+      
+      <div class="itens-tabela" *ngIf="itensArray.length > 0">
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Produto</th>
+              <th>Qtd</th>
+              <th>Valor Un.</th>
+              <th>Subtotal</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of itensArray.controls; let i = index">
+              <td>{{ item.get('produto')?.value?.codigo }}</td>
+              <td>{{ item.get('produto')?.value?.nome }}</td>
+              <td>
+                <input type="number" min="1" [value]="item.get('quantidade')?.value" 
+                      (change)="updateQuantidade($event, i)" class="quantidade-input">
+              </td>
+              <td>
+                <input type="number" min="0" step="0.01" [value]="item.get('custoNoMomento')?.value"
+                      (change)="updateCusto($event, i)" class="preco-input">
+              </td>
+              <td>{{ item.get('subtotal')?.value | currency:'BRL' }}</td>
+              <td>
+                <button mat-icon-button color="warn" (click)="removerItem(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="total-label">Total:</td>
+              <td colspan="2" class="total-valor">{{ valorTotal | currency:'BRL' }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    
+    <mat-divider></mat-divider>
+    
+    <!-- Observações -->
+    <div class="form-section">
+      <h3>Observações</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Observações</mat-label>
+        <textarea matInput formControlName="observacoes" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="enviar()" 
+         [disabled]="form.invalid || itensArray.length === 0">
+    {{ isEdicao ? 'Atualizar' : 'Salvar' }}
+  </button>
+</mat-dialog-actions>
