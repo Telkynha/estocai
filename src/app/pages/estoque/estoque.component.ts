@@ -89,9 +89,9 @@ export class EstoqueComponent implements OnInit {
   }
 
   private configureDataSource() {
+    // Configura o filtro para buscar apenas por nome
     this.dataSource.filterPredicate = (data: Produto, filter: string) => {
-      const searchStr = JSON.stringify(Object.values(data)).toLowerCase();
-      return searchStr.includes(filter.toLowerCase());
+      return data.nome.toLowerCase().includes(filter.toLowerCase());
     };
   }
 

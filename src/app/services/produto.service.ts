@@ -40,10 +40,15 @@ export class ProdutoService {
     const q = query(produtosRef, where('usuarioId', '==', usuarioId));
     const querySnapshot = await getDocs(q);
 
-    return querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    } as Produto));
+    return querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        dataCriacao: data['dataCriacao']?.toDate(),
+        dataAtualizacao: data['dataAtualizacao']?.toDate()
+      } as Produto;
+    });
   }
 
   async updateProduto(id: string, changes: Partial<Produto>): Promise<void> {
