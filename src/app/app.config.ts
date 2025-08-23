@@ -18,9 +18,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    provideAnimations(),
-    importProvidersFrom(MatDialogModule), // Keep this for MatDialog
-    // Initialize Firebase using the modular providers
+    importProvidersFrom(
+      MatDialogModule
+    ),
+    importProvidersFrom(MatDialogModule),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

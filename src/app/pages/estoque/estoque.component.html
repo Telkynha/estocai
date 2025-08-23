@@ -12,8 +12,9 @@
       <mat-form-field appearance="outline">
         <mat-label>Categoria</mat-label>
         <mat-select (selectionChange)="filtrarPorCategoria($event.value)">
+          <mat-option [value]="null">Todas as categorias</mat-option>
           <mat-option *ngFor="let cat of categorias" [value]="cat">
-            {{cat}}
+            {{Categoria[cat]}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -21,15 +22,16 @@
       <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
         <mat-select (selectionChange)="filtrarPorStatus($event.value)">
-          <mat-option *ngFor="let status of statusFiltros" [value]="status">
-            {{status}}
+          <mat-option [value]="null">Todos os status</mat-option>
+          <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+            {{status.label}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
     <div class="acoes-container">
-      <button mat-raised-button color="primary" aria-label="Adicionar item">
+      <button mat-raised-button color="primary" aria-label="Adicionar item" (click)="adicionarProduto()">
         <mat-icon>add</mat-icon>
         <span>Adicionar Item</span>
       </button>
@@ -41,12 +43,12 @@
       
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="exportarSelecionados()">
-          <mat-icon>file_download</mat-icon>
-          <span>Exportar selecionados</span>
+          <mat-icon>download</mat-icon>
+          <span>Exportar Selecionados</span>
         </button>
-        <button mat-menu-item>
-          <mat-icon>upload</mat-icon>
-          <span>Importar dados</span>
+        <button mat-menu-item (click)="selection.clear()">
+          <mat-icon>clear_all</mat-icon>
+          <span>Limpar Seleção</span>
         </button>
       </mat-menu>
     </div>
@@ -57,29 +59,96 @@
       <!-- Seleção -->
       <ng-container matColumnDef="selecao">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox></mat-checkbox>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let item">
-          <mat-checkbox (change)="onSelecaoChange(item)"></mat-checkbox>
+          <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(item) : null"
+                      [checked]="selection.isSelected(item)">
+          </mat-checkbox>
         </td>
       </ng-container>
 
-      <!-- Colunas existentes atualizadas -->
+      <!-- Código -->
       <ng-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
         <td mat-cell *matCellDef="let item">{{item.codigo}}</td>
       </ng-container>
 
-      <!-- ... outras colunas existentes ... -->
+      <!-- Nome -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let item">{{item.nome}}</td>
+      </ng-container>
 
-      <!-- Nova coluna de ações -->
+      <!-- Descrição -->
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let item">{{item.descricao}}</td>
+      </ng-container>
+
+      <!-- Categoria -->
+      <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+        <td mat-cell *matCellDef="let item">
+          <span *ngFor="let cat of item.categoria" class="categoria-chip">
+            {{Categoria[cat]}}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Estoque Atual -->
+      <ng-container matColumnDef="estoqueAtual">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estoque Atual</th>
+        <td mat-cell *matCellDef="let item">
+          <span class="status-chip" [ngClass]="getStatusProduto(item)">
+            {{item.estoqueAtual}}
+            ({{getStatusLabel(item)}})
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Estoque Mínimo -->
+      <ng-container matColumnDef="estoqueMinimo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estoque Mínimo</th>
+        <td mat-cell *matCellDef="let item">{{item.estoqueMinimo}}</td>
+      </ng-container>
+
+      <!-- Preço de Venda -->
+      <ng-container matColumnDef="precoVenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço Venda</th>
+        <td mat-cell *matCellDef="let item">{{item.precoVenda | currency:'BRL'}}</td>
+      </ng-container>
+
+      <!-- Preço de Custo -->
+      <ng-container matColumnDef="precoCusto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço Custo</th>
+        <td mat-cell *matCellDef="let item">{{item.precoCusto | currency:'BRL'}}</td>
+      </ng-container>
+
+      <!-- Fornecedor -->
+      <ng-container matColumnDef="fornecedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fornecedor</th>
+        <td mat-cell *matCellDef="let item">{{item.fornecedor}}</td>
+      </ng-container>
+
+      <!-- Data de Atualização -->
+      <ng-container matColumnDef="dataAtualizacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Última Atualização</th>
+        <td mat-cell *matCellDef="let item">{{item.dataAtualizacao | date:'dd/MM/yyyy HH:mm'}}</td>
+      </ng-container>
+
+      <!-- Ações -->
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let item">
-          <button mat-icon-button [matMenuTriggerFor]="itemMenu">
+          <button mat-icon-button [matMenuTriggerFor]="rowMenu" aria-label="Ações do item">
             <mat-icon>more_vert</mat-icon>
           </button>
-          <mat-menu #itemMenu="matMenu">
+          <mat-menu #rowMenu="matMenu">
             <button mat-menu-item (click)="editarItem(item)">
               <mat-icon>edit</mat-icon>
               <span>Editar</span>

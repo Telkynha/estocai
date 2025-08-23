@@ -1,5 +1,11 @@
 import { Categoria } from "../categoria/categoria.component";
 
+export enum StatusEstoque {
+    NORMAL = 'normal',
+    BAIXO = 'baixo',
+    ZERADO = 'zerado'
+}
+
 export interface Produto {
     id?: string;
     codigo: string;
