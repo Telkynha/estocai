@@ -58,6 +58,7 @@ export class EstoqueComponent implements OnInit {
     'estoqueMinimo', 
     'precoVenda',
     'precoCusto',
+    'margem',
     'fornecedor',
     'dataAtualizacao',
     'acoes'
@@ -109,6 +110,26 @@ export class EstoqueComponent implements OnInit {
     const status = this.getStatusProduto(produto);
     const statusOption = this.statusOptions.find(s => s.value === status);
     return statusOption ? statusOption.label : 'Normal';
+  }
+  
+  calcularMargem(produto: Produto): number {
+    if (!produto.precoVenda || !produto.precoCusto || produto.precoCusto === 0) {
+      return 0;
+    }
+    return ((produto.precoVenda - produto.precoCusto) / produto.precoCusto) * 100;
+  }
+  
+  formatarMargem(produto: Produto): string {
+    const margem = this.calcularMargem(produto);
+    return margem.toFixed(2) + '%';
+  }
+  
+  getClasseMargem(produto: Produto): string {
+    const margem = this.calcularMargem(produto);
+    if (margem < 0) return 'negativa';
+    if (margem < 15) return 'baixa';
+    if (margem < 40) return 'media';
+    return 'alta';
   }
 
   async carregarProdutos() {

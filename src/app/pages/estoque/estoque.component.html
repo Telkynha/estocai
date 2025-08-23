@@ -103,10 +103,9 @@
       <!-- Estoque Atual -->
       <ng-container matColumnDef="estoqueAtual">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Estoque Atual</th>
-        <td mat-cell *matCellDef="let item">
-          <span class="status-chip" [ngClass]="getStatusProduto(item)">
+        <td mat-cell *matCellDef="let item" class="qtd-itens-cell">
+          <span class="estoque-badge" [ngClass]="getStatusProduto(item)">
             {{item.estoqueAtual}}
-            ({{getStatusLabel(item)}})
           </span>
         </td>
       </ng-container>
@@ -127,6 +126,16 @@
       <ng-container matColumnDef="precoCusto">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço Custo</th>
         <td mat-cell *matCellDef="let item">{{item.precoCusto | currency:'BRL'}}</td>
+      </ng-container>
+
+      <!-- Margem -->
+      <ng-container matColumnDef="margem">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Margem</th>
+        <td mat-cell *matCellDef="let item" class="qtd-itens-cell"> 
+          <span class="margem-badge" [ngClass]="getClasseMargem(item)">
+            {{formatarMargem(item)}}
+          </span>
+        </td>
       </ng-container>
 
       <!-- Fornecedor -->
