@@ -81,8 +81,11 @@ export class AppComponent implements OnInit {
   openConfig() {
     if (this.authState.isAuthenticated()) {
       this.dialog.open(ConfigComponent, {
-        minWidth: '60vw',
-        height: '50vh'
+        width: '800px',
+        maxWidth: '95vw',
+        minHeight: '400px',
+        maxHeight: '80vh',
+        panelClass: 'config-dialog-container'
       });
     } else {
       this.openAcesso();

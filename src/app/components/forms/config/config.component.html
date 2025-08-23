@@ -1,41 +1,72 @@
 <mat-dialog-content class="config-dialog">
     <h2>Configurações</h2>
 
-    <div class="config-header">
-        <mat-nav-list>
-            <mat-list-item>
-                <mat-icon matListItemIcon>person</mat-icon>
-                <span matListItemTitle>Minha Conta</span>
-            </mat-list-item>
+    <div class="config-container">
+        <div class="config-sidebar">
+            <mat-nav-list>
+                <mat-list-item [class.active]="activeSection === 'minha-conta'" (click)="changeSection('minha-conta')">
+                    <mat-icon matListItemIcon>person</mat-icon>
+                    <span matListItemTitle>Minha Conta</span>
+                </mat-list-item>
 
-            <mat-list-item>
-                <mat-icon matListItemIcon>notifications</mat-icon>
-                <span matListItemTitle>Notificações</span>
-            </mat-list-item>
+                <mat-list-item (click)="showInProgressMessage()">
+                    <mat-icon matListItemIcon>notifications</mat-icon>
+                    <span matListItemTitle>Notificações</span>
+                </mat-list-item>
 
-            <mat-list-item>
-                <mat-icon matListItemIcon>integration_instructions</mat-icon>
-                <span matListItemTitle>Integrações</span>
-            </mat-list-item>
+                <mat-list-item (click)="showInProgressMessage()">
+                    <mat-icon matListItemIcon>integration_instructions</mat-icon>
+                    <span matListItemTitle>Integrações</span>
+                </mat-list-item>
 
-            <mat-list-item>
-                <mat-icon matListItemIcon>download</mat-icon>
-                <span matListItemTitle>Exportar Dados</span>
-            </mat-list-item>
+                <mat-list-item (click)="showInProgressMessage()">
+                    <mat-icon matListItemIcon>download</mat-icon>
+                    <span matListItemTitle>Exportar Dados</span>
+                </mat-list-item>
 
-            <mat-list-item>
-                <mat-icon matListItemIcon>workspace_premium</mat-icon>
-                <span matListItemTitle>Assinatura</span>
-            </mat-list-item>
-        </mat-nav-list>
+                <mat-list-item (click)="showInProgressMessage()">
+                    <mat-icon matListItemIcon>workspace_premium</mat-icon>
+                    <span matListItemTitle>Assinatura</span>
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
 
-        <div class="user-profile">
-            <div class="avatar">
-                <!-- Placeholder circular avatar -->
-                <div class="avatar-circle"></div>
+        <div class="config-content">
+            <!-- Minha Conta Section -->
+            <div *ngIf="activeSection === 'minha-conta'" class="section-container">
+                <div class="user-profile">
+                    <div class="avatar">
+                        <div class="avatar-circle">
+                            <mat-icon class="avatar-icon">person</mat-icon>
+                        </div>
+                    </div>
+                    <h3>{{ currentUser?.nome || 'Usuário' }}</h3>
+                    <p class="email">{{ currentUser?.email || 'usuario@email.com' }}</p>
+
+                    <button mat-raised-button color="warn" class="logout-btn" (click)="logout()">
+                        <mat-icon>logout</mat-icon>
+                        Sair da Conta
+                    </button>
+                </div>
+                
+                <div class="account-info">
+                    <h4>Informações da Conta</h4>
+                    <p class="info-text">Você está conectado com o e-mail: <strong>{{ currentUser?.email }}</strong></p>
+                </div>
             </div>
-            <h3>Usuario</h3>
-            <p class="email">usuario.conta&#64;gmail.com</p>
+
+            <!-- Placeholder for other sections -->
+            <div *ngIf="activeSection !== 'minha-conta'" class="section-container">
+                <div class="coming-soon">
+                    <mat-icon class="coming-soon-icon">construction</mat-icon>
+                    <h3>Em Desenvolvimento</h3>
+                    <p>Esta funcionalidade estará disponível em breve!</p>
+                </div>
+            </div>
         </div>
     </div>
 </mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

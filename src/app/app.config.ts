@@ -7,6 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Import modular Firebase providers
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -19,9 +20,10 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withFetch()),
     importProvidersFrom(
-      MatDialogModule
+      MatDialogModule,
+      MatSnackBarModule
     ),
-    importProvidersFrom(MatDialogModule),
+    provideAnimations(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
