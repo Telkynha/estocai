@@ -72,6 +72,11 @@ export class MovimentacoesComponent implements OnInit {
     { value: status.CANCELADA, label: 'Cancelada' }
   ];
 
+  tipoList = [
+    { value: 'venda', label: 'Venda' },
+    { value: 'compra', label: 'Compra' }
+  ];
+
   constructor(
     private movimentacaoService: MovimentacaoService,
     private produtoService: ProdutoService,
@@ -118,6 +123,20 @@ export class MovimentacoesComponent implements OnInit {
       return data.status === parseInt(filter);
     };
     this.dataSource.filter = statusValue.toString();
+  }
+  
+  filtrarPorTipo(tipoValue: string | null) {
+    if (tipoValue === null) {
+      this.dataSource.filter = '';
+      return;
+    }
+
+    this.dataSource.filterPredicate = (data: Venda | Compra, filter: string) => {
+      // Verifica se é uma venda verificando se tem a propriedade 'plataforma' (exclusiva de venda)
+      const isVenda = 'plataforma' in data;
+      return (isVenda && filter === 'venda') || (!isVenda && filter === 'compra');
+    };
+    this.dataSource.filter = tipoValue;
   }
 
   async novaMovimentacao() {
