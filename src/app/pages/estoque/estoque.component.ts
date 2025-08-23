@@ -12,6 +12,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import { ProdutoDialogComponent } from '../../components/forms/produto-dialog/produto-dialog.component';
@@ -36,7 +37,8 @@ import { Categoria } from '../../models/categoria/categoria.component';
     MatSortModule,
     MatDialogModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule
   ],
   templateUrl: './estoque.component.html',
   styleUrls: ['./estoque.component.scss']

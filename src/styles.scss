@@ -40,3 +40,8 @@ mat-dialog-content {
   }
 }
 
+.multiline-tooltip {
+  white-space: pre-line;
+  max-width: 300px;
+}
+

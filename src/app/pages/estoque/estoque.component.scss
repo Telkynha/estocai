@@ -80,6 +80,10 @@
   
   .mat-column-descricao {
     min-width: 200px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .mat-column-estoqueAtual {
@@ -153,6 +157,13 @@
   padding: 0 8px;
   border-radius: 16px;
   font-size: 14px;
+}
+
+.descricao-truncada {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
   
   &.normal {
     background-color: var(--mat-sys-primary-container);
