@@ -116,4 +116,179 @@
       }
     }
   </div>
+
+  <!-- Produtos com Estoque Crítico -->
+  <div class="data-section">
+    <div class="section-header">
+      <h2>Produtos com Estoque Crítico</h2>
+      <button mat-button color="primary" (click)="verProdutosCriticos()">
+        Ver Todos <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+    
+    @if (produtosCriticos.length === 0) {
+      <div class="no-data-large">
+        <mat-icon>check_circle</mat-icon>
+        <p>Parabéns! Nenhum produto com estoque crítico.</p>
+      </div>
+    } @else {
+      <div class="table-container mat-elevation-z2">
+        <table mat-table [dataSource]="produtosCriticos">
+          <!-- Nome Column -->
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef>Nome</th>
+            <td mat-cell *matCellDef="let produto">
+              {{produto.nome}}
+              <div class="product-category">
+                @for (catId of produto.categoria.slice(0,1); track catId) {
+                  <span class="category-chip">
+                    {{Categoria[catId].replace('_', ' ')}}
+                  </span>
+                }
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Estoque Atual Column -->
+          <ng-container matColumnDef="estoqueAtual">
+            <th mat-header-cell *matHeaderCellDef>Estoque Atual</th>
+            <td mat-cell *matCellDef="let produto">
+              <strong>{{produto.estoqueAtual}}</strong>
+              <div class="small-text">Mín: {{produto.estoqueMinimo}}</div>
+            </td>
+          </ng-container>
+
+          <!-- Estoque Mínimo Column -->
+          <ng-container matColumnDef="estoqueMinimo">
+            <th mat-header-cell *matHeaderCellDef>Tempo Estimado</th>
+            <td mat-cell *matCellDef="let produto">
+              {{calcularTempoRessuprimento(produto)}}
+            </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let produto">
+              <div class="status-chip" [class]="getStatusEstoque(produto)">
+                <span *ngIf="produto.estoqueAtual === 0">Zerado</span>
+                <span *ngIf="produto.estoqueAtual > 0 && produto.estoqueAtual <= produto.estoqueMinimo">Baixo</span>
+                <span *ngIf="produto.estoqueAtual > produto.estoqueMinimo">Normal</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    }
+  </div>
+
+  <!-- Produtos Mais Vendidos -->
+  <div class="data-section">
+    <div class="section-header">
+      <h2>Produtos Mais Vendidos</h2>
+      <button mat-button color="primary" (click)="verMovimentacoes()">
+        Ver Movimentações <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+
+    @if (produtosMaisVendidos.length === 0) {
+      <div class="no-data-large">
+        <mat-icon>info</mat-icon>
+        <p>Ainda não há registros de vendas concluídas.</p>
+      </div>
+    } @else {
+      <div class="products-grid">
+        @for (item of produtosMaisVendidos; track item.produto.id) {
+          <div class="product-card mat-elevation-z2">
+            <div class="product-ranking">{{$index + 1}}</div>
+            <div class="product-details">
+              <div class="product-name">{{item.produto.nome}}</div>
+              <div class="product-category">
+                @for (catId of item.produto.categoria; track catId) {
+                  <span class="category-chip">
+                    {{Categoria[catId].replace('_', ' ')}}
+                  </span>
+                }
+              </div>
+              <div class="product-stats">
+                <span class="qty-sold">
+                  <mat-icon>shopping_cart</mat-icon> {{item.qtdVendida}} vendidos
+                </span>
+                <span class="price">
+                  <mat-icon>attach_money</mat-icon> {{item.produto.precoVenda | currency:'BRL'}}
+                </span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+  
+  <!-- Vendas por Plataforma -->
+  <div class="data-section">
+    <div class="section-header">
+      <h2>Vendas por Plataforma</h2>
+    </div>
+
+    @if (vendasPorPlataforma.length === 0) {
+      <div class="no-data-large">
+        <mat-icon>info</mat-icon>
+        <p>Ainda não há registros de vendas concluídas.</p>
+      </div>
+    } @else {
+      <div class="platform-stats-container">
+        @for (item of vendasPorPlataforma; track item.plataforma) {
+          <div class="platform-card mat-elevation-z1">
+            <div class="platform-name">
+              <span class="platform-indicator" 
+                   [style.background-color]="plataformaColors[item.plataforma.replace(' ', '_')] || '#757575'"></span>
+              {{item.plataforma}}
+            </div>
+            <div class="platform-value">{{item.total | currency:'BRL'}}</div>
+            <mat-progress-bar mode="determinate" 
+                             [value]="item.percentual"
+                             color="accent">
+            </mat-progress-bar>
+            <div class="platform-percentage">{{item.percentual}}% das vendas</div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Tendência de Vendas -->
+  <div class="data-section">
+    <div class="section-header">
+      <h2>Tendência de Vendas (7 dias)</h2>
+    </div>
+
+    @if (tendenciaVendas.length === 0) {
+      <div class="no-data-large">
+        <mat-icon>info</mat-icon>
+        <p>Ainda não há dados suficientes para exibir tendências.</p>
+      </div>
+    } @else {
+      <div class="trend-chart">
+        <div class="chart-container">
+          @for (item of tendenciaVendas; track item.data) {
+            <div class="chart-bar-container">
+              <div class="chart-date">{{item.data}}</div>
+              <div class="chart-bar-wrapper">
+                @if (item.valor > 0) {
+                  <div class="chart-bar" 
+                       [style.height]="calcularAlturaBarra(item.valor) + '%'">
+                    <div class="chart-value">{{item.valor | currency:'BRL'}}</div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
 </div>

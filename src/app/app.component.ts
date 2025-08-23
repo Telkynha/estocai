@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { isPlatformBrowser, NgIf } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -27,8 +27,7 @@ import { DialogService } from './services/dialog.service';
     MatListModule,
     MatToolbarModule,
     MatDividerModule,
-    MatProgressSpinnerModule,
-    NgIf
+    MatProgressSpinnerModule
 ]
 })
 export class AppComponent implements OnInit {

@@ -36,9 +36,7 @@ import { Categoria } from '../../models/categoria/categoria.component';
     MatSortModule,
     MatDialogModule,
     MatMenuModule,
-    MatCheckboxModule,
-    ProdutoDialogComponent,
-    ConfirmDialogComponent
+    MatCheckboxModule
   ],
   templateUrl: './estoque.component.html',
   styleUrls: ['./estoque.component.scss']
