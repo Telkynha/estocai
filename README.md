@@ -26,7 +26,7 @@ Uma solução inteligente de gestão de estoque para pequenos negócios que ajud
 
 ## 💻 Tecnologias
 
-- **Frontend:** Angular 20, Material Design
+- **Frontend:** Angular, Material Design
   - **Gráficos:** Chart.js, ng2-charts
 - **Backend:** Firebase
   - Firestore
@@ -79,17 +79,11 @@ npm start
 - Controle de despesas
 - Integração com envios
 
-### 📈 Estatísticas
-- Análise de vendas
-- Acompanhamento de despesas
-- Cálculos de lucro
-- Desempenho dos produtos
-
 ## 🔜 Roadmap
 
 - [x] MVP com funcionalidades básicas
-- [ ] Estruturação completa do layout
-- [ ] Integração com o backend
+- [x] Estruturação completa do layout
+- [x] Integração com o backend
 - [ ] Integração com os marketplaces
 - [ ] Recursos Premium
 

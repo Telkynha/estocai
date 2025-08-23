@@ -1,3 +1,85 @@
-<mat-dialog-content>
-<p>Login e Cadastro</p>
+<mat-dialog-content class="acesso-dialog">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+        <mat-tab label="Login">
+            <form class="form-container" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <h2>Bem-vindo de volta!</h2>
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" [readonly]="loading">
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email é obrigatório</mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Email inválido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" [readonly]="loading">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Senha é obrigatória</mat-error>
+                    <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Senha deve ter no mínimo 6 caracteres</mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || loading">
+                    @if (loading) {
+                        <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                    } @else {
+                        Entrar
+                    }
+                </button>
+
+                <mat-divider>ou</mat-divider>
+
+                <button mat-stroked-button type="button" (click)="loginWithGoogle()" [disabled]="loading" class="google-button">
+                    <img src="assets/icons/google.svg" alt="Google Logo" class="google-icon">
+                    Continuar com Google
+                </button>
+            </form>
+        </mat-tab>
+
+        <mat-tab label="Cadastro">
+            <form class="form-container" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <h2>Criar conta</h2>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="name" [readonly]="loading">
+                    <mat-error *ngIf="registerForm.get('name')?.hasError('required')">Nome é obrigatório</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" [readonly]="loading">
+                    <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email é obrigatório</mat-error>
+                    <mat-error *ngIf="registerForm.get('email')?.hasError('email')">Email inválido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" [readonly]="loading">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Senha é obrigatória</mat-error>
+                    <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">Senha deve ter no mínimo 6 caracteres</mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid || loading">
+                    @if (loading) {
+                        <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                    } @else {
+                        Cadastrar
+                    }
+                </button>
+
+                <mat-divider>ou</mat-divider>
+
+                <button mat-stroked-button type="button" (click)="loginWithGoogle()" [disabled]="loading" class="google-button">
+                    <img src="assets/icons/google.svg" alt="Google Logo" class="google-icon">
+                    Continuar com Google
+                </button>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
 </mat-dialog-content>

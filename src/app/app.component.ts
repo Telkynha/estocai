@@ -1,6 +1,5 @@
 import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
-
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,8 +8,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { isPlatformBrowser } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfigComponent } from './components/forms/config/config.component';
 import { AcessoComponent } from './components/forms/acesso/acesso.component';
+import { AuthStateService } from './services/auth-state.service';
+import { DialogService } from './services/dialog.service';
 
 @Component({
   selector: 'app-root',
@@ -24,22 +26,32 @@ import { AcessoComponent } from './components/forms/acesso/acesso.component';
     MatButtonModule,
     MatListModule,
     MatToolbarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
 ]
 })
 export class AppComponent implements OnInit {
   isExpanded = true;
   isDarkTheme = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private dialog: MatDialog) { 
-
-  }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private dialog: MatDialog,
+    private router: Router,
+    public authState: AuthStateService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme');
       this.isDarkTheme = savedTheme === 'dark';
       this.applyTheme();
+    }
+
+    // Verificar autenticação ao iniciar
+    if (!this.authState.isAuthenticated() && !this.router.url.includes('acesso')) {
+      this.openAcesso();
     }
   }
 
@@ -66,16 +78,34 @@ export class AppComponent implements OnInit {
   }
 
   openConfig() {
-    this.dialog.open(ConfigComponent, {
-      minWidth: '60vw',
-      height: '50vh'
-    });
+    if (this.authState.isAuthenticated()) {
+      this.dialog.open(ConfigComponent, {
+        width: '800px',
+        maxWidth: '95vw',
+        minHeight: '400px',
+        maxHeight: '80vh',
+        panelClass: 'config-dialog-container'
+      });
+    } else {
+      this.openAcesso();
+    }
   }
 
   openAcesso() {
-    this.dialog.open(AcessoComponent, {
-      minWidth: '60vw',
-      height: '50vh'
+    this.dialogService.openLoginDialog().afterClosed().subscribe(result => {
+      if (result) {
+        // Usuário fez login com sucesso
+        this.router.navigate(['/']);
+      }
     });
+  }
+
+  async logout() {
+    try {
+      await this.authState.logout();
+      this.openAcesso();
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    }
   }
 }

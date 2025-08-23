@@ -1,0 +1,5 @@
+mutation InsertUsuario($id: String!, $nome: String!, $email: String!, $senha: String!) {
+  usuario_insert(data: {id: $id, nome: $nome, email: $email, senha: $senha}) {
+    id
+  }
+}

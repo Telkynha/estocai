@@ -2,6 +2,34 @@
   padding: 24px;
 }
 
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  margin: 24px 0;
+  
+  .loading-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    animation: spin 1.5s infinite ease-in-out;
+    color: var(--mat-sys-primary);
+    margin-bottom: 8px;
+  }
+  
+  p {
+    font-size: 16px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -136,6 +164,33 @@ mat-card {
   margin-top: 24px;
 }
 
+.data-section {
+  margin-top: 32px;
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--mat-sys-on-surface);
+      margin: 0;
+    }
+  }
+  
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    
+    table {
+      width: 100%;
+    }
+  }
+}
+
 .comparison-card {
   .comparison-item {
     padding: 16px;
@@ -229,5 +284,246 @@ mat-card {
       color: var(--mat-sys-on-surface-variant);
       font-weight: 500;
     }
+  }
+}
+
+.no-data {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+  font-style: italic;
+}
+
+.no-data-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background-color: var(--mat-sys-surface-container);
+  border-radius: 12px;
+  text-align: center;
+  
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--mat-sys-primary);
+    margin-bottom: 16px;
+  }
+  
+  p {
+    font-size: 16px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--mat-sys-surface-container);
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+  }
+  
+  .product-ranking {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--mat-sys-primary);
+    min-width: 40px;
+    text-align: center;
+  }
+  
+  .product-details {
+    flex: 1;
+    
+    .product-name {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    .product-category {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 8px;
+      
+      .category-chip {
+        background-color: var(--mat-sys-tertiary-container);
+        color: var(--mat-sys-on-tertiary-container);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+      }
+    }
+    
+    .product-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      
+      span {
+        display: flex;
+        align-items: center;
+        
+        mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+}
+
+.platform-stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.platform-card {
+  background-color: var(--mat-sys-surface-container);
+  padding: 16px;
+  border-radius: 12px;
+  
+  .platform-name {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--mat-sys-on-surface-variant);
+    margin-bottom: 8px;
+    
+    .platform-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  }
+  
+  .platform-value {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  
+  .platform-percentage {
+    font-size: 12px;
+    color: var(--mat-sys-on-surface-variant);
+    margin-top: 4px;
+    text-align: right;
+  }
+}
+
+.trend-chart {
+  background-color: var(--mat-sys-surface-container);
+  padding: 24px;
+  border-radius: 12px;
+  
+  .chart-container {
+    display: flex;
+    align-items: flex-end;
+    height: 240px;
+    gap: 12px;
+  }
+  
+  .chart-bar-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    
+    .chart-date {
+      font-size: 12px;
+      color: var(--mat-sys-on-surface-variant);
+      margin-top: 8px;
+    }
+    
+    .chart-bar-wrapper {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      
+      .chart-bar {
+        width: 70%;
+        background-color: var(--mat-sys-primary);
+        border-radius: 4px 4px 0 0;
+        position: relative;
+        transition: height 0.5s ease;
+        
+        .chart-value {
+          position: absolute;
+          top: -24px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 11px;
+          white-space: nowrap;
+          color: var(--mat-sys-on-surface);
+        }
+      }
+    }
+  }
+}
+
+.status-chip {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+
+  &.normal {
+    background-color: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
+  }
+
+  &.baixo {
+    background-color: var(--mat-sys-warning-container);
+    color: var(--mat-sys-on-warning-container);
+  }
+
+  &.zerado {
+    background-color: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-error-container);
+  }
+}
+
+.small-text {
+  font-size: 11px;
+  color: var(--mat-sys-on-surface-variant);
+  margin-top: 4px;
+}
+
+.table-container {
+  background: var(--mat-sys-surface-container);
+  border-radius: 8px;
+  overflow: hidden;
+  
+  table {
+    width: 100%;
+  }
+  
+  .mat-mdc-header-row {
+    background-color: var(--mat-sys-surface-container-highest);
+  }
+  
+  .mat-mdc-row:hover {
+    background-color: var(--mat-sys-surface-container-high);
   }
 }

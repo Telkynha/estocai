@@ -1,69 +1,182 @@
 <mat-card class="estoque-card">
   <mat-card-title>Estoque de Produtos</mat-card-title>
 
-  <div class="estoque-actions">
-    <button mat-raised-button color="primary" aria-label="Adicionar item">
-      <mat-icon>add</mat-icon>
-      <span>Adicionar Item</span>
-    </button>
-    <button mat-raised-button color="accent" aria-label="Importar dados">
-      <mat-icon>upload</mat-icon>
-      <span>Importar Dados</span>
-    </button>
+  <div class="estoque-header">
+    <div class="filtros-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="aplicarFiltro($event)" placeholder="Digite para buscar...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Categoria</mat-label>
+        <mat-select (selectionChange)="filtrarPorCategoria($event.value)">
+          <mat-option [value]="null">Todas as categorias</mat-option>
+          <mat-option *ngFor="let cat of categorias" [value]="cat">
+            {{Categoria[cat]}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select (selectionChange)="filtrarPorStatus($event.value)">
+          <mat-option [value]="null">Todos os status</mat-option>
+          <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+            {{status.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="acoes-container">
+      <button mat-raised-button color="primary" aria-label="Adicionar item" (click)="adicionarProduto()">
+        <mat-icon>add</mat-icon>
+        <span>Adicionar Item</span>
+      </button>
+      
+      <button mat-raised-button [matMenuTriggerFor]="menu" color="accent">
+        <mat-icon>more_vert</mat-icon>
+        <span>Mais ações</span>
+      </button>
+      
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="exportarSelecionados()">
+          <mat-icon>download</mat-icon>
+          <span>Exportar Selecionados</span>
+        </button>
+        <button mat-menu-item (click)="selection.clear()">
+          <mat-icon>clear_all</mat-icon>
+          <span>Limpar Seleção</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 
   <div class="estoque-table-container">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+      <!-- Seleção -->
+      <ng-container matColumnDef="selecao">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let item">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(item) : null"
+                      [checked]="selection.isSelected(item)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
       <!-- Código -->
       <ng-container matColumnDef="codigo">
-        <th mat-header-cell *matHeaderCellDef class="primary-header">Código</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
         <td mat-cell *matCellDef="let item">{{item.codigo}}</td>
       </ng-container>
 
       <!-- Nome -->
       <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
         <td mat-cell *matCellDef="let item">{{item.nome}}</td>
+      </ng-container>
+
+      <!-- Descrição -->
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let item">{{item.descricao}}</td>
       </ng-container>
 
       <!-- Categoria -->
       <ng-container matColumnDef="categoria">
-        <th mat-header-cell *matHeaderCellDef>Categoria</th>
-        <td mat-cell *matCellDef="let item">{{item.categoria}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+        <td mat-cell *matCellDef="let item">
+          <span *ngFor="let cat of item.categoria" class="categoria-chip">
+            {{Categoria[cat]}}
+          </span>
+        </td>
       </ng-container>
 
-      <!-- Quantidade -->
-      <ng-container matColumnDef="quantidade">
-        <th mat-header-cell *matHeaderCellDef>Qtd.</th>
-        <td mat-cell *matCellDef="let item">{{item.quantidade}}</td>
+      <!-- Estoque Atual -->
+      <ng-container matColumnDef="estoqueAtual">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estoque Atual</th>
+        <td mat-cell *matCellDef="let item" class="qtd-itens-cell">
+          <span class="estoque-badge" [ngClass]="getStatusProduto(item)">
+            {{item.estoqueAtual}}
+          </span>
+        </td>
       </ng-container>
 
-      <!-- Preço -->
-      <ng-container matColumnDef="preco">
-        <th mat-header-cell *matHeaderCellDef>Preço</th>
-        <td mat-cell *matCellDef="let item">R$ {{item.preco | number:'1.2-2'}}</td>
+      <!-- Estoque Mínimo -->
+      <ng-container matColumnDef="estoqueMinimo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estoque Mínimo</th>
+        <td mat-cell *matCellDef="let item">{{item.estoqueMinimo}}</td>
+      </ng-container>
+
+      <!-- Preço de Venda -->
+      <ng-container matColumnDef="precoVenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço Venda</th>
+        <td mat-cell *matCellDef="let item">{{item.precoVenda | currency:'BRL'}}</td>
+      </ng-container>
+
+      <!-- Preço de Custo -->
+      <ng-container matColumnDef="precoCusto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço Custo</th>
+        <td mat-cell *matCellDef="let item">{{item.precoCusto | currency:'BRL'}}</td>
+      </ng-container>
+
+      <!-- Margem -->
+      <ng-container matColumnDef="margem">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Margem</th>
+        <td mat-cell *matCellDef="let item" class="qtd-itens-cell"> 
+          <span class="margem-badge" [ngClass]="getClasseMargem(item)">
+            {{formatarMargem(item)}}
+          </span>
+        </td>
       </ng-container>
 
       <!-- Fornecedor -->
       <ng-container matColumnDef="fornecedor">
-        <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fornecedor</th>
         <td mat-cell *matCellDef="let item">{{item.fornecedor}}</td>
       </ng-container>
 
-      <!-- Status -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef class="secondary-header">Status</th>
+      <!-- Data de Atualização -->
+      <ng-container matColumnDef="dataAtualizacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Última Atualização</th>
+        <td mat-cell *matCellDef="let item">{{item.dataAtualizacao | date:'dd/MM/yyyy HH:mm'}}</td>
+      </ng-container>
+
+      <!-- Ações -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let item">
-          <span [ngClass]="{
-            'status-disponivel': item.status === 'Disponível',
-            'status-baixo': item.status === 'Baixo Estoque',
-            'status-critico': item.status === 'Crítico'
-          }">{{item.status}}</span>
+          <button mat-icon-button [matMenuTriggerFor]="rowMenu" aria-label="Ações do item">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #rowMenu="matMenu">
+            <button mat-menu-item (click)="editarItem(item)">
+              <mat-icon>edit</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item (click)="excluirItem(item)">
+              <mat-icon>delete</mat-icon>
+              <span>Excluir</span>
+            </button>
+          </mat-menu>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" 
+                   aria-label="Selecione a página"
+                   showFirstLastButtons>
+    </mat-paginator>
   </div>
 </mat-card>

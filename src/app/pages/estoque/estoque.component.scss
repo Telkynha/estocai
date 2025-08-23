@@ -1,71 +1,285 @@
 .estoque-card {
-  margin: 32px;
-  background: var(--mat-sys-surface-container-low);
-  border-radius: 16px;
-  padding: 32px;
+  margin: 24px;
+  background: var(--mat-sys-surface-container);
+  border-radius: 12px;
+  overflow: hidden;
+  
+  mat-card-title {
+    padding: 24px;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface);
+  }
 }
 
-mat-card-title {
-  color: var(--mat-sys-primary);
-  font-size: 1.5rem;
+.estoque-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 24px;
+  gap: 16px;
   margin-bottom: 24px;
+}
+
+.filtros-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 300px;
+
+  mat-form-field {
+    min-width: 200px;
+    flex: 1;
+  }
+}
+
+.acoes-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  button {
+    height: 40px;
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
 }
 
 .estoque-table-container {
   overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--mat-sys-surface-container);
-}
-
-th.mat-header-cell {
-  font-weight: 600;
-  background: var(--mat-sys-surface-container-highest);
-  color: var(--mat-sys-on-surface-variant);
-}
-
-.primary-header {
-  color: var(--mat-sys-primary);
-}
-
-.secondary-header {
-  color: var(--mat-sys-secondary);
-}
-
-td.mat-cell {
-  color: var(--mat-sys-on-surface);
-}
-
-.status-disponivel {
-  color: var(--mat-sys-primary);
-  font-weight: 500;
-}
-.status-baixo {
-  color: var(--mat-sys-secondary);
-  font-weight: 500;
-}
-.status-critico {
-  color: #ba1a1a;
-  font-weight: 700;
-}
-
-.estoque-actions {
-  display: flex;
-  gap: 16px;
-  margin: 16px 0;
-  justify-content: flex-end;
   
-  button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    
-    mat-icon {
-      margin-right: 4px;
+  table {
+    width: 100%;
+  }
+
+  .mat-mdc-row {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--mat-sys-surface-container-highest);
     }
+  }
+
+  .mat-column-selecao {
+    width: 48px;
+    padding: 0 8px;
+  }
+
+  .mat-column-codigo {
+    min-width: 100px;
+  }
+
+  .mat-column-nome {
+    min-width: 150px;
+  }
+  
+  .mat-column-descricao {
+    min-width: 200px;
+  }
+  
+  .mat-column-estoqueAtual {
+    min-width: 110px;
+    text-align: center;
+  }
+  
+  .mat-column-estoqueMinimo {
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .mat-column-precoVenda {
+    min-width: 110px;
+  }
+  
+  .mat-column-precoCusto {
+    min-width: 110px;
+  }
+  
+  .mat-column-margem {
+    min-width: 100px;
+    text-align: center;
+  }
+  
+  .mat-column-fornecedor {
+    min-width: 120px;
+  }
+  
+  .mat-column-dataAtualizacao {
+    min-width: 160px;
+  }
+
+  .mat-column-acoes {
+    width: 48px;
+    text-align: center;
+  }
+}
+
+.status-chip {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  &.normal {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+  }
+
+  &.baixo {
+    background-color: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
+  }
+
+  &.zerado {
+    background-color: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-error-container);
+  }
+}
+
+.estoque-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 16px;
+  font-size: 14px;
+  
+  &.normal {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+  }
+  
+  &.baixo {
+    background-color: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
+  }
+  
+  &.zerado {
+    background-color: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-error-container);
+  }
+}
+
+.margem-badge {
+  @extend .estoque-badge;
+  
+  &.alta {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+  }
+  
+  &.media {
+    background-color: var(--mat-sys-secondary-container);
+    color: var(--mat-sys-on-secondary-container);
+  }
+  
+  &.baixa {
+    background-color: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
+  }
+  
+  &.negativa {
+    background-color: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-error-container);
+  }
+}
+
+.categoria-chip {
+  background-color: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  margin-right: 6px;
+  display: inline-block;
+  margin-bottom: 4px;
+  font-weight: 500;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// Responsividade
+@media (max-width: 960px) {
+  .estoque-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filtros-container {
+    flex-direction: column;
+    
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .acoes-container {
+    justify-content: flex-end;
+  }
+
+  .mat-column-codigo,
+  .mat-column-fornecedor,
+  .mat-column-dataAtualizacao {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .estoque-card {
+    margin: 16px;
+  }
+
+  mat-card-title {
+    font-size: 1.25rem !important;
+    padding: 16px !important;
+  }
+
+  .estoque-header {
+    padding: 0 16px;
+  }
+
+  button {
+    span {
+      display: none;
+    }
+
+    mat-icon {
+      margin: 0;
+    }
+  }
+
+  .mat-column-descricao,
+  .mat-column-precoCusto,
+  .mat-column-estoqueMinimo {
+    display: none;
+  }
+}
+
+// Animações
+.mat-mdc-row {
+  transition: background-color 0.2s ease;
+}
+
+.acoes-container button {
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }

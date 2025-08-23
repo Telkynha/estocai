@@ -19,3 +19,24 @@ body {
   color-scheme: dark;
 }
 
+// Custom dialog styles
+.config-dialog-container .mat-mdc-dialog-surface {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+mat-dialog-content {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--mat-sys-primary-container);
+    border-radius: 10px;
+  }
+}
+
