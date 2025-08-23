@@ -1,95 +1,127 @@
-import { SelectionModel } from '@angular/cdk/collections';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule, MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatCheckbox } from "@angular/material/checkbox";
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSortModule, MatSort } from '@angular/material/sort';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { FormsModule } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-interface VendaItem {
-  codigo: string;
-  produto: string;
-  quantidade: number;
-  valor: number;
-  frete: number;
-  cliente: string;
-  dataVenda: string;
-  dataEntrega: string;
-  status: string;
-}
-
-interface GastoItem {
-  codigo: string;
-  descricao: string;
-  categoria: string;
-  valor: number;
-  data: string;
-  fornecedor: string;
-  status: string;
-}
+import { MovimentacaoService } from '../../services/movimentacao.service';
+import { ProdutoService } from '../../services/produto.service';
+import { DialogService } from '../../services/dialog.service';
+import { Item, status } from '../../models/produto/produto.component';
+import { Compra } from '../../models/compra/compra.component';
+import { Venda, formaPagamento, plataforma } from '../../models/venda/venda.component';
+import { StatusClassPipe } from '../../pipes/status-class.pipe';
 
 @Component({
   selector: 'app-movimentacoes',
   standalone: true,
   imports: [
-    MatTabsModule,
+    StatusClassPipe,
+    CommonModule,
     MatTableModule,
     MatCardModule,
     MatIconModule,
-    CommonModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
     MatMenuModule,
+    MatCheckboxModule,
     MatChipsModule,
-    FormsModule,
-    MatCheckbox
-],
+    FormsModule
+  ],
   templateUrl: './movimentacoes.component.html',
-  styleUrl: './movimentacoes.component.scss'
+  styleUrls: ['./movimentacoes.component.scss']
 })
-export class MovimentacoesComponent {
+export class MovimentacoesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = [
     'selecao',
-    'codigo',
     'data',
     'tipo',
-    'descricao',
-    'categoria',
     'valor',
     'status',
     'acoes'
   ];
 
-  dataSource: MatTableDataSource<any>;
-  selection = new SelectionModel<any>(true, []);
+  dataSource = new MatTableDataSource<Venda | Compra>();
+  selection = new SelectionModel<Venda | Compra>(true, []);
 
-  statusList: string[] = ['Todos', 'Pago', 'Pendente', 'Atrasado'];
-  categorias: string[] = ['Todos', 'Vendas', 'Compras', 'Despesas', 'Outros'];
+  statusList = [
+    { value: status.PENDENTE, label: 'Pendente' },
+    { value: status.CONCLUIDA, label: 'Concluída' },
+    { value: status.CANCELADA, label: 'Cancelada' }
+  ];
 
-  constructor() {
-    this.dataSource = new MatTableDataSource<any>([]);
+  constructor(
+    private movimentacaoService: MovimentacaoService,
+    private produtoService: ProdutoService,
+    private dialogService: DialogService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
+
+  async ngOnInit() {
+    await this.carregarMovimentacoes();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  async carregarMovimentacoes() {
+    try {
+      const movimentacoes = await this.movimentacaoService.getMovimentacoesByUsuario();
+      this.dataSource.data = movimentacoes;
+    } catch (error) {
+      console.error('Erro ao carregar movimentações:', error);
+      this.snackBar.open('Erro ao carregar movimentações', 'Fechar', { duration: 3000 });
+    }
+  }
+
+  aplicarFiltro(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  filtrarPorStatus(statusValue: status | null) {
+    if (statusValue === null) {
+      this.dataSource.filter = '';
+      return;
+    }
+
+    this.dataSource.filterPredicate = (data: Venda | Compra, filter: string) => {
+      return data.status === parseInt(filter);
+    };
+    this.dataSource.filter = statusValue.toString();
+  }
+
+  async novaMovimentacao() {
+    // TODO: Implementar dialog de nova movimentação
+    this.snackBar.open('Funcionalidade em desenvolvimento', 'Fechar', { duration: 3000 });
   }
 
   isAllSelected() {
@@ -99,48 +131,64 @@ export class MovimentacoesComponent {
   }
 
   masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  async editarMovimentacao(movimentacao: Venda | Compra) {
+    // TODO: Implementar dialog de edição
+    this.snackBar.open('Funcionalidade em desenvolvimento', 'Fechar', { duration: 3000 });
+  }
+
+  async excluirMovimentacao(movimentacao: Venda | Compra) {
+    const isVenda = 'plataforma' in movimentacao;
+    const tipo = isVenda ? 'venda' : 'compra';
+
+    const confirmacao = await this.dialogService.openConfirmDialog({
+      title: 'Confirmar Exclusão',
+      message: `Tem certeza que deseja excluir esta ${tipo}?`,
+      type: 'warn'
+    });
+
+    if (confirmacao) {
+      try {
+        if (isVenda) {
+          await this.movimentacaoService.deleteVenda(movimentacao.id!);
+        } else {
+          await this.movimentacaoService.deleteCompra(movimentacao.id!);
+        }
+        
+        this.snackBar.open('Movimentação excluída com sucesso!', 'Fechar', {
+          duration: 3000
+        });
+        await this.carregarMovimentacoes();
+      } catch (error) {
+        console.error('Erro ao excluir movimentação:', error);
+        this.snackBar.open('Erro ao excluir movimentação', 'Fechar', {
+          duration: 3000
+        });
+      }
     }
-    this.selection.select(...this.dataSource.data);
   }
 
-  aplicarFiltro(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  getStatusLabel(status: status): string {
+    return this.statusList.find(s => s.value === status)?.label || 'Desconhecido';
   }
 
-  filtrarPorStatus(status: string) {
-    if (status === 'Todos') {
-      this.dataSource.filter = '';
-    } else {
-      this.dataSource.filter = status;
-    }
+  getTipoLabel(movimentacao: Venda | Compra): string {
+    return 'plataforma' in movimentacao ? 'Venda' : 'Compra';
   }
 
-  filtrarPorCategoria(categoria: string) {
-    if (categoria === 'Todos') {
-      this.dataSource.filter = '';
-    } else {
-      this.dataSource.filter = categoria;
-    }
-  }
-
-  novaMovimentacao() {
-    console.log('Nova movimentação');
-  }
-
-  editarItem(item: any) {
-    console.log('Editar:', item);
-  }
-
-  excluirItem(item: any) {
-    console.log('Excluir:', item);
+  formatarValor(valor: number): string {
+    return valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
   }
 
   exportarSelecionados() {
-    console.log('Exportar itens:', this.selection.selected);
+    // TODO: Implementar exportação
+    this.snackBar.open('Funcionalidade em desenvolvimento', 'Fechar', { duration: 3000 });
   }
-
 }
