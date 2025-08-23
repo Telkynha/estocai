@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import { ProdutoDialogComponent } from '../../components/forms/produto-dialog/produto-dialog.component';
+import { ConfirmDialogComponent } from '../../components/shared/confirm-dialog/confirm-dialog.component';
 import { ProdutoService } from '../../services/produto.service';
 import { Produto, StatusEstoque } from '../../models/produto/produto.component';
 import { Categoria } from '../../models/categoria/categoria.component';
@@ -36,7 +37,8 @@ import { Categoria } from '../../models/categoria/categoria.component';
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
-    ProdutoDialogComponent
+    ProdutoDialogComponent,
+    ConfirmDialogComponent
   ],
   templateUrl: './estoque.component.html',
   styleUrls: ['./estoque.component.scss']
@@ -202,6 +204,18 @@ export class EstoqueComponent implements OnInit {
   }
 
   async excluirItem(item: Produto) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Excluir Produto',
+        message: `Tem certeza que deseja excluir o produto "${item.nome}"? Esta ação não pode ser desfeita.`,
+        confirmText: 'Excluir',
+        cancelText: 'Cancelar',
+        type: 'warn'
+      }
+    });
+
+    const confirmed = await dialogRef.afterClosed().toPromise();
+    if (!confirmed) return;
     if (item.id && confirm('Tem certeza que deseja excluir este produto?')) {
       try {
         await this.produtoService.deleteProduto(item.id);

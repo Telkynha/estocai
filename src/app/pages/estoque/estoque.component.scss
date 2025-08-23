@@ -1,11 +1,13 @@
 .estoque-card {
   margin: 20px;
   padding: 20px;
+  background: var(--mat-sys-surface-container);
   
   mat-card-title {
     margin-bottom: 24px;
     font-size: 24px;
     font-weight: 500;
+    color: var(--mat-sys-on-surface);
   }
 }
 
@@ -49,23 +51,27 @@
   margin-top: 16px;
   overflow: auto;
   border-radius: 8px;
+  background: var(--mat-sys-surface-container-highest);
   
   table {
     width: 100%;
   }
 
   .mat-mdc-table {
-    background: white;
+    background: var(--mat-sys-surface-container);
   }
 
   th.mat-header-cell {
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.87);
+    color: var(--mat-sys-on-surface);
     padding: 16px;
+    background: var(--mat-sys-surface-container-high);
   }
 
   td.mat-cell {
     padding: 16px;
+    color: var(--mat-sys-on-surface);
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
   }
 
   td.mat-column-acoes {
@@ -79,7 +85,7 @@
   }
 
   .mat-mdc-row:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: var(--mat-sys-surface-container-highest);
   }
 }
 
@@ -93,24 +99,24 @@
   gap: 4px;
 
   &.normal {
-    background-color: #4caf50;
-    color: white;
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
   }
 
   &.baixo {
-    background-color: #ff9800;
-    color: white;
+    background-color: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
   }
 
   &.zerado {
-    background-color: #f44336;
-    color: white;
+    background-color: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-error-container);
   }
 }
 
 .categoria-chip {
-  background-color: rgba(0, 0, 0, 0.08);
-  color: rgba(0, 0, 0, 0.87);
+  background-color: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
   padding: 4px 10px;
   border-radius: 16px;
   font-size: 12px;
