@@ -14,7 +14,7 @@ export enum Categoria {
     PET_SHOP = 12,
     INFORMATICA = 13,
     CASA_JARDIM = 14,
-    PAPELERIA = 15,
+    PAPELARIA = 15,
     MUSICA = 16,
     VIAGENS = 17,
     ARTES = 18,
