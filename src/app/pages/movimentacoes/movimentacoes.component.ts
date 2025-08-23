@@ -57,6 +57,7 @@ export class MovimentacoesComponent implements OnInit {
     'selecao',
     'data',
     'tipo',
+    'qtdItens',
     'valor',
     'status',
     'acoes'
@@ -125,13 +126,17 @@ export class MovimentacoesComponent implements OnInit {
       const produtos = await this.produtoService.getProdutosByUsuario();
       
       // Abre um diálogo para escolher o tipo de movimentação
-      const tipo = await this.dialogService.openConfirmDialog({
+      const dialogResult = await this.dialogService.openConfirmDialog({
         title: 'Tipo de Movimentação',
         message: 'Qual tipo de movimentação deseja registrar?',
         confirmText: 'Venda',
         cancelText: 'Compra',
         type: 'info'
-      }) ? 'venda' : 'compra';
+      });
+      
+      // Determina o tipo com base na escolha do diálogo
+      const tipo = dialogResult === true ? 'venda' : 'compra';
+      console.log('Tipo selecionado:', tipo); // Debugging
       
       // Abre o diálogo de criação da movimentação
       const result = await this.dialogService.openMovimentacaoDialog(tipo, produtos);

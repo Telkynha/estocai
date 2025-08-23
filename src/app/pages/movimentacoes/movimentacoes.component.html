@@ -72,6 +72,14 @@
             <span class="categoria-chip">{{getTipoLabel(row)}}</span>
           </td>
         </ng-container>
+        
+        <!-- Quantidade de Itens -->
+        <ng-container matColumnDef="qtdItens">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Itens </th>
+          <td mat-cell *matCellDef="let row"> 
+            {{row.itens?.length || 0}}
+          </td>
+        </ng-container>
 
         <!-- Valor -->
         <ng-container matColumnDef="valor">

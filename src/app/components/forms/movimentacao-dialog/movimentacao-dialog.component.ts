@@ -108,12 +108,15 @@ export class MovimentacaoDialogComponent implements OnInit {
   }
   
   private criarFormulario(): FormGroup {
+    // Usar a data local no formato brasileiro
+    const dataAtual = new Date();
+    
     if (this.tipoMovimentacao === 'venda') {
       return this.fb.group({
         itens: this.fb.array([]),
         status: [status.PENDENTE, Validators.required],
         observacoes: [''],
-        data: [new Date(), Validators.required],
+        data: [dataAtual, Validators.required],
         valorTotal: [0, Validators.min(0)],
         plataforma: [plataforma.LOJA_FISICA, Validators.required],
         formaPagamento: [formaPagamento.DINHEIRO, Validators.required],

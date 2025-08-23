@@ -24,10 +24,12 @@ export class DialogService {
   async openConfirmDialog(data: ConfirmDialogData): Promise<boolean> {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
-      data: data
+      data: data,
+      disableClose: data.type === 'info' ? false : true
     });
 
-    return dialogRef.afterClosed().toPromise();
+    const result = await dialogRef.afterClosed().toPromise();
+    return result === true;
   }
   
   async openMovimentacaoDialog(
