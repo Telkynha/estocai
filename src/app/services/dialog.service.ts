@@ -77,7 +77,9 @@ export class DialogService {
     const dialogRef = this.dialog.open(MarketAnalysisDialogComponent, {
       width: '900px',
       maxWidth: '95vw',
-      data: { produto } as MarketAnalysisDialogData,
+      data: { 
+        produto: produto
+      } as MarketAnalysisDialogData,
     });
 
     return dialogRef.afterClosed().toPromise();

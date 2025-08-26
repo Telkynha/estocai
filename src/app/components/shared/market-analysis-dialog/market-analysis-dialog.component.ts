@@ -424,6 +424,17 @@ export class MarketAnalysisDialogComponent implements OnInit {
     const produto = this.data.produto;
     const preco = produto.precoVenda || 0;
     
+    // Verificar se é a caneta PENTEL para mostrar dados mockados
+    if (produto.nome.toLowerCase().includes('caneta') && produto.nome.toLowerCase().includes('pentel')) {
+      // Simular delay de carregamento
+      setTimeout(() => {
+        this.marketData = this.getMockedPentelData(preco);
+        this.setupCharts();
+        this.isLoading = false;
+      }, 2000);
+      return;
+    }
+    
     // Usar o serviço de IA para obter dados reais de mercado
     this.marketIntel.analyzeProduct(produto.nome, preco).subscribe({
       next: (res) => {
@@ -445,6 +456,108 @@ export class MarketAnalysisDialogComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  getMockedPentelData(preco: number): MarketDataFront {
+    return {
+      competitors: [
+        {
+          id: 'MLB123456789',
+          title: 'Caneta Gel BIC Cristal Gel+ 0.5mm',
+          price: 2.89,
+          monthlySalesEstimate: 1250
+        },
+        {
+          id: 'MLB987654321',
+          title: 'Caneta Gel Pilot G2 Premium 0.5mm',
+          price: 8.90,
+          monthlySalesEstimate: 890
+        },
+        {
+          id: 'MLB456789123',
+          title: 'Caneta Gel Stabilo Pointball 0.5mm',
+          price: 4.50,
+          monthlySalesEstimate: 670
+        },
+        {
+          id: 'MLB789123456',
+          title: 'Caneta Gel Uni-ball Signo 0.5mm',
+          price: 6.75,
+          monthlySalesEstimate: 540
+        },
+        {
+          id: 'MLB321654987',
+          title: 'Caneta Gel Faber-Castell Poly Ball 0.5mm',
+          price: 3.20,
+          monthlySalesEstimate: 480
+        }
+      ],
+      priceComparison: {
+        labels: ['BIC Cristal Gel+', 'Faber-Castell Poly', 'Stabilo Pointball', 'Seu Produto (PENTEL)', 'Uni-ball Signo', 'Pilot G2 Premium'],
+        prices: [2.89, 3.20, 4.50, preco || 5.50, 6.75, 8.90]
+      },
+      popularity: {
+        labels: ['BIC Cristal', 'Pilot G2', 'Stabilo Point', 'PENTEL Energel', 'Uni-ball Signo', 'Faber-Castell'],
+        values: [1250, 890, 670, 750, 540, 480]
+      },
+      events: [
+        { 
+          name: 'Black Friday - Material Escolar', 
+          date: '2024-11-29',
+          marketingRelevance: true,
+          type: 'seasonal',
+          impact: 'high'
+        },
+        { 
+          name: 'Volta às Aulas', 
+          date: '2025-02-10',
+          marketingRelevance: true,
+          type: 'seasonal',
+          impact: 'high'
+        },
+        { 
+          name: 'Dia do Estudante', 
+          date: '2025-08-11',
+          marketingRelevance: true,
+          type: 'holiday',
+          impact: 'medium'
+        }
+      ],
+      insights: {
+        price: `Seu produto está posicionado no mercado médio-premium (R$ ${(preco || 5.50).toFixed(2)}). Com 67% dos concorrentes abaixo do seu preço, há oportunidade para ajustes competitivos mantendo a qualidade PENTEL.`,
+        popularity: 'A PENTEL Energel tem performance sólida com ~750 vendas/mês estimadas. A marca tem reconhecimento no segmento premium de canetas gel, competindo bem com Pilot e Uni-ball.',
+        search: 'Interesse de busca por "caneta gel PENTEL" mostra picos sazonais durante volta às aulas (fevereiro) e Black Friday. Tendência estável nos últimos 12 meses com média de 75/100.'
+      },
+      search: {
+        currentScore: 75,
+        seasonality: 'alta',
+        trend: [
+          { date: '2024-09-01', value: 68 },
+          { date: '2024-10-01', value: 72 },
+          { date: '2024-11-01', value: 85 },
+          { date: '2024-12-01', value: 90 },
+          { date: '2025-01-01', value: 78 },
+          { date: '2025-02-01', value: 95 },
+          { date: '2025-03-01', value: 82 },
+          { date: '2025-04-01', value: 74 },
+          { date: '2025-05-01', value: 70 },
+          { date: '2025-06-01', value: 68 },
+          { date: '2025-07-01', value: 65 },
+          { date: '2025-08-01', value: 88 }
+        ],
+        relatedQueries: [
+          'caneta gel retrátil',
+          'caneta 0.5mm',
+          'pentel energel azul',
+          'caneta escrita suave',
+          'material escolar premium'
+        ]
+      },
+      original: {
+        name: 'Caneta Gel PENTEL Energel Infree Retrátil 0.5mm',
+        price: preco || 5.50
+      }
+    };
   }
 
   // processMarketData não é mais necessário (dados já vêm prontos)

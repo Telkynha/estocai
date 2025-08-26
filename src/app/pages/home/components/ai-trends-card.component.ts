@@ -7,9 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DialogService } from '../../../services/dialog.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Produto } from '../../../models/produto/produto.component';
-import { IaService } from '../../../services/ia.service';
+import { MarketAnalysisDialogComponent } from '../../../components/shared/market-analysis-dialog/market-analysis-dialog.component';
 
 @Component({
   selector: 'app-ai-trends-card',
@@ -31,8 +31,8 @@ import { IaService } from '../../../services/ia.service';
           <div class="ai-trends-description">
             <mat-icon>insights</mat-icon>
             <div class="ai-trends-text">
-              <h3>Busque informações valiosas dos seus produtos!</h3>
-              <p>Selecione um produto do seu estoque para descobrir produtos similares e comparar tendências de mercado.</p>
+              <h3>Análise de Mercado com IA</h3>
+              <p>Selecione um produto do seu estoque para descobrir produtos similares, comparar preços e analisar tendências de mercado usando inteligência artificial.</p>
             </div>
           </div>
 
@@ -49,7 +49,7 @@ import { IaService } from '../../../services/ia.service';
             <button mat-raised-button color="primary" 
                    [disabled]="!selectedProduct || isAnalyzing" 
                    (click)="analisarMercado()">
-              <mat-icon>trending_up</mat-icon>
+              <mat-icon>analytics</mat-icon>
               Analisar Mercado
               <mat-spinner *ngIf="isAnalyzing" diameter="20" class="button-spinner"></mat-spinner>
             </button>
@@ -65,37 +65,34 @@ export class AiTrendsCardComponent implements OnInit {
   
   selectedProduct: Produto | null = null;
   isAnalyzing: boolean = false;
-  private requestId: string | null = null;
 
-  // Use inject instead of constructor for standalone components
-  private iaService = inject(IaService);
-  private dialogService = inject(DialogService);
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    // Inscrever-se no observable de status da API para monitorar quando a análise termina
-    this.iaService.apiStatus$.subscribe(status => {
-      if (status.type === 'market' && 
-         (status.status === 'success' || status.status === 'error')) {
-        this.isAnalyzing = false;
-      }
-    });
+    // Componente pronto para uso
   }
 
   analisarMercado(): void {
-    if (!this.selectedProduct) return;
-    
+    if (!this.selectedProduct) {
+      return;
+    }
+
     this.isAnalyzing = true;
-    
-    // Gerar um ID único para esta requisição baseado no nome e preço do produto
-    this.requestId = `market_${this.selectedProduct.id}_${Date.now()}`;
-    
-    // Abrir diálogo com análise de mercado
-    this.dialogService.openMarketAnalysisDialog(this.selectedProduct)
-      .catch(error => {
-        console.error('Erro ao analisar mercado:', error);
-      })
-      .finally(() => {
-        this.isAnalyzing = false;
-      });
+
+    // Abrir dialog de análise de mercado
+    const dialogRef = this.dialog.open(MarketAnalysisDialogComponent, {
+      width: '90vw',
+      maxWidth: '1000px',
+      height: 'auto',
+      maxHeight: '90vh',
+      data: {
+        produto: this.selectedProduct
+      }
+    });
+
+    // Quando o dialog fechar, parar o loading
+    dialogRef.afterClosed().subscribe(() => {
+      this.isAnalyzing = false;
+    });
   }
 }

@@ -220,6 +220,9 @@ export class HomeComponent implements OnInit {
       this.produtoService.getProdutosByUsuario(),
       this.movimentacaoService.getMovimentacoesByUsuario()
     ]);
+
+    // Adicionar produto PENTEL mockado para demonstração se não existir
+    this.adicionarProdutoMockadoSeNecessario();
   }
   
   atualizarCards() {
@@ -814,6 +817,37 @@ export class HomeComponent implements OnInit {
         usuarioId: 'demo'
       };
       this.testarAnalisedemercado(produtoDemo);
+    }
+  }
+
+  private adicionarProdutoMockadoSeNecessario() {
+    // Verificar se já existe uma caneta PENTEL
+    const jaTemPentel = this.produtos.some(p => 
+      p.nome.toLowerCase().includes('pentel') || 
+      p.nome.toLowerCase().includes('caneta gel')
+    );
+
+    if (!jaTemPentel) {
+      // Adicionar caneta PENTEL mockada para demonstração
+      const produtoPentelDemo: Produto = {
+        id: 'demo-pentel-001',
+        nome: 'Caneta Gel PENTEL Energel Infree Retrátil 0.5mm',
+        precoVenda: 5.50,
+        precoCusto: 3.20,
+        estoqueAtual: 25,
+        estoqueMinimo: 10,
+        categoria: [],
+        codigo: 'PEN001',
+        descricao: 'Caneta gel retrátil com ponta de 0.5mm, escrita suave e secagem rápida',
+        fornecedor: 'PENTEL do Brasil',
+        dataCriacao: new Date('2024-01-15'),
+        dataAtualizacao: new Date(),
+        ativo: true,
+        usuarioId: 'demo'
+      };
+
+      // Adicionar à lista de produtos apenas para esta sessão (não salva no banco)
+      this.produtos.push(produtoPentelDemo);
     }
   }
 }

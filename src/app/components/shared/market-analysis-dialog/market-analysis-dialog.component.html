@@ -1,8 +1,8 @@
 <div class="market-analysis-container">
-  <h2 mat-dialog-title>Análise de Mercado: {{data.productName}}</h2>
+  <h2 mat-dialog-title>Análise de Mercado: {{data.produto.nome}}</h2>
   
   <mat-dialog-content>
-    @if (loading) {
+    @if (isLoading) {
       <div class="loading-container">
         <mat-spinner></mat-spinner>
         <p>Analisando dados do mercado...</p>
@@ -20,23 +20,26 @@
             <mat-card-title>Produto Analisado</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <p><strong>Nome:</strong> {{analysisData?.original_product.name}}</p>
-            <p><strong>Preço:</strong> {{analysisData?.original_product.price}}</p>
+            <p><strong>Nome:</strong> {{marketData?.original.name}}</p>
+            <p><strong>Preço:</strong> R$ {{marketData?.original.price | number:'1.2-2'}}</p>
           </mat-card-content>
         </mat-card>
 
         <!-- Produtos Similares -->
-        @if (analysisData?.similar_products?.length) {
+        @if (marketData?.competitors?.length) {
           <mat-card class="similar-products">
             <mat-card-header>
               <mat-card-title>Produtos Similares</mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <div class="products-grid">
-                @for (product of analysisData.similar_products; track product.name) {
+                @for (product of marketData.competitors; track product.id) {
                   <div class="product-item">
-                    <span class="product-name">{{product.name}}</span>
-                    <span class="product-price">{{product.price}}</span>
+                    <span class="product-name">{{product.title}}</span>
+                    <span class="product-price">R$ {{product.price | number:'1.2-2'}}</span>
+                    @if (product.monthlySalesEstimate) {
+                      <span class="product-sales">{{product.monthlySalesEstimate}} vendas/mês</span>
+                    }
                   </div>
                 }
               </div>
@@ -45,27 +48,59 @@
         }
 
         <!-- Gráfico de Tendências -->
-        @if (chartData) {
+        @if (priceChartData) {
           <mat-card class="trends-chart">
             <mat-card-header>
-              <mat-card-title>Tendências de Mercado</mat-card-title>
+              <mat-card-title>Comparação de Preços</mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <div class="chart-container">
-                <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
+                <canvas baseChart
+                  [data]="priceChartData"
+                  [options]="priceChartOptions"
+                  [type]="'bar'">
+                </canvas>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        @if (salesChartData) {
+          <mat-card class="trends-chart">
+            <mat-card-header>
+              <mat-card-title>Análise de Vendas</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="chart-container">
+                <canvas baseChart
+                  [data]="salesChartData"
+                  [options]="salesChartOptions"
+                  [type]="'line'">
+                </canvas>
               </div>
             </mat-card-content>
           </mat-card>
         }
 
         <!-- Insights -->
-        @if (analysisData?.market_insights) {
+        @if (marketData?.insights) {
           <mat-card class="market-insights">
             <mat-card-header>
               <mat-card-title>Insights do Mercado</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <p>{{analysisData.market_insights}}</p>
+              <div class="insight-item">
+                <h4>💰 Posicionamento de Preço</h4>
+                <p>{{marketData.insights.price}}</p>
+              </div>
+              <div class="insight-item">
+                <h4>📈 Análise de Vendas</h4>
+                <p>{{marketData.insights.popularity}}</p>
+              </div>
+              <div class="insight-item">
+                <h4>🔍 Volume de Buscas</h4>
+                <p>{{marketData.insights.search}}</p>
+              </div>
             </mat-card-content>
           </mat-card>
         }
@@ -74,6 +109,6 @@
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button mat-button (click)="close()">Fechar</button>
+    <button mat-button (click)="dialogRef.close()">Fechar</button>
   </mat-dialog-actions>
 </div>
