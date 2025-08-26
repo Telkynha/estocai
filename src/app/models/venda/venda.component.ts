@@ -16,10 +16,14 @@ export interface Venda {
 }
 
 export enum plataforma {
-    LOJA_FISICA = 0,
-    E_COMMERCE = 1,
-    APLICATIVO = 2,
-    OUTRO = 3
+    SHOPEE = 0,
+    AMAZON = 1,
+    MERCADO_LIVRE = 2,
+    OLX = 3,
+    MAGALU = 4,
+    APLICATIVO = 5,
+    LOJA_FISICA = 6,
+    OUTRO = 7
 }
 
 export enum formaPagamento {
