@@ -13,87 +13,137 @@ def local_solution_ai(product):
     """
     Gera produtos similares localmente sem usar a API Gemini
     """
+    if not product:
+        return ["Produto Similar A", "Produto Similar B"]
+    
     product_lower = product.lower()
     
-    # Produtos específicos para materiais de escritório e canetas
-    if 'caneta' in product_lower:
-        if 'gel' in product_lower:
-            return [
-                'Caneta Gel Zebra Sarasa 0.5mm',
-                'Caneta Gel Pilot G-2 0.7mm'
+    # Lista de marcas comuns para sugerir alternativas
+    marcas_comuns = [
+        "Samsung", "Apple", "Dell", "HP", "Lenovo", "Acer", "LG", "Sony", "Asus", 
+        "Philips", "BIC", "Faber-Castell", "Tilibra", "Pilot", "3M", "Stabilo",
+        "Pentel", "Sharpie", "Staedtler", "Uni-ball", "Zebra", "Tramontina",
+        "Mondial", "Electrolux", "Brastemp", "Arno", "Consul", "Multilaser",
+        "JBL", "Logitech", "Razer", "HyperX", "SteelSeries", "Corsair", "AOC"
+    ]
+    
+    # Extrair a marca do produto original, se presente
+    produto_marca = None
+    for marca in marcas_comuns:
+        if marca.lower() in product_lower:
+            produto_marca = marca
+            break
+    
+    # Identificar a categoria do produto com base em palavras-chave
+    categorias = {
+        'escritorio': ['caneta', 'lápis', 'borracha', 'caderno', 'fichário', 'pasta', 'grampeador', 
+                      'clipe', 'marca texto', 'post-it', 'sticky notes', 'papel', 'impressora', 'toner'],
+        'tecnologia': ['notebook', 'laptop', 'computador', 'monitor', 'mouse', 'teclado', 'headset', 
+                      'fone', 'celular', 'smartphone', 'tablet', 'adaptador', 'carregador', 'webcam'],
+        'eletrodomestico': ['geladeira', 'fogão', 'microondas', 'liquidificador', 'batedeira', 
+                           'cafeteira', 'aspirador', 'ferro', 'ventilador', 'ar condicionado'],
+        'ferramentas': ['chave', 'martelo', 'furadeira', 'alicate', 'serra', 'parafuso', 'prego',
+                       'trena', 'nível', 'lixa', 'pinca', 'solda', 'broca']
+    }
+    
+    # Detectar a categoria do produto
+    categoria_produto = 'geral'
+    for categoria, palavras_chave in categorias.items():
+        for palavra in palavras_chave:
+            if palavra in product_lower:
+                categoria_produto = categoria
+                break
+        if categoria_produto != 'geral':
+            break
+    
+    # Extrair palavras-chave do nome do produto
+    palavras = product_lower.split()
+    
+    # Gerar produtos similares
+    produtos_similares = []
+    
+    # Tenta gerar produtos similares baseados em categoria e características
+    if categoria_produto == 'escritorio':
+        if 'caneta' in product_lower:
+            tipo_caneta = None
+            if 'gel' in product_lower:
+                tipo_caneta = 'Gel'
+            elif 'esferográfica' in product_lower:
+                tipo_caneta = 'Esferográfica'
+            elif 'fineliner' in product_lower or 'ponta fina' in product_lower:
+                tipo_caneta = 'Fineliner'
+            else:
+                tipo_caneta = 'Esferográfica'
+                
+            # Gerar marcas diferentes da original
+            marcas_caneta = ["Pilot", "BIC", "Pentel", "Faber-Castell", "Uni-ball", "Zebra", "Staedtler", "Sharpie"]
+            if produto_marca:
+                marcas_caneta = [m for m in marcas_caneta if m != produto_marca]
+                
+            produtos_similares = [
+                f"Caneta {tipo_caneta} {marcas_caneta[0]} Premium",
+                f"Caneta {tipo_caneta} {marcas_caneta[1]} Standard"
             ]
-        elif 'esferográfica' in product_lower:
-            return [
-                'Caneta Esferográfica BIC Cristal',
-                'Caneta Esferográfica Faber-Castell'
-            ]
-        elif 'fineliner' in product_lower or 'ponta fina' in product_lower:
-            return [
-                'Caneta Fineliner Sharpie 0.4mm',
-                'Caneta Fineliner Uni Pin 0.3mm'
-            ]
-        elif 'pentel' in product_lower:
-            return [
-                'Caneta Gel Zebra Sarasa 0.5mm',
-                'Caneta Gel Uni-ball Signo 0.5mm'
-            ]
-        else:
-            return [
-                'Caneta Gel Pentel EnerGel 0.7mm',
-                'Caneta BIC Cristal Fina Azul'
-            ]
-    elif 'lápis' in product_lower:
-        return [
-            'Lápis Faber-Castell 9000 HB',
-            'Lápis Staedtler Mars Lumograph 2B'
-        ]
-    elif 'caderno' in product_lower:
-        return [
-            'Caderno Tilibra Universitário 10 Matérias',
-            'Caderno Espiral Jandaia Stiff 96 Folhas'
-        ]
-    elif 'borracha' in product_lower:
-        return [
-            'Borracha Faber-Castell Super Soft',
-            'Borracha Staedtler Mars Plastic'
-        ]
-    elif 'notebook' in product_lower or 'laptop' in product_lower:
-        return ['Notebook Acer Aspire', 'Laptop Dell Inspiron']
-    elif 'mouse' in product_lower:
-        return ['Mouse Logitech G Pro', 'Mouse Gamer Razer DeathAdder']
-    elif 'teclado' in product_lower:
-        return ['Teclado Mecânico Redragon', 'Teclado sem fio Logitech']
-    elif 'monitor' in product_lower:
-        return ['Monitor LG 24"', 'Monitor Samsung Curvo 32"']
-    elif 'headset' in product_lower or 'fone' in product_lower:
-        return ['Headset Gamer HyperX Cloud', 'Fones de Ouvido Bluetooth JBL']
-    elif 'celular' in product_lower or 'smartphone' in product_lower:
-        return ['Samsung Galaxy S25', 'iPhone 18 Pro']
-    elif 'impressora' in product_lower:
-        return ['Impressora HP LaserJet', 'Impressora Epson EcoTank']
-    else:
-        # Para produtos não identificados, tentar fazer uma análise parcial
-        if 'staedtler' in product_lower:
-            return [
-                'Caneta Rotring Tikky 0.5mm',
-                'Caneta Uni-ball Signo 0.7mm'
+        elif 'caderno' in product_lower:
+            marcas_caderno = ["Tilibra", "Foroni", "Jandaia", "Spiral", "Faber-Castell", "Credeal", "Oxford"]
+            if produto_marca:
+                marcas_caderno = [m for m in marcas_caderno if m != produto_marca]
+                
+            produtos_similares = [
+                f"Caderno Universitário {marcas_caderno[0]} 10 Matérias",
+                f"Caderno Espiral {marcas_caderno[1]} Capa Dura"
             ]
         elif 'marca texto' in product_lower or 'marcador' in product_lower:
-            return [
-                'Marca Texto Stabilo Boss Pastel',
-                'Marca Texto Faber-Castell SuperSoft'
+            marcas_marca_texto = ["Stabilo", "Pilot", "BIC", "Faber-Castell", "CIS"]
+            if produto_marca:
+                marcas_marca_texto = [m for m in marcas_marca_texto if m != produto_marca]
+                
+            produtos_similares = [
+                f"Marca Texto {marcas_marca_texto[0]} Neon",
+                f"Marca Texto {marcas_marca_texto[1]} Pastel"
             ]
-        elif 'sticky notes' in product_lower or 'post-it' in product_lower or 'autoadesivo' in product_lower:
-            return [
-                'Post-it 3M Tradicional 76x76mm',
-                'Bloco Adesivo BRW Neon'
+    elif categoria_produto == 'tecnologia':
+        if any(item in product_lower for item in ['notebook', 'laptop']):
+            marcas_notebook = ["Dell", "Lenovo", "Samsung", "Acer", "HP", "Asus", "Apple"]
+            if produto_marca:
+                marcas_notebook = [m for m in marcas_notebook if m != produto_marca]
+                
+            produtos_similares = [
+                f"Notebook {marcas_notebook[0]} Core i5 8GB 256GB SSD",
+                f"Notebook {marcas_notebook[1]} Ryzen 5 16GB 512GB SSD"
             ]
-        else:
-            # Para produtos não reconhecidos, gera produtos similares plausíveis
-            return [
-                'Produto similar da marca Faber-Castell',
-                'Produto equivalente da marca Pilot'
+        elif 'mouse' in product_lower:
+            marcas_mouse = ["Logitech", "Razer", "Redragon", "HyperX", "Corsair", "SteelSeries"]
+            if produto_marca:
+                marcas_mouse = [m for m in marcas_mouse if m != produto_marca]
+                
+            produtos_similares = [
+                f"Mouse {marcas_mouse[0]} Wireless Ergonômico",
+                f"Mouse Gamer {marcas_mouse[1]} RGB"
             ]
+    
+    # Se ainda não conseguiu gerar produtos similares, use uma abordagem mais genérica
+    if not produtos_similares:
+        # Escolher marcas diferentes da marca original
+        marcas_disponiveis = [m for m in marcas_comuns if produto_marca is None or m != produto_marca]
+        
+        # Escolher duas marcas aleatórias
+        import random
+        random.shuffle(marcas_disponiveis)
+        marca1 = marcas_disponiveis[0]
+        marca2 = marcas_disponiveis[1]
+        
+        # Criar produtos genéricos com as marcas selecionadas
+        produto_base = ' '.join([p for p in palavras if p.lower() not in [m.lower() for m in marcas_comuns]])
+        if not produto_base.strip():
+            produto_base = "Produto similar"
+            
+        produtos_similares = [
+            f"{produto_base} {marca1}",
+            f"{produto_base} {marca2}"
+        ]
+    
+    return produtos_similares
 
 @app.route("/api/ia", methods=["POST"])
 def ia():
@@ -322,12 +372,16 @@ def market_analysis():
         "volumeBusca": int(random.uniform(60, 90))  # Produto original geralmente tem mais buscas
     }
     
-    # Adicionar o produto original no início da lista de produtos similares
+    # Adicionar o produto original no início da lista de produtos similares para que apareça corretamente na comparação
     todos_produtos = [produto_original] + produtos_similares
+    
+    # O frontend espera o produto original como parte da lista de produtos similares
+    # Então vamos incluir o produto original na lista de produtos similares
+    produtos_similares_com_original = [produto_original] + produtos_similares
     
     # Montar resposta
     resposta = {
-        "produtos_similares": produtos_similares,
+        "produtos_similares": produtos_similares_com_original,
         "produto_original": produto_original,
         "todos_produtos": todos_produtos,
         "tendencia_original": tendencia_original,
