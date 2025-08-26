@@ -11,12 +11,14 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { AiTrendsCardComponent } from './components/ai-trends-card.component';
 
 import { ProdutoService } from '../../services/produto.service';
 import { MovimentacaoService } from '../../services/movimentacao.service';
 import { DialogService } from '../../services/dialog.service';
+import { MarketAnalysisDialogComponent } from '../../components/shared/market-analysis-dialog/market-analysis-dialog.component';
 import { Produto, StatusEstoque } from '../../models/produto/produto.component';
 import { Venda, plataforma } from '../../models/venda/venda.component';
 import { Compra } from '../../models/compra/compra.component';
@@ -91,6 +93,7 @@ type AdvancedCard = ComparisonCard | TimelineCard | DistributionCard;
     MatFormFieldModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     FormsModule,
     CommonModule,
     AiTrendsCardComponent
@@ -161,7 +164,8 @@ export class HomeComponent implements OnInit {
     private produtoService: ProdutoService,
     private movimentacaoService: MovimentacaoService,
     private dialogService: DialogService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
   
   async ngOnInit() {
@@ -770,4 +774,46 @@ export class HomeComponent implements OnInit {
    */
   // Método removido: analisarTendencias
   // Essa funcionalidade foi movida para o componente AiTrendsCardComponent
+
+  /**
+   * Demonstra a análise de mercado com IA para um produto
+   */
+  testarAnalisedemercado(produto: Produto) {
+    this.dialog.open(MarketAnalysisDialogComponent, {
+      width: '900px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      data: {
+        produto: produto
+      }
+    });
+  }
+
+  /**
+   * Abre análise de mercado para o primeiro produto disponível (demo)
+   */
+  demonstrarAnaliseIA() {
+    if (this.produtos.length > 0) {
+      this.testarAnalisedemercado(this.produtos[0]);
+    } else {
+      // Criar produto demo se não tiver nenhum
+      const produtoDemo: Produto = {
+        id: 'demo',
+        nome: 'Smartphone Samsung Galaxy',
+        precoVenda: 1299.99,
+        precoCusto: 899.99,
+        estoqueAtual: 10,
+        estoqueMinimo: 5,
+        categoria: [], // Array de categorias
+        codigo: 'DEMO001',
+        descricao: 'Smartphone para demonstração de análise de mercado',
+        fornecedor: 'Demo Store',
+        dataCriacao: new Date(),
+        dataAtualizacao: new Date(),
+        ativo: true,
+        usuarioId: 'demo'
+      };
+      this.testarAnalisedemercado(produtoDemo);
+    }
+  }
 }

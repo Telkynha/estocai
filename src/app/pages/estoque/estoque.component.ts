@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MarketAnalysisDialogComponent } from '../../components/shared/market-analysis-dialog/market-analysis-dialog.component';
 
 import { ProdutoDialogComponent } from '../../components/forms/produto-dialog/produto-dialog.component';
 import { ConfirmDialogComponent } from '../../components/shared/confirm-dialog/confirm-dialog.component';
@@ -271,6 +272,21 @@ export class EstoqueComponent implements OnInit {
    */
   analisarTendencias(item: Produto) {
     this.dialogService.openTrendsDialog(item.nome);
+  }
+
+  /**
+   * Abre o diálogo de análise de mercado para um produto
+   * @param item O produto a ser analisado
+   */
+  analisarMercado(item: Produto) {
+    this.dialog.open(MarketAnalysisDialogComponent, {
+      width: '900px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      data: {
+        produto: item
+      }
+    });
   }
 
   exportarSelecionados() {

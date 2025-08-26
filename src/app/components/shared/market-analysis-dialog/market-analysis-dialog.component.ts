@@ -5,20 +5,26 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 import { NgChartsModule } from 'ng2-charts';
 
-import { IaService, MarketProduct, MarketAnalysisData } from '../../../services/ia.service';
+// Substitui dependência anterior de backend por serviço front-end
+import { MarketIntelService, FrontMarketAnalysisResult } from '../../../services/market-intel.service';
 import { Produto } from '../../../models/produto/produto.component';
 
 export interface MarketAnalysisDialogData {
   produto: Produto;
 }
 
-interface MarketData {
-  similarProducts: MarketProduct[];
-  priceComparison: any;
-  salesComparison: any;
-  eventos: string[];
+// Interface simplificada baseada no novo serviço front-end
+interface MarketDataFront {
+  competitors: FrontMarketAnalysisResult['competitors'];
+  priceComparison: FrontMarketAnalysisResult['priceComparison'];
+  popularity: FrontMarketAnalysisResult['popularity'];
+  events: FrontMarketAnalysisResult['events'];
+  insights: FrontMarketAnalysisResult['insights'];
+  search: FrontMarketAnalysisResult['search'];
+  original: FrontMarketAnalysisResult['original'];
 }
 
 @Component({
@@ -31,6 +37,7 @@ interface MarketData {
     MatIconModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
     NgChartsModule
   ],
   template: `
@@ -56,16 +63,16 @@ interface MarketData {
         <div class="similar-products-section">
           <h3>Produtos Similares Encontrados</h3>
           <div class="similar-products-grid">
-            <div *ngFor="let product of marketData?.similarProducts" class="similar-product-card">
-              <div class="product-name">{{ product.nome }}</div>
-              <div class="product-price">R$ {{ product.preco.toFixed(2) }}</div>
-              <div class="product-trend" [ngClass]="{'positive': product.tendencia > 0, 'negative': product.tendencia < 0}">
-                <mat-icon>{{ product.tendencia > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
-                {{ product.tendencia.toFixed(1) }}%
+            <div *ngFor="let product of marketData?.competitors" class="similar-product-card">
+              <div class="product-name">{{ product.title }}</div>
+              <div class="product-price">R$ {{ product.price.toFixed(2) }}</div>
+              <div class="product-trend" *ngIf="product.monthlySalesEstimate">
+                <mat-icon>show_chart</mat-icon>
+                {{ product.monthlySalesEstimate }} vendas/mês (estim.)
               </div>
-              <div class="product-search-volume" *ngIf="product.volumeBusca !== undefined">
+              <div class="product-search-volume" *ngIf="marketData?.search">
                 <mat-icon>search</mat-icon>
-                <span>{{ getSearchVolumeText(product.volumeBusca) }}</span>
+                <span>Interesse: {{ marketData?.search?.currentScore }} / 100</span>
               </div>
             </div>
           </div>
@@ -82,7 +89,7 @@ interface MarketData {
             </div>
           </mat-tab>
           
-          <mat-tab label="Comparação de Vendas">
+          <mat-tab label="Análise de Vendas">
             <div class="chart-container">
               <canvas baseChart
                 [data]="salesChartData"
@@ -91,12 +98,36 @@ interface MarketData {
               </canvas>
             </div>
           </mat-tab>
+
+          <mat-tab label="Tendências de Busca" *ngIf="marketData?.search?.trend?.length">
+            <div class="chart-container">
+              <canvas baseChart
+                [data]="searchTrendData"
+                [options]="searchTrendOptions"
+                [type]="'line'">
+              </canvas>
+            </div>
+            <div class="trend-info">
+              <div class="trend-stat">
+                <span class="label">Sazonalidade:</span>
+                <span class="value">{{ marketData?.search?.seasonality | titlecase }}</span>
+              </div>
+              <div class="related-queries" *ngIf="marketData?.search?.relatedQueries?.length">
+                <h4>Consultas Relacionadas:</h4>
+                <div class="queries-chips">
+                  <mat-chip *ngFor="let query of marketData?.search?.relatedQueries">
+                    {{ query }}
+                  </mat-chip>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
         </mat-tab-group>
 
-        <div *ngIf="marketData && marketData.eventos && marketData.eventos.length > 0" class="events-section">
+    <div *ngIf="marketData && marketData.events && marketData.events.length > 0" class="events-section">
           <h3>Eventos Relevantes para o Mercado</h3>
           <ul class="events-list">
-            <li *ngFor="let evento of marketData.eventos">{{ evento }}</li>
+      <li *ngFor="let ev of marketData.events">{{ ev.name }} - {{ ev.date | date:'dd/MM' }}</li>
           </ul>
         </div>
 
@@ -316,21 +347,66 @@ interface MarketData {
         }
       }
     }
+
+    .trend-info {
+      margin-top: 16px;
+      padding: 16px;
+      background-color: var(--mat-sys-surface-container-low);
+      border-radius: 8px;
+
+      .trend-stat {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        
+        .label {
+          font-weight: 500;
+          color: var(--mat-sys-on-surface-variant);
+        }
+        
+        .value {
+          font-weight: 600;
+          color: var(--mat-sys-primary);
+        }
+      }
+
+      .related-queries {
+        h4 {
+          margin: 0 0 12px 0;
+          font-size: 14px;
+          color: var(--mat-sys-on-surface-variant);
+        }
+
+        .queries-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          mat-chip {
+            font-size: 12px;
+            background-color: var(--mat-sys-secondary-container);
+            color: var(--mat-sys-on-secondary-container);
+          }
+        }
+      }
+    }
   `]
 })
 export class MarketAnalysisDialogComponent implements OnInit {
   isLoading: boolean = true;
   error: string | null = null;
-  marketData: MarketData | null = null;
+  marketData: MarketDataFront | null = null;
   
   // Dados para os gráficos
   priceChartData: any;
   priceChartOptions: any;
   salesChartData: any;
   salesChartOptions: any;
+  searchTrendData: any;
+  searchTrendOptions: any;
 
   // Use inject for services
-  private iaService = inject(IaService);
+  private marketIntel = inject(MarketIntelService);
   
   constructor(
     public dialogRef: MatDialogRef<MarketAnalysisDialogComponent>,
@@ -349,128 +425,112 @@ export class MarketAnalysisDialogComponent implements OnInit {
     const preco = produto.precoVenda || 0;
     
     // Usar o serviço de IA para obter dados reais de mercado
-    this.iaService.analyzeMarketData(produto.nome, preco).subscribe({
-      next: (data: MarketAnalysisData) => {
-        // Converter os dados do serviço para o formato usado pelo componente
-        this.marketData = this.processMarketData(data);
+    this.marketIntel.analyzeProduct(produto.nome, preco).subscribe({
+      next: (res) => {
+        this.marketData = {
+          competitors: res.competitors,
+          priceComparison: res.priceComparison,
+          popularity: res.popularity,
+          events: res.events,
+          insights: res.insights,
+          search: res.search,
+          original: res.original
+        };
         this.setupCharts();
         this.isLoading = false;
       },
-      error: (err: Error) => {
-        console.error('Erro ao carregar dados de mercado:', err);
-        this.error = 'Não foi possível analisar o mercado. Tente novamente mais tarde.';
+      error: (err) => {
+        console.error('Erro na análise de mercado:', err);
+        this.error = 'Não foi possível realizar a análise de mercado no momento. Tente novamente.';
         this.isLoading = false;
       }
     });
   }
 
-  processMarketData(apiData: any): MarketData {
-    const produto = this.data.produto;
-    const similarProducts = apiData.similarProducts;
-    
-    // Ordenar produtos por preço para melhor visualização
-    similarProducts.sort((a: MarketProduct, b: MarketProduct) => a.preco - b.preco);
-    
-    // Dados para gráfico de preços
-    const priceComparison = {
-      labels: similarProducts.map((p: any) => p.nome),
-      datasets: [
-        {
-          data: similarProducts.map((p: any) => p.preco),
-          backgroundColor: similarProducts.map((p: any) => 
-            p.nome === produto.nome ? '#4285F4' : '#9E9E9E'
-          )
-        }
-      ]
-    };
-    
-    // Dados para gráfico de vendas (últimos 6 meses)
-    const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
-    const salesDatasets = similarProducts.map((p: any) => {
-      // Usar os dados de vendas da API ou gerar se não existirem
-      const vendas = p.vendas || [0, 0, 0, 0, 0, 0];
-      
-      return {
-        label: p.nome,
-        data: vendas,
-        borderColor: p.nome === produto.nome ? '#4285F4' : this.getRandomColor(),
-        backgroundColor: 'transparent',
-        tension: 0.3
-      };
-    });
-    
-    const salesComparison = {
-      labels: months,
-      datasets: salesDatasets
-    };
-    
-    return {
-      similarProducts: similarProducts,
-      priceComparison,
-      salesComparison,
-      eventos: apiData.events
-    };
-  }
+  // processMarketData não é mais necessário (dados já vêm prontos)
   
   setupCharts(): void {
     if (!this.marketData) return;
     
-    // Configurar gráfico de preços
+    // Gráfico de Preços (bar horizontal)
     this.priceChartData = {
       labels: this.marketData.priceComparison.labels,
-      datasets: this.marketData.priceComparison.datasets
+      datasets: [{
+        data: this.marketData.priceComparison.prices,
+        backgroundColor: this.marketData.priceComparison.labels.map(l => 
+          l === 'Seu Produto' ? '#4285F4' : '#9E9E9E'
+        )
+      }]
     };
-    
     this.priceChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
       indexAxis: 'y',
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          callbacks: {
-            label: (context: any) => `R$ ${context.raw.toFixed(2)}`
-          }
-        }
+      plugins: { 
+        legend: { display: false },
+        title: { display: true, text: 'Comparação de Preços (R$)' }
       },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Preço (R$)'
-          }
-        }
+      scales: { 
+        x: { title: { display: true, text: 'Preço (R$)' } } 
       }
     };
     
-    // Configurar gráfico de vendas
+    // Gráfico de Popularidade (vendas)
     this.salesChartData = {
-      labels: this.marketData.salesComparison.labels,
-      datasets: this.marketData.salesComparison.datasets
+      labels: this.marketData.popularity.labels,
+      datasets: [{
+        label: 'Vendas Totais',
+        data: this.marketData.popularity.values,
+        borderColor: '#4CAF50',
+        backgroundColor: 'rgba(76,175,80,0.15)',
+        tension: 0.3,
+        fill: true
+      }]
     };
-    
     this.salesChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: (context: any) => `${context.dataset.label}: ${context.raw} unidades`
-          }
-        }
+      plugins: { 
+        legend: { display: true },
+        title: { display: true, text: 'Vendas dos Concorrentes' }
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Unidades Vendidas'
-          }
-        }
+      scales: { 
+        y: { beginAtZero: true } 
       }
     };
+
+    // Gráfico de Tendências de Busca
+    if (this.marketData.search?.trend?.length) {
+      this.searchTrendData = {
+        labels: this.marketData.search.trend.map(t => {
+          const date = new Date(t.date);
+          return date.toLocaleDateString('pt-BR', { month: 'short', year: '2-digit' });
+        }),
+        datasets: [{
+          label: 'Interesse de Busca',
+          data: this.marketData.search.trend.map(t => t.value),
+          borderColor: '#FF6384',
+          backgroundColor: 'rgba(255,99,132,0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      };
+      this.searchTrendOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { 
+          legend: { display: true },
+          title: { display: true, text: 'Tendência de Busca (últimos 12 meses)' }
+        },
+        scales: { 
+          y: { 
+            beginAtZero: true,
+            max: 100,
+            title: { display: true, text: 'Score (0-100)' }
+          } 
+        }
+      };
+    }
   }
   
   getAlternativeName(name: string): string {
@@ -510,99 +570,24 @@ export class MarketAnalysisDialogComponent implements OnInit {
   // Função getRelevantEvents foi removida pois agora usamos os eventos da API
   
   getPriceInsight(): string {
-    if (!this.marketData) return '';
-    
-    const produto = this.data.produto;
-    const produtoPreco = produto.precoVenda || 0;
-    
-    // Calcular preço médio dos produtos similares, excluindo o produto atual
-    const similarProducts = this.marketData.similarProducts.filter(p => p.nome !== produto.nome);
-    const precoMedio = similarProducts.reduce((acc, p) => acc + p.preco, 0) / similarProducts.length;
-    
-    const precoMaisBaixo = Math.min(...similarProducts.map(p => p.preco));
-    const precoMaisAlto = Math.max(...similarProducts.map(p => p.preco));
-    
-    if (produtoPreco < precoMedio) {
-      const percentualMenor = Math.round(((precoMedio - produtoPreco) / precoMedio) * 100);
-      return `Seu produto está ${percentualMenor}% mais barato que a média do mercado. Considere aumentar o preço mantendo a competitividade, ou destaque o valor atrativo nas suas comunicações.`;
-    } else if (produtoPreco > precoMedio) {
-      const percentualMaior = Math.round(((produtoPreco - precoMedio) / precoMedio) * 100);
-      return `Seu produto está ${percentualMaior}% mais caro que a média do mercado. Certifique-se de destacar os diferenciais que justificam este valor ou considere ajustar para aumentar a competitividade.`;
-    } else {
-      return `Seu produto está com preço alinhado à média do mercado. Bom posicionamento, mas considere destacar diferenciais para justificar a preferência dos clientes.`;
-    }
+  return this.marketData?.insights.price || '';
   }
   
   getSalesInsight(): string {
-    if (!this.marketData) return '';
-    
-    const produto = this.data.produto;
-    const produtoAtual = this.marketData.similarProducts.find(p => p.nome === produto.nome);
-    
-    if (!produtoAtual) return '';
-    
-    const tendenciaAtual = produtoAtual.tendencia;
-    
-    // Calcular tendência média do mercado
-    const tendenciaMedia = this.marketData.similarProducts.reduce((acc, p) => acc + p.tendencia, 0) / this.marketData.similarProducts.length;
-    
-    if (tendenciaAtual > 0) {
-      if (tendenciaAtual > tendenciaMedia) {
-        return `Seu produto está em alta, com tendência de crescimento de ${tendenciaAtual.toFixed(1)}%, superior à média do mercado de ${tendenciaMedia.toFixed(1)}%. Considere aumentar seu estoque para atender à demanda crescente.`;
-      } else {
-        return `Seu produto tem tendência de crescimento de ${tendenciaAtual.toFixed(1)}%, mas está abaixo da média do mercado de ${tendenciaMedia.toFixed(1)}%. Analise estratégias de marketing e diferenciação para acelerar as vendas.`;
-      }
-    } else if (tendenciaAtual < 0) {
-      return `Atenção: seu produto apresenta tendência de queda de ${Math.abs(tendenciaAtual).toFixed(1)}%. Considere promoções, renovação visual ou bundle com outros produtos para reverter esta tendência.`;
-    } else {
-      return `Seu produto está com vendas estáveis. Para aumentar o desempenho, considere estratégias de marketing digital ou promoções sazonais.`;
-    }
+  return this.marketData?.insights.popularity || '';
   }
   
   /**
    * Verifica se existem dados de volume de buscas disponíveis
    */
   hasSearchVolumeData(): boolean {
-    if (!this.marketData || !this.marketData.similarProducts) return false;
-    
-    const produto = this.data.produto;
-    const produtoAtual = this.marketData.similarProducts.find(p => p.nome === produto.nome);
-    
-    return !!produtoAtual && produtoAtual.volumeBusca !== undefined;
+    return !!this.marketData?.search && this.marketData.search.currentScore > 0;
   }
   
   /**
    * Gera insights baseados no volume de buscas do produto
    */
   getSearchVolumeInsight(): string {
-    if (!this.marketData) return '';
-    
-    const produto = this.data.produto;
-    const produtoAtual = this.marketData.similarProducts.find(p => p.nome === produto.nome);
-    
-    if (!produtoAtual || produtoAtual.volumeBusca === undefined) return '';
-    
-    const volumeAtual = produtoAtual.volumeBusca;
-    
-    // Calcular volume médio de buscas do mercado
-    const volumesValidos = this.marketData.similarProducts
-      .filter(p => p.volumeBusca !== undefined)
-      .map(p => p.volumeBusca as number);
-      
-    if (volumesValidos.length === 0) return '';
-    
-    const volumeMedio = volumesValidos.reduce((acc, v) => acc + v, 0) / volumesValidos.length;
-    
-    if (volumeAtual > 80) {
-      return `Seu produto tem um volume de buscas muito alto (${volumeAtual}/100), indicando grande interesse do mercado. Aproveite esse momento para destacar seu produto e considerar aumento de preço ou lançar versões premium.`;
-    } else if (volumeAtual > 60) {
-      return `Seu produto tem um volume de buscas alto (${volumeAtual}/100). Isso indica um bom interesse do mercado. Considere investir em anúncios para capturar essas buscas e aumentar conversões.`;
-    } else if (volumeAtual > volumeMedio) {
-      return `Seu produto tem um volume de buscas (${volumeAtual}/100) acima da média do mercado (${volumeMedio.toFixed(0)}/100). Isso é um bom sinal de interesse, aproveite para melhorar sua presença digital.`;
-    } else if (volumeAtual > 30) {
-      return `O volume de buscas pelo seu produto (${volumeAtual}/100) está na média do mercado. Para aumentar o interesse, considere criar conteúdo educativo ou reviews do produto.`;
-    } else {
-      return `O volume de buscas pelo seu produto é baixo (${volumeAtual}/100). Para aumentar a visibilidade, considere estratégias de marketing de conteúdo e SEO para torná-lo mais descobrível.`;
-    }
+    return this.marketData?.insights.search || 'Dados de busca não disponíveis.';
   }
 }
