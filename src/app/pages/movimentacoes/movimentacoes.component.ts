@@ -55,8 +55,8 @@ export class MovimentacoesComponent implements OnInit {
 
   displayedColumns: string[] = [
     'selecao',
-    'data',
     'tipo',
+    'data',
     'qtdItens',
     'valor',
     'status',
