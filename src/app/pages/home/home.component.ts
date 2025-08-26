@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -7,9 +8,15 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
-import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
+import { AiTrendsCardComponent } from './components/ai-trends-card.component';
+
 import { ProdutoService } from '../../services/produto.service';
 import { MovimentacaoService } from '../../services/movimentacao.service';
+import { DialogService } from '../../services/dialog.service';
 import { Produto, StatusEstoque } from '../../models/produto/produto.component';
 import { Venda, plataforma } from '../../models/venda/venda.component';
 import { Compra } from '../../models/compra/compra.component';
@@ -81,7 +88,12 @@ type AdvancedCard = ComparisonCard | TimelineCard | DistributionCard;
     MatButtonModule,
     MatTableModule,
     MatBadgeModule,
-    CommonModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    FormsModule,
+    CommonModule,
+    AiTrendsCardComponent
   ]
 })
 export class HomeComponent implements OnInit {
@@ -141,9 +153,14 @@ export class HomeComponent implements OnInit {
   // Colunas para tabela de produtos críticos
   displayedColumns: string[] = ['nome', 'estoqueAtual', 'estoqueMinimo', 'status'];
   
+  // Propriedades para análise de tendências com IA
+  selectedProductForAnalysis: Produto | null = null;
+  isAnalyzing: boolean = false;
+  
   constructor(
     private produtoService: ProdutoService,
     private movimentacaoService: MovimentacaoService,
+    private dialogService: DialogService,
     private router: Router
   ) {}
   
@@ -746,4 +763,11 @@ export class HomeComponent implements OnInit {
     ]
   }
   ];
+  
+  /**
+   * Analisa as tendências de um produto usando a IA
+   * Abre um diálogo mostrando um gráfico com as tendências
+   */
+  // Método removido: analisarTendencias
+  // Essa funcionalidade foi movida para o componente AiTrendsCardComponent
 }

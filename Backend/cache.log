@@ -1,0 +1,132 @@
+2025-08-25 19:22:04,336 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 19:22:04,339 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 19:22:09,685 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\cache_manager.py', reloading
+2025-08-25 19:22:11,261 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 19:22:11,264 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 19:22:24,012 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\cache_manager.py', reloading
+2025-08-25 19:22:25,758 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 19:22:25,763 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 19:37:55,024 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 19:37:55,024 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 19:37:55,026 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 19:37:56,324 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 19:37:56,327 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 19:58:40,104 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 19:58:40,104 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 19:58:40,105 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 19:58:41,413 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 19:58:41,415 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 20:07:59,580 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:07:59] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:07:59,592 - cache_manager - INFO - Diretório de cache criado: cache
+2025-08-25 20:07:59,592 - cache_manager - INFO - Cache não encontrado: market_analysis - market_analysis_ca275adeeff0ad37e5b39c92573d8324
+2025-08-25 20:08:00,458 - cache_manager - INFO - Cache salvo: market_analysis - market_analysis_ca275adeeff0ad37e5b39c92573d8324
+2025-08-25 20:08:00,459 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:08:00] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:14:51,680 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:14:51] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:14:51,692 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_ca275adeeff0ad37e5b39c92573d8324
+2025-08-25 20:14:51,693 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:14:51] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:15:41,260 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:15:41] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:15:41,271 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_ca275adeeff0ad37e5b39c92573d8324
+2025-08-25 20:15:41,272 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:15:41] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:27:09,380 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:27:09] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:27:09,393 - cache_manager - INFO - Cache não encontrado: market_analysis - market_analysis_8f0215e018331a6bf5e03e24fb7eb9d8
+2025-08-25 20:27:09,400 - cache_manager - INFO - Cache salvo: market_analysis - market_analysis_8f0215e018331a6bf5e03e24fb7eb9d8
+2025-08-25 20:27:09,400 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:27:09] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:31:17,517 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:31:17] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:31:17,528 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_8f0215e018331a6bf5e03e24fb7eb9d8
+2025-08-25 20:31:17,529 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:31:17] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:31:20,619 - cache_manager - INFO - Cache não encontrado: market_analysis - market_analysis_0124b1c1f2f24eb4a04ffcd41a3f8130
+2025-08-25 20:31:20,628 - cache_manager - INFO - Cache salvo: market_analysis - market_analysis_0124b1c1f2f24eb4a04ffcd41a3f8130
+2025-08-25 20:31:20,629 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:31:20] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:31:49,469 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:31:49] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:31:49,480 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_8f0215e018331a6bf5e03e24fb7eb9d8
+2025-08-25 20:31:49,480 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:31:49] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:34:17,978 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 20:34:17,978 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 20:34:17,980 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 20:34:19,212 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 20:34:19,215 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 20:34:53,192 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:34:53] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:34:53,205 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_0124b1c1f2f24eb4a04ffcd41a3f8130
+2025-08-25 20:34:53,205 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:34:53] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:35:16,648 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:35:16] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:35:16,659 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_ca275adeeff0ad37e5b39c92573d8324
+2025-08-25 20:35:16,660 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:35:16] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:35:24,016 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:35:24] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:35:24,029 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_8f0215e018331a6bf5e03e24fb7eb9d8
+2025-08-25 20:35:24,029 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:35:24] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:38:27,260 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\cache_manager.py', reloading
+2025-08-25 20:38:27,539 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 20:38:28,824 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 20:38:28,827 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 20:38:54,467 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 20:38:54,468 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 20:38:54,469 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 20:38:56,038 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 20:38:56,041 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 20:39:12,343 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:39:12] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:39:12,355 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_0124b1c1f2f24eb4a04ffcd41a3f8130
+2025-08-25 20:39:12,356 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:39:12] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:39:50,113 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 20:39:50,113 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 20:39:50,114 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 20:39:51,356 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 20:39:51,359 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 20:40:12,859 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:40:12] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:40:12,870 - cache_manager - INFO - Cache válido encontrado: market_analysis - market_analysis_8f0215e018331a6bf5e03e24fb7eb9d8
+2025-08-25 20:40:12,870 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 20:40:12] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 20:40:36,739 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 20:40:36,739 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 20:40:36,740 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 20:40:37,977 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 20:40:37,979 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:00:45,138 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 21:00:45,138 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 21:00:45,139 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:00:46,473 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:00:46,477 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:02:05,522 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\pytoweb_back.py', reloading
+2025-08-25 21:02:05,779 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:02:07,216 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:02:07,219 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:02:18,367 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\pytoweb_back.py', reloading
+2025-08-25 21:02:18,584 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:02:20,113 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:02:20,116 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:02:28,342 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\pytoweb_back.py', reloading
+2025-08-25 21:02:28,601 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:02:30,032 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:02:30,035 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:02:39,904 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\pytoweb_back.py', reloading
+2025-08-25 21:02:40,138 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:02:41,593 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:02:41,596 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:05:29,918 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 21:05:29,918 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 21:05:29,920 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:05:31,176 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:05:31,179 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:06:01,076 - werkzeug - INFO -  * Detected change in 'C:\\Users\\emily\\Documents\\! PROGRAMAÇÃO\\estocai\\Backend\\pytoweb_back.py', reloading
+2025-08-25 21:06:01,334 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:06:02,579 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:06:02,582 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:06:31,821 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-25 21:06:31,821 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-25 21:06:31,823 - werkzeug - INFO -  * Restarting with stat
+2025-08-25 21:06:32,988 - werkzeug - WARNING -  * Debugger is active!
+2025-08-25 21:06:32,992 - werkzeug - INFO -  * Debugger PIN: 127-667-025
+2025-08-25 21:06:47,575 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 21:06:47] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 21:06:47,586 - cache_manager - INFO - Cache hit para market_analysis_ca275adeeff0ad37e5b39c92573d8324
+2025-08-25 21:06:47,586 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 21:06:47] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 21:07:04,167 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 21:07:04] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 21:07:04,951 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 21:07:04] "POST /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 21:08:37,711 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 21:08:37] "OPTIONS /api/market_analysis HTTP/1.1" 200 -
+2025-08-25 21:08:37,729 - werkzeug - INFO - 127.0.0.1 - - [25/Aug/2025 21:08:37] "POST /api/market_analysis HTTP/1.1" 200 -

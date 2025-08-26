@@ -1,0 +1,10 @@
+# Requisitos para a API Python
+flask
+flask-cors
+pandas
+matplotlib
+pytrends
+langchain
+langchain-core
+python-dotenv
+google-generativeai  # Necessário para o langchain.chat_models com provider google_genai

@@ -18,6 +18,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ProdutoDialogComponent } from '../../components/forms/produto-dialog/produto-dialog.component';
 import { ConfirmDialogComponent } from '../../components/shared/confirm-dialog/confirm-dialog.component';
 import { ProdutoService } from '../../services/produto.service';
+import { DialogService } from '../../services/dialog.service';
+import { IaService } from '../../services/ia.service';
 import { Produto, StatusEstoque } from '../../models/produto/produto.component';
 import { Categoria } from '../../models/categoria/categoria.component';
 
@@ -76,7 +78,9 @@ export class EstoqueComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private produtoService: ProdutoService
+    private dialogService: DialogService,
+    private produtoService: ProdutoService,
+    private iaService: IaService
   ) {}
 
   async ngOnInit() {
@@ -246,6 +250,14 @@ export class EstoqueComponent implements OnInit {
         // Adicionar tratamento de erro adequado
       }
     }
+  }
+  
+  /**
+   * Abre o diálogo de análise de tendências para um produto
+   * @param item O produto a ser analisado
+   */
+  analisarTendencias(item: Produto) {
+    this.dialogService.openTrendsDialog(item.nome);
   }
 
   exportarSelecionados() {
