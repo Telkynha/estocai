@@ -159,9 +159,9 @@
 
           <!-- Estoque Mínimo Column -->
           <ng-container matColumnDef="estoqueMinimo">
-            <th mat-header-cell *matHeaderCellDef>Tempo Estimado</th>
+            <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
             <td mat-cell *matCellDef="let produto">
-              {{calcularTempoRessuprimento(produto)}}
+              {{produto.fornecedor}}
             </td>
           </ng-container>
 

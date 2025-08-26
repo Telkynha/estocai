@@ -20,6 +20,8 @@ import { ConfirmDialogComponent } from '../../components/shared/confirm-dialog/c
 import { ProdutoService } from '../../services/produto.service';
 import { DialogService } from '../../services/dialog.service';
 import { IaService } from '../../services/ia.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmDialogData } from '../../components/shared/confirm-dialog/confirm-dialog.component';
 import { Produto, StatusEstoque } from '../../models/produto/produto.component';
 import { Categoria } from '../../models/categoria/categoria.component';
 
@@ -40,7 +42,8 @@ import { Categoria } from '../../models/categoria/categoria.component';
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   templateUrl: './estoque.component.html',
   styleUrls: ['./estoque.component.scss']
@@ -80,7 +83,8 @@ export class EstoqueComponent implements OnInit {
     private dialog: MatDialog,
     private dialogService: DialogService,
     private produtoService: ProdutoService,
-    private iaService: IaService
+    private iaService: IaService,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -230,26 +234,34 @@ export class EstoqueComponent implements OnInit {
   }
 
   async excluirItem(item: Produto) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {
+    try {
+      const dialogConfig: ConfirmDialogData = {
         title: 'Excluir Produto',
-        message: `Tem certeza que deseja excluir o produto "${item.nome}"? Esta ação não pode ser desfeita.`,
+        message: item.estoqueAtual > 0 
+          ? `O produto "${item.nome}" possui ${item.estoqueAtual} itens em estoque. Tem certeza que deseja excluí-lo?`
+          : `Tem certeza que deseja excluir o produto "${item.nome}"?`,
+        type: item.estoqueAtual > 0 ? 'warn' : 'error',
         confirmText: 'Excluir',
-        cancelText: 'Cancelar',
-        type: 'warn'
-      }
-    });
+        cancelText: 'Cancelar'
+      };
 
-    const confirmed = await dialogRef.afterClosed().toPromise();
-    if (!confirmed) return;
-    if (item.id && confirm('Tem certeza que deseja excluir este produto?')) {
-      try {
-        await this.produtoService.deleteProduto(item.id);
-        await this.carregarProdutos();
-      } catch (error) {
-        console.error('Erro ao excluir produto:', error);
-        // Adicionar tratamento de erro adequado
-      }
+      const confirmou = await this.dialogService.openConfirmDialog(dialogConfig);
+      if (!confirmou || !item.id) return;
+
+      // Exclui o produto
+      await this.produtoService.deleteProduto(item.id);
+      await this.carregarProdutos();
+
+      this.snackBar.open('Produto excluído com sucesso', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'end'
+      });
+    } catch (error) {
+      console.error('Erro ao excluir produto:', error);
+      this.snackBar.open('Erro ao excluir produto', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'end'
+      });
     }
   }
   
