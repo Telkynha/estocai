@@ -31,7 +31,7 @@ import { IaService } from '../../../services/ia.service';
           <div class="ai-trends-description">
             <mat-icon>insights</mat-icon>
             <div class="ai-trends-text">
-              <h3>Análise de Mercado com IA</h3>
+              <h3>Busque informações valiosas dos seus produtos!</h3>
               <p>Selecione um produto do seu estoque para descobrir produtos similares e comparar tendências de mercado.</p>
             </div>
           </div>
