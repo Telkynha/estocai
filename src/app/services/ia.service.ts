@@ -22,6 +22,7 @@ export interface MarketProduct {
   preco: number;
   tendencia: number;
   vendas: number[];
+  volumeBusca?: number; // Volume de buscas de 0-100
 }
 
 // Interface para dados de mercado
@@ -37,6 +38,7 @@ interface MarketAnalysisBackendResponse {
     preco: number;
     tendencia: number;
     vendas: number[];
+    volumeBusca?: number;
   }>;
   tendencia_original?: number;
   vendas_original?: number[];
@@ -502,7 +504,8 @@ export class IaService {
                 nome: p.nome,
                 preco: p.preco,
                 tendencia: p.tendencia,
-                vendas: p.vendas
+                vendas: p.vendas,
+                volumeBusca: p.volumeBusca
               }));
             }
             

@@ -63,6 +63,10 @@ interface MarketData {
                 <mat-icon>{{ product.tendencia > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
                 {{ product.tendencia.toFixed(1) }}%
               </div>
+              <div class="product-search-volume" *ngIf="product.volumeBusca !== undefined">
+                <mat-icon>search</mat-icon>
+                <span>{{ getSearchVolumeText(product.volumeBusca) }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -113,6 +117,15 @@ interface MarketData {
               <div class="insight-title">Tendência de Vendas</div>
               <p>
                 {{ getSalesInsight() }}
+              </p>
+            </div>
+          </div>
+          <div class="insight-card" *ngIf="hasSearchVolumeData()">
+            <mat-icon>search</mat-icon>
+            <div class="insight-content">
+              <div class="insight-title">Volume de Buscas</div>
+              <p>
+                {{ getSearchVolumeInsight() }}
               </p>
             </div>
           </div>
@@ -213,6 +226,21 @@ interface MarketData {
         
         &.negative {
           color: #F44336;
+        }
+      }
+      
+      .product-search-volume {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        margin-top: 8px;
+        color: var(--mat-sys-on-surface-variant);
+        
+        mat-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
         }
       }
     }
@@ -464,6 +492,21 @@ export class MarketAnalysisDialogComponent implements OnInit {
     return colors[Math.floor(Math.random() * colors.length)];
   }
   
+  /**
+   * Converte o volume de buscas numérico (0-100) para uma descrição textual
+   * @param volume Volume de buscas de 0 a 100
+   * @returns Texto descritivo do volume de buscas
+   */
+  getSearchVolumeText(volume: number): string {
+    if (volume === undefined || volume === null) return 'N/A';
+    
+    if (volume >= 80) return 'Volume de buscas muito alto';
+    if (volume >= 60) return 'Volume de buscas alto';
+    if (volume >= 40) return 'Volume de buscas médio';
+    if (volume >= 20) return 'Volume de buscas baixo';
+    return 'Volume de buscas muito baixo';
+  }
+  
   // Função getRelevantEvents foi removida pois agora usamos os eventos da API
   
   getPriceInsight(): string {
@@ -513,6 +556,53 @@ export class MarketAnalysisDialogComponent implements OnInit {
       return `Atenção: seu produto apresenta tendência de queda de ${Math.abs(tendenciaAtual).toFixed(1)}%. Considere promoções, renovação visual ou bundle com outros produtos para reverter esta tendência.`;
     } else {
       return `Seu produto está com vendas estáveis. Para aumentar o desempenho, considere estratégias de marketing digital ou promoções sazonais.`;
+    }
+  }
+  
+  /**
+   * Verifica se existem dados de volume de buscas disponíveis
+   */
+  hasSearchVolumeData(): boolean {
+    if (!this.marketData || !this.marketData.similarProducts) return false;
+    
+    const produto = this.data.produto;
+    const produtoAtual = this.marketData.similarProducts.find(p => p.nome === produto.nome);
+    
+    return !!produtoAtual && produtoAtual.volumeBusca !== undefined;
+  }
+  
+  /**
+   * Gera insights baseados no volume de buscas do produto
+   */
+  getSearchVolumeInsight(): string {
+    if (!this.marketData) return '';
+    
+    const produto = this.data.produto;
+    const produtoAtual = this.marketData.similarProducts.find(p => p.nome === produto.nome);
+    
+    if (!produtoAtual || produtoAtual.volumeBusca === undefined) return '';
+    
+    const volumeAtual = produtoAtual.volumeBusca;
+    
+    // Calcular volume médio de buscas do mercado
+    const volumesValidos = this.marketData.similarProducts
+      .filter(p => p.volumeBusca !== undefined)
+      .map(p => p.volumeBusca as number);
+      
+    if (volumesValidos.length === 0) return '';
+    
+    const volumeMedio = volumesValidos.reduce((acc, v) => acc + v, 0) / volumesValidos.length;
+    
+    if (volumeAtual > 80) {
+      return `Seu produto tem um volume de buscas muito alto (${volumeAtual}/100), indicando grande interesse do mercado. Aproveite esse momento para destacar seu produto e considerar aumento de preço ou lançar versões premium.`;
+    } else if (volumeAtual > 60) {
+      return `Seu produto tem um volume de buscas alto (${volumeAtual}/100). Isso indica um bom interesse do mercado. Considere investir em anúncios para capturar essas buscas e aumentar conversões.`;
+    } else if (volumeAtual > volumeMedio) {
+      return `Seu produto tem um volume de buscas (${volumeAtual}/100) acima da média do mercado (${volumeMedio.toFixed(0)}/100). Isso é um bom sinal de interesse, aproveite para melhorar sua presença digital.`;
+    } else if (volumeAtual > 30) {
+      return `O volume de buscas pelo seu produto (${volumeAtual}/100) está na média do mercado. Para aumentar o interesse, considere criar conteúdo educativo ou reviews do produto.`;
+    } else {
+      return `O volume de buscas pelo seu produto é baixo (${volumeAtual}/100). Para aumentar a visibilidade, considere estratégias de marketing de conteúdo e SEO para torná-lo mais descobrível.`;
     }
   }
 }

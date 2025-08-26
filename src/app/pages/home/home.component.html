@@ -260,38 +260,6 @@
     }
   </div>
 
-  <!-- Tendência de Vendas -->
-  <div class="data-section">
-    <div class="section-header">
-      <h2>Tendência de Vendas (7 dias)</h2>
-    </div>
-
-    @if (tendenciaVendas.length === 0) {
-      <div class="no-data-large">
-        <mat-icon>info</mat-icon>
-        <p>Ainda não há dados suficientes para exibir tendências.</p>
-      </div>
-    } @else {
-      <div class="trend-chart">
-        <div class="chart-container">
-          @for (item of tendenciaVendas; track item.data) {
-            <div class="chart-bar-container">
-              <div class="chart-date">{{item.data}}</div>
-              <div class="chart-bar-wrapper">
-                @if (item.valor > 0) {
-                  <div class="chart-bar" 
-                       [style.height]="calcularAlturaBarra(item.valor) + '%'">
-                    <div class="chart-value">{{item.valor | currency:'BRL'}}</div>
-                  </div>
-                }
-              </div>
-            </div>
-          }
-        </div>
-      </div>
-    }
-  </div>
-
   <!-- Análise de Tendências de Produtos com IA -->
   <div class="data-section">
     <div class="section-header">
