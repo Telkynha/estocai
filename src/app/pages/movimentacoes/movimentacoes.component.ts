@@ -55,8 +55,8 @@ export class MovimentacoesComponent implements OnInit {
 
   displayedColumns: string[] = [
     'selecao',
-    'data',
     'tipo',
+    'data',
     'qtdItens',
     'valor',
     'status',
@@ -92,6 +92,7 @@ export class MovimentacoesComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.paginator._changePageSize(10);
   }
 
   async carregarMovimentacoes() {

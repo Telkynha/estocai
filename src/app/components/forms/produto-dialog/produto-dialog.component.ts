@@ -109,17 +109,17 @@ export class ProdutoDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data?: Produto
   ) {
     this.produtoForm = this.fb.group({
-      codigo: ['', Validators.required],
-      nome: ['', Validators.required],
-      descricao: [''],
-      categoria: [[], Validators.required],
-      precoVenda: [0, [Validators.required, Validators.min(0)]],
-      precoCusto: [0, [Validators.required, Validators.min(0)]],
+      codigo: ['', [Validators.required, Validators.minLength(1)]],
+      nome: ['', [Validators.required, Validators.minLength(1)]],
+      descricao: ['', [Validators.required, Validators.minLength(1)]],
+      categoria: [[], [Validators.required, Validators.minLength(1)]],
+      precoVenda: [0, [Validators.required, Validators.min(0.01)]],
+      precoCusto: [0, [Validators.required, Validators.min(0.01)]],
       estoqueAtual: [0, [Validators.required, Validators.min(0)]],
       estoqueMinimo: [0, [Validators.required, Validators.min(0)]],
-      fornecedor: [''],
-      observacoes: [''],
-      ativo: [true]
+      fornecedor: ['', [Validators.required, Validators.minLength(1)]],
+      observacoes: ['', [Validators.required, Validators.minLength(1)]],
+      ativo: [true, Validators.required]
     });
 
     if (data) {

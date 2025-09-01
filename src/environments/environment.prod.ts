@@ -7,5 +7,8 @@ export const environment = {
     storageBucket: "estocaibase.appspot.com",
     messagingSenderId: "467828264754",
     appId: "1:467828264754:web:AfZaSyAkp8hh04IrrXX9FWNaAnZrbzyEJXFOfQ8"
+  },
+  pythonApi: {
+    baseUrl: 'http://127.0.0.1:5000/api' // Mudar para a URL de produção quando estiver disponível
   }
 };

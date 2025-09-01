@@ -8,6 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { IaService } from './services/ia.service';
 
 // Import modular Firebase providers
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -27,5 +28,7 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    // Add IaService as a provider
+    { provide: IaService, useClass: IaService }
   ]
 };

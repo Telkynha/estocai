@@ -1,0 +1,74 @@
+.ai-trends-card {
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.ai-trends-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ai-trends-description {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  
+  mat-icon {
+    color: var(--mat-sys-primary);
+    font-size: 28px;
+    height: 28px;
+    width: 28px;
+  }
+  
+  .ai-trends-text {
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--mat-sys-on-surface);
+    }
+    
+    p {
+      margin: 0;
+      color: var(--mat-sys-on-surface-variant);
+      font-size: 14px;
+    }
+  }
+}
+
+.ai-trends-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  @media (min-width: 600px) {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .product-select {
+    width: 100%;
+    max-width: 100%;
+    
+    @media (min-width: 600px) {
+      max-width: 70%;
+    }
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 180px;
+    height: 48px;
+    position: relative;
+    
+    .button-spinner {
+      position: absolute;
+      right: 12px;
+    }
+  }
+}

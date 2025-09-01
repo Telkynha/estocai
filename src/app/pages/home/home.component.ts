@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -7,9 +8,17 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
-import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { AiTrendsCardComponent } from './components/ai-trends-card.component';
+
 import { ProdutoService } from '../../services/produto.service';
 import { MovimentacaoService } from '../../services/movimentacao.service';
+import { DialogService } from '../../services/dialog.service';
+import { MarketAnalysisDialogComponent } from '../../components/shared/market-analysis-dialog/market-analysis-dialog.component';
 import { Produto, StatusEstoque } from '../../models/produto/produto.component';
 import { Venda, plataforma } from '../../models/venda/venda.component';
 import { Compra } from '../../models/compra/compra.component';
@@ -81,7 +90,13 @@ type AdvancedCard = ComparisonCard | TimelineCard | DistributionCard;
     MatButtonModule,
     MatTableModule,
     MatBadgeModule,
-    CommonModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    FormsModule,
+    CommonModule,
+    AiTrendsCardComponent
   ]
 })
 export class HomeComponent implements OnInit {
@@ -141,10 +156,16 @@ export class HomeComponent implements OnInit {
   // Colunas para tabela de produtos críticos
   displayedColumns: string[] = ['nome', 'estoqueAtual', 'estoqueMinimo', 'status'];
   
+  // Propriedades para análise de tendências com IA
+  selectedProductForAnalysis: Produto | null = null;
+  isAnalyzing: boolean = false;
+  
   constructor(
     private produtoService: ProdutoService,
     private movimentacaoService: MovimentacaoService,
-    private router: Router
+    private dialogService: DialogService,
+    private router: Router,
+    private dialog: MatDialog
   ) {}
   
   async ngOnInit() {
@@ -199,6 +220,9 @@ export class HomeComponent implements OnInit {
       this.produtoService.getProdutosByUsuario(),
       this.movimentacaoService.getMovimentacoesByUsuario()
     ]);
+
+    // Adicionar produto PENTEL mockado para demonstração se não existir
+    this.adicionarProdutoMockadoSeNecessario();
   }
   
   atualizarCards() {
@@ -746,4 +770,84 @@ export class HomeComponent implements OnInit {
     ]
   }
   ];
+  
+  /**
+   * Analisa as tendências de um produto usando a IA
+   * Abre um diálogo mostrando um gráfico com as tendências
+   */
+  // Método removido: analisarTendencias
+  // Essa funcionalidade foi movida para o componente AiTrendsCardComponent
+
+  /**
+   * Demonstra a análise de mercado com IA para um produto
+   */
+  testarAnalisedemercado(produto: Produto) {
+    this.dialog.open(MarketAnalysisDialogComponent, {
+      width: '900px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      data: {
+        produto: produto
+      }
+    });
+  }
+
+  /**
+   * Abre análise de mercado para o primeiro produto disponível (demo)
+   */
+  demonstrarAnaliseIA() {
+    if (this.produtos.length > 0) {
+      this.testarAnalisedemercado(this.produtos[0]);
+    } else {
+      // Criar produto demo se não tiver nenhum
+      const produtoDemo: Produto = {
+        id: 'demo',
+        nome: 'Smartphone Samsung Galaxy',
+        precoVenda: 1299.99,
+        precoCusto: 899.99,
+        estoqueAtual: 10,
+        estoqueMinimo: 5,
+        categoria: [], // Array de categorias
+        codigo: 'DEMO001',
+        descricao: 'Smartphone para demonstração de análise de mercado',
+        fornecedor: 'Demo Store',
+        dataCriacao: new Date(),
+        dataAtualizacao: new Date(),
+        ativo: true,
+        usuarioId: 'demo'
+      };
+      this.testarAnalisedemercado(produtoDemo);
+    }
+  }
+
+  private adicionarProdutoMockadoSeNecessario() {
+    // Verificar se já existe uma caneta PENTEL
+    const jaTemPentel = this.produtos.some(p => 
+      p.nome.toLowerCase().includes('pentel') || 
+      p.nome.toLowerCase().includes('caneta gel')
+    );
+
+    if (!jaTemPentel) {
+      // Adicionar caneta PENTEL mockada para demonstração
+      const produtoPentelDemo: Produto = {
+        id: 'demo-pentel-001',
+        nome: 'Caneta Gel PENTEL Energel Infree Retrátil 0.5mm',
+        precoVenda: 5.50,
+        precoCusto: 3.20,
+        estoqueAtual: 25,
+        estoqueMinimo: 10,
+        categoria: [],
+        codigo: 'PEN001',
+        descricao: 'Caneta gel retrátil com ponta de 0.5mm, escrita suave e secagem rápida',
+        fornecedor: 'PENTEL do Brasil',
+        dataCriacao: new Date('2024-01-15'),
+        dataAtualizacao: new Date(),
+        ativo: true,
+        usuarioId: 'demo'
+      };
+
+      // Adicionar à lista de produtos apenas para esta sessão (não salva no banco)
+      this.produtos.push(produtoPentelDemo);
+    }
+  }
 }

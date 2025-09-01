@@ -16,7 +16,6 @@
             <div class="card-info">
               <div class="card-title">{{card.title}}</div>
               <div class="card-value">{{card.value}}</div>
-              <div class="card-trend">{{card.trend}}</div>
             </div>
             <div class="card-icon">
               <mat-icon>{{card.icon}}</mat-icon>
@@ -160,9 +159,9 @@
 
           <!-- Estoque Mínimo Column -->
           <ng-container matColumnDef="estoqueMinimo">
-            <th mat-header-cell *matHeaderCellDef>Tempo Estimado</th>
+            <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
             <td mat-cell *matCellDef="let produto">
-              {{calcularTempoRessuprimento(produto)}}
+              {{produto.fornecedor}}
             </td>
           </ng-container>
 
@@ -260,35 +259,12 @@
     }
   </div>
 
-  <!-- Tendência de Vendas -->
+  <!-- Análise de Tendências de Produtos com IA -->
   <div class="data-section">
     <div class="section-header">
-      <h2>Tendência de Vendas (7 dias)</h2>
+      <h2>Análise de Mercado com IA</h2>
     </div>
-
-    @if (tendenciaVendas.length === 0) {
-      <div class="no-data-large">
-        <mat-icon>info</mat-icon>
-        <p>Ainda não há dados suficientes para exibir tendências.</p>
-      </div>
-    } @else {
-      <div class="trend-chart">
-        <div class="chart-container">
-          @for (item of tendenciaVendas; track item.data) {
-            <div class="chart-bar-container">
-              <div class="chart-date">{{item.data}}</div>
-              <div class="chart-bar-wrapper">
-                @if (item.valor > 0) {
-                  <div class="chart-bar" 
-                       [style.height]="calcularAlturaBarra(item.valor) + '%'">
-                    <div class="chart-value">{{item.valor | currency:'BRL'}}</div>
-                  </div>
-                }
-              </div>
-            </div>
-          }
-        </div>
-      </div>
-    }
+    
+    <app-ai-trends-card [produtos]="produtos"></app-ai-trends-card>
   </div>
 </div>

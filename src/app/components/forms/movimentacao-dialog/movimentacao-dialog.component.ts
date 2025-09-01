@@ -113,25 +113,25 @@ export class MovimentacaoDialogComponent implements OnInit {
     
     if (this.tipoMovimentacao === 'venda') {
       return this.fb.group({
-        itens: this.fb.array([]),
+        itens: this.fb.array([], Validators.required),
         status: [status.PENDENTE, Validators.required],
-        observacoes: [''],
+        observacoes: ['', Validators.required],
         data: [dataAtual, Validators.required],
-        valorTotal: [0, Validators.min(0)],
+        valorTotal: [0, [Validators.required, Validators.min(0)]],
         plataforma: [plataforma.LOJA_FISICA, Validators.required],
         formaPagamento: [formaPagamento.DINHEIRO, Validators.required],
-        nomeCliente: [''],
-        contatoCliente: ['']
+        nomeCliente: ['', Validators.required],
+        contatoCliente: ['', Validators.required]
       });
     } else {
       return this.fb.group({
-        itens: this.fb.array([]),
+        itens: this.fb.array([], Validators.required),
         status: [status.PENDENTE, Validators.required],
-        observacoes: [''],
+        observacoes: ['', Validators.required],
         data: [new Date(), Validators.required],
-        valorTotal: [0, Validators.min(0)],
+        valorTotal: [0, [Validators.required, Validators.min(0)]],
         fornecedor: ['', Validators.required],
-        numeroNota: ['']
+        numeroNota: ['', Validators.required]
       });
     }
   }

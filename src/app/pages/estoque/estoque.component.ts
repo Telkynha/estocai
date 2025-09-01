@@ -12,11 +12,17 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MarketAnalysisDialogComponent } from '../../components/shared/market-analysis-dialog/market-analysis-dialog.component';
 
 import { ProdutoDialogComponent } from '../../components/forms/produto-dialog/produto-dialog.component';
 import { ConfirmDialogComponent } from '../../components/shared/confirm-dialog/confirm-dialog.component';
 import { ProdutoService } from '../../services/produto.service';
+import { DialogService } from '../../services/dialog.service';
+import { IaService } from '../../services/ia.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmDialogData } from '../../components/shared/confirm-dialog/confirm-dialog.component';
 import { Produto, StatusEstoque } from '../../models/produto/produto.component';
 import { Categoria } from '../../models/categoria/categoria.component';
 
@@ -36,7 +42,9 @@ import { Categoria } from '../../models/categoria/categoria.component';
     MatSortModule,
     MatDialogModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   templateUrl: './estoque.component.html',
   styleUrls: ['./estoque.component.scss']
@@ -74,7 +82,10 @@ export class EstoqueComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private produtoService: ProdutoService
+    private dialogService: DialogService,
+    private produtoService: ProdutoService,
+    private iaService: IaService,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -85,6 +96,7 @@ export class EstoqueComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.paginator._changePageSize(10);
   }
 
   private configureDataSource() {
@@ -223,27 +235,58 @@ export class EstoqueComponent implements OnInit {
   }
 
   async excluirItem(item: Produto) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {
+    try {
+      const dialogConfig: ConfirmDialogData = {
         title: 'Excluir Produto',
-        message: `Tem certeza que deseja excluir o produto "${item.nome}"? Esta ação não pode ser desfeita.`,
+        message: item.estoqueAtual > 0 
+          ? `O produto "${item.nome}" possui ${item.estoqueAtual} itens em estoque. Tem certeza que deseja excluí-lo?`
+          : `Tem certeza que deseja excluir o produto "${item.nome}"?`,
+        type: item.estoqueAtual > 0 ? 'warn' : 'error',
         confirmText: 'Excluir',
-        cancelText: 'Cancelar',
-        type: 'warn'
+        cancelText: 'Cancelar'
+      };
+
+      const confirmou = await this.dialogService.openConfirmDialog(dialogConfig);
+      if (!confirmou || !item.id) return;
+
+      // Exclui o produto
+      await this.produtoService.deleteProduto(item.id);
+      await this.carregarProdutos();
+
+      this.snackBar.open('Produto excluído com sucesso', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'end'
+      });
+    } catch (error) {
+      console.error('Erro ao excluir produto:', error);
+      this.snackBar.open('Erro ao excluir produto', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'end'
+      });
+    }
+  }
+  
+  /**
+   * Abre o diálogo de análise de tendências para um produto
+   * @param item O produto a ser analisado
+   */
+  analisarTendencias(item: Produto) {
+    this.dialogService.openTrendsDialog(item.nome);
+  }
+
+  /**
+   * Abre o diálogo de análise de mercado para um produto
+   * @param item O produto a ser analisado
+   */
+  analisarMercado(item: Produto) {
+    this.dialog.open(MarketAnalysisDialogComponent, {
+      width: '900px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      data: {
+        produto: item
       }
     });
-
-    const confirmed = await dialogRef.afterClosed().toPromise();
-    if (!confirmed) return;
-    if (item.id && confirm('Tem certeza que deseja excluir este produto?')) {
-      try {
-        await this.produtoService.deleteProduto(item.id);
-        await this.carregarProdutos();
-      } catch (error) {
-        console.error('Erro ao excluir produto:', error);
-        // Adicionar tratamento de erro adequado
-      }
-    }
   }
 
   exportarSelecionados() {
